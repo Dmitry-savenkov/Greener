@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Button, Image, Dimensions } from 'react-native';
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -23,9 +23,7 @@ const HomeScreen = () => {
         });
     }, [activeIndex]);
 
-    const ITEM_HEIGHT = width;
-
-    let [fontsLoaded] = useFonts({
+    const [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
         'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
         'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
@@ -103,6 +101,28 @@ const HomeScreen = () => {
                     })}
                 </View>
             </View>
+            <TouchableOpacity>
+                <View style={[styles.buttonCenterMode]}>
+                    <LinearGradient
+                        start={{ x: 0, y: 15 }}
+                        end={{ x: 1.33, y: 5 }}
+                        colors={['rgba(12, 197, 184, 1)', 'rgba(43, 218, 142, 1)']}
+                        style={[styles.buttonLogin, styles.blockCentering]}
+                    >
+                        <Text style={styles.loginButtonText}>Login</Text>
+                    </LinearGradient>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <View style={[styles.buttonSignUp, styles.blockCentering]}>
+                    <Text>Sign up</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <View style={[styles.blockCentering]}>
+                    <Text style={[styles.serviceLinkText]}>Terms of service</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -158,6 +178,41 @@ const styles = StyleSheet.create({
         height: 5,
         backgroundColor: '#9DA3B4',
         borderRadius: 6
+    },
+    buttonCenterMode: {
+        marginTop: 26,
+        paddingHorizontal: width * 0.15,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonLogin: {
+        width: '100%',
+        height: 48,
+        borderRadius: 9
+    },
+    loginButtonText: {
+        color: '#ffffff',
+        fontFamily: 'SFUIDisplay-Regular',
+        fontSize: 16
+    },
+    buttonSignUp: {
+        fontFamily: 'SFUIDisplay-Regular',
+        fontSize: 16,
+        marginTop: 26,
+        marginHorizontal: width * 0.15,
+        backgroundColor: '#ffffff',
+        height: 48,
+        borderRadius: 9,
+        shadowColor: '#171717',
+        shadowOffset: { width: -1, height: 10 },
+        shadowOpacity: 0.1,
+        shadowRadius: 10
+    },
+    serviceLinkText: {
+        marginTop: 20,
+        color: 'rgba(157, 163, 180, 1)',
+        fontSize: 13,
+        fontFamily: 'SFUIDisplay-Regular'
     }
 });
 
