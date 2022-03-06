@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/AntDesign';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
 
@@ -29,22 +31,45 @@ const LoginScreen = () => {
             <View style={[styles.authorizationPlace]}>
                 <View>
                     <Text style={[styles.authorizationText]}>Email</Text>
-                    <TextInput style={[styles.textInput]} />
+                    <TextInput style={[styles.textInput]} placeholder="simpleEmail@mail.ru" />
                     <View style={[styles.inputInderline]}></View>
                 </View>
                 <View>
                     <Text style={[styles.authorizationText]}>Password</Text>
-                    <View>
-                        <TextInput style={[styles.textInput]} />
+                    <View style={[styles.passwordInput]}>
+                        <TextInput style={[styles.textInput]} placeholder="yourCoolPassword" />
+                        <Entypo
+                            name={passwordVisible ? 'eye' : 'eye-with-line'}
+                            size={20}
+                            color="#6E737A"
+                            onPress={() => {
+                                return setPasswordVisible(!passwordVisible);
+                            }}
+                        />
                     </View>
                     <View style={[styles.inputInderline]}></View>
                 </View>
             </View>
+            <TouchableOpacity>
+                <View style={[styles.buttonCenterMode]}>
+                    <LinearGradient
+                        start={{ x: 0, y: 15 }}
+                        end={{ x: 1.33, y: 5 }}
+                        colors={['rgba(10, 196, 186, 1)', 'rgba(43, 218, 142, 1)']}
+                        style={[styles.buttonLogin, styles.blockCentering]}
+                    >
+                        <Text style={styles.loginButtonText}>Login</Text>
+                    </LinearGradient>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <View style={[styles.blockCentering]}>
+                    <Text style={[styles.forgotPasswordText]}>Forgot your password?</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };
-
-export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -52,6 +77,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         paddingHorizontal: width * 0.085,
         paddingTop: height * 0.1
+    },
+    blockCentering: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     loginText: {
         marginTop: 35,
@@ -62,7 +91,7 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     authorizationText: {
-        color: 'rgba(197, 204, 214, 1)',
+        color: '#6E737A',
         fontSize: 15,
         marginBottom: 10,
         fontFamily: 'SFUIDisplay-Regular'
@@ -77,5 +106,31 @@ const styles = StyleSheet.create({
         color: 'rgba(50, 54, 67, 1)',
         marginBottom: 20,
         fontFamily: 'SFUIDisplay-Medium'
+    },
+    buttonCenterMode: {
+        marginTop: 26,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonLogin: {
+        width: '100%',
+        height: 48,
+        borderRadius: 9
+    },
+    loginButtonText: {
+        color: '#ffffff',
+        fontFamily: 'SFUIDisplay-Regular',
+        fontSize: 16
+    },
+    forgotPasswordText: {
+        color: 'rgba(157, 163, 180, 1)',
+        marginTop: 20,
+        textDecorationLine: 'underline'
+    },
+    passwordInput: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 });
+
+export default LoginScreen;
