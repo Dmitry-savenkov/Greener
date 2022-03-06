@@ -1,14 +1,21 @@
 import { StyleSheet, Text, View, FlatList, Button, Image, Dimensions } from 'react-native';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
-import { HomeScreenData } from '../data/HomeScreenData';
+import HomeScreenData from '../data/HomeScreenData';
+import 'react-native-reanimated';
+import { MotiView, MotiText } from 'moti';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
+    const ref = useRef(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [scrollValue, setScrollValue] = useState(0.5);
+
     let [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
         'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
@@ -40,20 +47,49 @@ const HomeScreen = () => {
             <View style={[styles.sliderContainer]}>
                 <View style={[styles.slider]}></View>
                 <FlatList
+                    ref={ref}
+                    initialScrollIndex={0}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     data={HomeScreenData}
+                    decelerationRate="fast"
+                    bounces={false}
                     keyExtractor={(item, index) => {
                         return item.id + index.toString();
                     }}
                     renderItem={({ item }) => {
                         return (
-                            <View>
+                            <MotiView>
                                 <Image style={[styles.sliderImage]} source={item.image} />
-                            </View>
+                            </MotiView>
                         );
                     }}
                 />
+                <View style={[styles.paginationSlider, styles.blockCentering]}>
+                    {HomeScreenData.map((_, index) => {
+                        return (
+                            <TouchableOpacity
+                                key={index}
+                                onPress={() => {
+                                    setActiveIndex(index);
+                                }}
+                            >
+                                <MotiView
+                                    style={[
+                                        styles.paginationDot,
+                                        {
+                                            width: activeIndex === index ? 7 : 5,
+
+                                            height: activeIndex === index ? 7 : 5,
+                                            backgroundColor:
+                                                activeIndex === index ? '#9DA3B4' : 'rgba(157, 163, 180, 0.4)'
+                                        }
+                                    ]}
+                                ></MotiView>
+                            </TouchableOpacity>
+                        );
+                    })}
+                </View>
             </View>
         </View>
     );
@@ -87,7 +123,7 @@ const styles = StyleSheet.create({
     },
     slider: {
         position: 'absolute',
-        backgroundColor: 'rgba(197, 204, 214, 0.2)',
+        backgroundColor: 'rgba(197, 204, 214, 0.15)',
         left: -width * 0.05,
         width: width * 1.1,
         height: width * 1.1,
@@ -97,6 +133,19 @@ const styles = StyleSheet.create({
         width: width,
         height: height * 0.5,
         resizeMode: 'cover'
+    },
+    paginationSlider: {
+        top: height * 0.43,
+        left: width * 0.45,
+        position: 'absolute',
+        flexDirection: 'row'
+    },
+    paginationDot: {
+        margin: 3,
+        width: 5,
+        height: 5,
+        backgroundColor: '#9DA3B4',
+        borderRadius: 6
     }
 });
 
