@@ -6,15 +6,24 @@ import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
 import HomeScreenData from '../data/HomeScreenData';
 import 'react-native-reanimated';
-import { MotiView, MotiText } from 'moti';
+import { MotiView } from 'moti';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
-    const ref = useRef(null);
+    const flatlistRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [scrollValue, setScrollValue] = useState(0.5);
+    useEffect(() => {
+        flatlistRef.current?.scrollToIndex({
+            index: activeIndex,
+            animated: true,
+            viewOffset: 10,
+            viewPosition: 1
+        });
+    }, [activeIndex]);
+
+    const ITEM_HEIGHT = width;
 
     let [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
@@ -47,13 +56,16 @@ const HomeScreen = () => {
             <View style={[styles.sliderContainer]}>
                 <View style={[styles.slider]}></View>
                 <FlatList
-                    ref={ref}
-                    initialScrollIndex={0}
+                    ref={flatlistRef}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     data={HomeScreenData}
                     decelerationRate="fast"
                     bounces={false}
+                    onMomentumScrollEnd={(ev) => {
+                        const newIndex = Math.round(ev.nativeEvent.contentOffset.x / width);
+                        setActiveIndex(newIndex);
+                    }}
                     keyExtractor={(item, index) => {
                         return item.id + index.toString();
                     }}
