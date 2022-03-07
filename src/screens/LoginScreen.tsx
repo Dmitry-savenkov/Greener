@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import Feather from 'react-native-vector-icons/AntDesign';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
+import BackIcon from '../components/BackIcon';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,11 +21,7 @@ const LoginScreen = () => {
     }
     return (
         <View style={[styles.container]}>
-            <TouchableOpacity>
-                <View>
-                    <AntDesign name="arrowleft" size={24} color="#C5CCD6" />
-                </View>
-            </TouchableOpacity>
+            <BackIcon />
             <Text style={[styles.loginText]}>Login</Text>
             <View style={[styles.authorizationPlace]}>
                 <View>
@@ -37,13 +32,26 @@ const LoginScreen = () => {
                 <View>
                     <Text style={[styles.authorizationText]}>Password</Text>
                     <View style={[styles.passwordInput]}>
-                        <TextInput style={[styles.textInput]} placeholder="yourCoolPassword" />
+                        <TextInput
+                            style={[styles.textInput]}
+                            value={
+                                passwordVisible
+                                    ? text
+                                    : [...Array(text.length)].reduce((acc, next) => {
+                                          return (acc += '*');
+                                      }, '')
+                            }
+                            onChangeText={(inputText) => {
+                                setText(inputText);
+                            }}
+                            placeholder="yourCoolPassword"
+                        />
                         <Entypo
                             name={passwordVisible ? 'eye' : 'eye-with-line'}
                             size={20}
                             color="#6E737A"
                             onPress={() => {
-                                return setPasswordVisible(!passwordVisible);
+                                setPasswordVisible(!passwordVisible);
                             }}
                         />
                     </View>
