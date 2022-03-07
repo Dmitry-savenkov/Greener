@@ -11,7 +11,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     const flatlistRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     useEffect(() => {
@@ -101,7 +101,11 @@ const HomeScreen = () => {
                     })}
                 </View>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Login');
+                }}
+            >
                 <View style={[styles.buttonCenterMode]}>
                     <LinearGradient
                         start={{ x: 0, y: 15 }}
@@ -113,7 +117,11 @@ const HomeScreen = () => {
                     </LinearGradient>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('SignUp');
+                }}
+            >
                 <View style={[styles.buttonSignUp, styles.blockCentering]}>
                     <Text>Sign up</Text>
                 </View>
