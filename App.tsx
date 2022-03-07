@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './src/screens/HomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
 import BrowseScreen from './src/screens/BrowseScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import BestPlantsScreen from './src/screens/BestPlantsScreen';
@@ -53,6 +54,13 @@ export default function App() {
                 <Stack.Screen
                     name="Settings"
                     component={SettingsScreen}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name="SignUp"
+                    component={SignUpScreen}
                     options={{
                         headerShown: false
                     }}

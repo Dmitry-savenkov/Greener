@@ -8,7 +8,7 @@ import BackIcon from '../components/BackIcon';
 
 const { width, height } = Dimensions.get('window');
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
     const [text, setText] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
     const [fontsLoaded] = useFonts({
@@ -29,8 +29,18 @@ const LoginScreen = ({ navigation }) => {
                 <BackIcon />
             </TouchableOpacity>
 
-            <Text style={[styles.loginText]}>Login</Text>
+            <Text style={[styles.loginText]}>Sign Up</Text>
             <View style={[styles.authorizationPlace]}>
+                <View>
+                    <Text style={[styles.authorizationText]}>First name</Text>
+                    <TextInput style={[styles.textInput]} placeholder="Name" />
+                    <View style={[styles.inputInderline]}></View>
+                </View>
+                <View>
+                    <Text style={[styles.authorizationText]}>Last Name</Text>
+                    <TextInput style={[styles.textInput]} placeholder="LastName" />
+                    <View style={[styles.inputInderline]}></View>
+                </View>
                 <View>
                     <Text style={[styles.authorizationText]}>Email</Text>
                     <TextInput style={[styles.textInput]} placeholder="simpleEmail@mail.ru" />
@@ -74,13 +84,13 @@ const LoginScreen = ({ navigation }) => {
                         colors={['rgba(10, 196, 186, 1)', 'rgba(43, 218, 142, 1)']}
                         style={[styles.buttonLogin, styles.blockCentering]}
                     >
-                        <Text style={styles.loginButtonText}>Login</Text>
+                        <Text style={styles.loginButtonText}>Sign Up</Text>
                     </LinearGradient>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity>
                 <View style={[styles.blockCentering]}>
-                    <Text style={[styles.forgotPasswordText]}>Forgot your password?</Text>
+                    <Text style={[styles.forgotPasswordText]}>Technical support</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -149,4 +159,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginScreen;
+export default SignUpScreen;
