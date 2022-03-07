@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation }) => {
                                       }, '')
                             }
                             onChangeText={(inputText) => {
-                                setText(inputText);
+                                passwordVisible ? setText(inputText) : null;
                             }}
                             placeholder="yourCoolPassword"
                         />
