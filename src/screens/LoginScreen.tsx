@@ -1,24 +1,42 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
+import { handleLogin } from '../auth/firebase';
+import { auth } from '../auth/firebase-config';
 
 const { width, height } = Dimensions.get('window');
 
 const LoginScreen = ({ navigation }) => {
-    const [text, setText] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
+
     const [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
         'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
         'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
     });
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
+    const handleLogin = (email: any, password: any) => {
+        auth.signInWithEmailAndPassword(email, password)
+            .then((userCredentials: { user: any }) => {
+                const user = userCredentials.user;
+                console.log('Logged in with:', user.email);
+                navigation.navigate('Browse');
+            })
+            .catch((error: { message: string }) => {
+                alert(error.message);
+            });
+    };
+
     return (
         <View style={[styles.container]}>
             <TouchableOpacity
@@ -33,7 +51,14 @@ const LoginScreen = ({ navigation }) => {
             <View style={[styles.authorizationPlace]}>
                 <View>
                     <Text style={[styles.authorizationText]}>Email</Text>
-                    <TextInput style={[styles.textInput]} placeholder="simpleEmail@mail.ru" />
+                    <TextInput
+                        style={[styles.textInput]}
+                        placeholder="simpleEmail@mail.ru"
+                        value={email}
+                        onChangeText={(inputText) => {
+                            setEmail(inputText);
+                        }}
+                    />
                     <View style={[styles.inputInderline]}></View>
                 </View>
                 <View>
@@ -44,13 +69,13 @@ const LoginScreen = ({ navigation }) => {
                             style={[styles.textInput]}
                             value={
                                 passwordVisible
-                                    ? text
-                                    : [...Array(text.length)].reduce((acc, next) => {
+                                    ? password
+                                    : [...Array(password.length)].reduce((acc) => {
                                           return (acc += '*');
                                       }, '')
                             }
                             onChangeText={(inputText) => {
-                                passwordVisible ? setText(inputText) : null;
+                                passwordVisible ? setPassword(inputText) : null;
                             }}
                             placeholder="yourCoolPassword"
                         />
@@ -68,7 +93,7 @@ const LoginScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Browse');
+                    handleLogin(email, password);
                 }}
             >
                 <View style={[styles.buttonCenterMode]}>

@@ -1,31 +1,23 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from './firebase-config';
+import { auth } from './firebase-config';
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-export const handleCreateAccount = (email: string, password: string) => {
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            console.log('Account created!');
-            const user = userCredential.user;
-            console.log(user);
+export const handleSignUp = (email: string, password: string) => {
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredentials: { user: any }) => {
+            const user = userCredentials.user;
+            console.log('Logged in with:', user.email);
         })
-        .catch((error) => {
-            console.log(error);
+        .catch((error: { message: string }) => {
             alert(error.message);
         });
 };
 
-export const handleSignInAccount = (email: string, password: string) => {
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            console.log('Signed in!');
-            const user = userCredential.user;
-            console.log(user);
+export const handleLogin = (email: any, password: any) => {
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredentials: { user: any }) => {
+            const user = userCredentials.user;
+            console.log('Logged in with:', user.email);
         })
-        .catch((error) => {
-            console.log(error);
+        .catch((error: { message: string }) => {
+            alert(error.message);
         });
 };

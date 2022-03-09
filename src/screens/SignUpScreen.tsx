@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
-// import { handleCreateAccount } from '../auth/firebase';
+import { handleSignUp } from '../auth/firebase';
+import { auth } from '../auth/firebase-config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -13,11 +14,25 @@ const SignUpScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
+
     const [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
         'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
         'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
     });
+
+    const handleSignUp = (email: string, password: string) => {
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredentials: { user: any }) => {
+                const user = userCredentials.user;
+                console.log('Logged in with:', user.email);
+                navigation.navigate('Login');
+            })
+            .catch((error: { message: string }) => {
+                alert(error.message);
+            });
+    };
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
@@ -85,7 +100,7 @@ const SignUpScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity
                 onPress={() => {
-                    // return handleCreateAccount(email, password);
+                    return handleSignUp(email, password);
                 }}
             >
                 <View style={[styles.buttonCenterMode]}>
