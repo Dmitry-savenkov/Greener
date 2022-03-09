@@ -66,7 +66,11 @@ const LoginScreen = ({ navigation }) => {
                     <View style={[styles.inputInderline]}></View>
                 </View>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Browse');
+                }}
+            >
                 <View style={[styles.buttonCenterMode]}>
                     <LinearGradient
                         start={{ x: 0, y: 15 }}

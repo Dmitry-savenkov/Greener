@@ -1,4 +1,19 @@
-const BrowseScreenData = [
+export const BrowseNameCategories = [
+    {
+        id: 'products',
+        name: 'Products'
+    },
+    {
+        id: 'inspirations',
+        name: 'Inspirations'
+    },
+    {
+        id: 'seeds',
+        name: 'Seeds'
+    }
+];
+
+export const BrowseScreenData = [
     {
         id: 'plants',
         name: 'Plants',
@@ -42,5 +57,3 @@ const BrowseScreenData = [
         image: require('../assets/icons/fertilizers.png')
     }
 ];
-
-export default BrowseScreenData;
