@@ -5,11 +5,13 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
+// import { handleCreateAccount } from '../auth/firebase';
 
 const { width, height } = Dimensions.get('window');
 
 const SignUpScreen = ({ navigation }) => {
-    const [text, setText] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
     const [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
@@ -43,24 +45,29 @@ const SignUpScreen = ({ navigation }) => {
                 </View>
                 <View>
                     <Text style={[styles.authorizationText]}>Email</Text>
-                    <TextInput style={[styles.textInput]} placeholder="simpleEmail@mail.ru" />
+                    <TextInput
+                        style={[styles.textInput]}
+                        placeholder="simpleEmail@mail.ru"
+                        onChangeText={(inputText) => {
+                            setEmail(inputText);
+                        }}
+                    />
                     <View style={[styles.inputInderline]}></View>
                 </View>
                 <View>
                     <Text style={[styles.authorizationText]}>Password</Text>
                     <View style={[styles.passwordInput]}>
                         <TextInput
-                            keyboardType="email-address"
                             style={[styles.textInput]}
                             value={
                                 passwordVisible
-                                    ? text
-                                    : [...Array(text.length)].reduce((acc, next) => {
+                                    ? password
+                                    : [...Array(password.length)].reduce((acc, next) => {
                                           return (acc += '*');
                                       }, '')
                             }
                             onChangeText={(inputText) => {
-                                setText(inputText);
+                                passwordVisible ? setPassword(inputText) : null;
                             }}
                             placeholder="yourCoolPassword"
                         />
@@ -76,7 +83,11 @@ const SignUpScreen = ({ navigation }) => {
                     <View style={[styles.inputInderline]}></View>
                 </View>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    // return handleCreateAccount(email, password);
+                }}
+            >
                 <View style={[styles.buttonCenterMode]}>
                     <LinearGradient
                         start={{ x: 0, y: 15 }}
