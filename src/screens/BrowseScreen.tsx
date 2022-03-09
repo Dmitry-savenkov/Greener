@@ -68,8 +68,9 @@ const BrowseScreen = ({ navigation }) => {
                 />
             </View>
             <View style={[styles.grayLine]}></View>
-            <View>
+            <View style={[styles.shadowFlatList]}>
                 <FlatList
+                    style={{ marginLeft: -7.5, marginBottom: 250 }}
                     showsVerticalScrollIndicator={false}
                     data={BrowseScreenData}
                     bounces={false}
@@ -79,15 +80,13 @@ const BrowseScreen = ({ navigation }) => {
                     }}
                     renderItem={({ item, index }) => {
                         return (
-                            <View style={[styles.categoryBlock]}>
-                                <View>
+                            <TouchableOpacity style={[styles.categoryBlock]} key={index}>
+                                <View style={[styles.imageBG]}>
                                     <Image source={item.image} />
                                 </View>
-                                <Text>{item.name}</Text>
-                                <Text>
-                                    <Text>{item.count}</Text> products
-                                </Text>
-                            </View>
+                                <Text style={[styles.categoryBlockTitle]}>{item.name}</Text>
+                                <Text style={[styles.categoryBlockCount]}>{item.count} products</Text>
+                            </TouchableOpacity>
                         );
                     }}
                 />
@@ -144,8 +143,41 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(10, 196, 186, 1)'
     },
     categoryBlock: {
-        width: '50%',
-        margin: 7.5
+        alignItems: 'center',
+        width: '47.5%',
+        height: 150,
+        margin: 7.5,
+        backgroundColor: '#ffffff',
+        shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.02,
+        shadowRadius: 10
+    },
+    shadowFlatList: {
+        shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.08,
+        shadowRadius: 10
+    },
+    imageBG: {
+        marginTop: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        backgroundColor: 'rgba(43, 218, 142, 0.2)',
+        marginBottom: 15
+    },
+    categoryBlockTitle: {
+        fontSize: 14,
+        color: 'black',
+        fontFamily: 'SFUIDisplay-Medium',
+        marginBottom: 4
+    },
+    categoryBlockCount: {
+        color: 'rgba(197, 204, 214, 1)',
+        fontFamily: 'SFUIDisplay-Regular'
     }
 });
 
