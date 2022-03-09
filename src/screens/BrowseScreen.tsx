@@ -1,20 +1,19 @@
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import BackIcon from '../components/BackIcon';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { BrowseScreenData } from '../data/BrowseScreenData';
 import { BrowseNameCategories } from '../data/BrowseScreenData';
-import { FlatList } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
 const BrowseScreen = ({ navigation }) => {
     const [activeCategory, setActiveCategory] = useState(0);
+    const [activeCategoryName, setActiveCategoryName] = useState('products');
     const [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
-        'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
+        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf')
     });
     if (!fontsLoaded) {
         return <AppLoading />;
@@ -47,6 +46,7 @@ const BrowseScreen = ({ navigation }) => {
                             <TouchableOpacity
                                 onPress={() => {
                                     setActiveCategory(index);
+                                    setActiveCategoryName(item.id);
                                 }}
                             >
                                 <View style={[styles.categoryNameItem]}>
@@ -69,17 +69,14 @@ const BrowseScreen = ({ navigation }) => {
             </View>
             <View style={[styles.grayLine]}></View>
             <View style={[styles.shadowFlatList]}>
-                <FlatList
-                    style={{ marginLeft: -7.5, marginBottom: 250 }}
+                <ScrollView
                     showsVerticalScrollIndicator={false}
-                    data={BrowseScreenData}
+                    style={{ marginLeft: -7.5, marginBottom: 250 }}
                     bounces={false}
-                    numColumns={2}
-                    keyExtractor={(_item, index) => {
-                        return _item.id + (index + Math.random().toString());
-                    }}
-                    renderItem={({ item, index }) => {
-                        return (
+                    contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+                >
+                    {BrowseScreenData.map((item, index) => {
+                        return item.tags.includes(activeCategoryName) ? (
                             <TouchableOpacity style={[styles.categoryBlock]} key={index}>
                                 <View style={[styles.imageBG]}>
                                     <Image source={item.image} />
@@ -87,9 +84,9 @@ const BrowseScreen = ({ navigation }) => {
                                 <Text style={[styles.categoryBlockTitle]}>{item.name}</Text>
                                 <Text style={[styles.categoryBlockCount]}>{item.count} products</Text>
                             </TouchableOpacity>
-                        );
-                    }}
-                />
+                        ) : null;
+                    })}
+                </ScrollView>
             </View>
         </View>
     );
@@ -144,7 +141,7 @@ const styles = StyleSheet.create({
     },
     categoryBlock: {
         alignItems: 'center',
-        width: '47.5%',
+        width: '45%',
         height: 150,
         margin: 7.5,
         backgroundColor: '#ffffff',

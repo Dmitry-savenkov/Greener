@@ -8,8 +8,8 @@ export const BrowseNameCategories = [
         name: 'Inspirations'
     },
     {
-        id: 'seeds',
-        name: 'Seeds'
+        id: 'shop',
+        name: 'Shop'
     }
 ];
 
@@ -18,7 +18,7 @@ export const BrowseScreenData = [
         id: 'plants',
         name: 'Plants',
         tags: ['products', 'inspirations'],
-        count: 147,
+        count: 17,
         image: require('../assets/icons/plants.png')
     },
     {
@@ -53,14 +53,14 @@ export const BrowseScreenData = [
         id: 'fertilizers',
         name: 'fertilizers',
         tags: ['products', 'shop'],
-        count: 47,
+        count: 84,
         image: require('../assets/icons/fertilizers.png')
     },
     {
         id: 'plants',
         name: 'Plants',
         tags: ['products', 'inspirations'],
-        count: 147,
+        count: 312,
         image: require('../assets/icons/plants.png')
     },
     {
@@ -81,14 +81,14 @@ export const BrowseScreenData = [
         id: 'sprayers',
         name: 'Sprayers',
         tags: ['products', 'shop'],
-        count: 17,
+        count: 7,
         image: require('../assets/icons/sprayers.png')
     },
     {
         id: 'pots',
         name: 'Pots',
         tags: ['products', 'shop'],
-        count: 47,
+        count: 41,
         image: require('../assets/icons/pots.png')
     },
     {
@@ -100,9 +100,9 @@ export const BrowseScreenData = [
     },
     {
         id: 'plants',
-        name: 'Plants',
+        name: 'Steel',
         tags: ['products', 'inspirations'],
-        count: 147,
+        count: 193,
         image: require('../assets/icons/plants.png')
     },
     {
@@ -130,14 +130,14 @@ export const BrowseScreenData = [
         id: 'pots',
         name: 'Perts',
         tags: ['products', 'shop'],
-        count: 47,
+        count: 12,
         image: require('../assets/icons/pots.png')
     },
     {
         id: 'fertilizers',
         name: 'Shane',
         tags: ['products', 'shop'],
-        count: 47,
+        count: 54,
         image: require('../assets/icons/fertilizers.png')
     }
 ];
