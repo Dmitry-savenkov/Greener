@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -10,6 +10,11 @@ import { auth } from '../auth/firebase-config';
 const { width, height } = Dimensions.get('window');
 
 const SignUpScreen = ({ navigation }) => {
+    const [name, setName] = useState('');
+    const [errorName, setErrorName] = useState(false);
+    const [errorLastName, setErrorLastName] = useState(false);
+    const [lastName, setLastName] = useState('');
+    const [error, setError] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
@@ -21,6 +26,14 @@ const SignUpScreen = ({ navigation }) => {
     });
 
     const handleSignUp = (email: string, password: string) => {
+        if (name === '') {
+            setErrorName(true);
+            return;
+        }
+        if (lastName === '') {
+            setErrorLastName(true);
+            return;
+        }
         auth.createUserWithEmailAndPassword(email, password)
             .then((userCredentials: { user: any }) => {
                 const user = userCredentials.user;
@@ -28,6 +41,7 @@ const SignUpScreen = ({ navigation }) => {
                 navigation.navigate('Login');
             })
             .catch((error: { message: string }) => {
+                setError(true);
                 alert(error.message);
             });
     };
@@ -44,32 +58,103 @@ const SignUpScreen = ({ navigation }) => {
             >
                 <BackIcon />
             </TouchableOpacity>
-
             <Text style={[styles.loginText]}>Sign Up</Text>
             <View style={[styles.authorizationPlace]}>
                 <View>
-                    <Text style={[styles.authorizationText]}>First name</Text>
-                    <TextInput style={[styles.textInput]} placeholder="Name" />
-                    <View style={[styles.inputInderline]}></View>
+                    <Text
+                        style={[
+                            styles.authorizationText,
+                            {
+                                color: errorName ? '#F3534A' : 'black'
+                            }
+                        ]}
+                    >
+                        First name
+                    </Text>
+                    <TextInput
+                        style={[styles.textInput]}
+                        placeholder="Name"
+                        onChangeText={(inputText) => {
+                            setErrorName(false);
+                            setName(inputText);
+                        }}
+                    />
+                    <View
+                        style={[
+                            styles.inputInderline,
+                            {
+                                backgroundColor: errorName ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                            }
+                        ]}
+                    ></View>
                 </View>
                 <View>
-                    <Text style={[styles.authorizationText]}>Last Name</Text>
-                    <TextInput style={[styles.textInput]} placeholder="LastName" />
-                    <View style={[styles.inputInderline]}></View>
+                    <Text
+                        style={[
+                            styles.authorizationText,
+                            {
+                                color: errorLastName ? '#F3534A' : 'black'
+                            }
+                        ]}
+                    >
+                        Last Name
+                    </Text>
+                    <TextInput
+                        style={[styles.textInput]}
+                        placeholder="LastName"
+                        onChangeText={(inputText) => {
+                            setErrorLastName(false);
+                            setLastName(inputText);
+                        }}
+                    />
+                    <View
+                        style={[
+                            styles.inputInderline,
+                            {
+                                backgroundColor: errorLastName ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                            }
+                        ]}
+                    ></View>
                 </View>
                 <View>
-                    <Text style={[styles.authorizationText]}>Email</Text>
+                    <Text
+                        style={[
+                            styles.authorizationText,
+                            {
+                                color: error ? '#F3534A' : 'black'
+                            }
+                        ]}
+                    >
+                        Email
+                    </Text>
                     <TextInput
                         style={[styles.textInput]}
                         placeholder="simpleEmail@mail.ru"
                         onChangeText={(inputText) => {
                             setEmail(inputText);
+                            setError(false);
                         }}
                     />
-                    <View style={[styles.inputInderline]}></View>
+                    <View
+                        style={[
+                            styles.inputInderline,
+                            {
+                                backgroundColor: error ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                            }
+                        ]}
+                    ></View>
                 </View>
                 <View>
-                    <Text style={[styles.authorizationText]}>Password</Text>
+                    <Text
+                        style={[
+                            styles.authorizationText,
+                            {
+                                color: error ? '#F3534A' : 'black'
+                            }
+                        ]}
+                    >
+                        Password
+                    </Text>
                     <View style={[styles.passwordInput]}>
                         <TextInput
                             style={[styles.textInput]}
@@ -82,6 +167,7 @@ const SignUpScreen = ({ navigation }) => {
                             }
                             onChangeText={(inputText) => {
                                 passwordVisible ? setPassword(inputText) : null;
+                                setError(false);
                             }}
                             placeholder="yourCoolPassword"
                         />
@@ -94,7 +180,14 @@ const SignUpScreen = ({ navigation }) => {
                             }}
                         />
                     </View>
-                    <View style={[styles.inputInderline]}></View>
+                    <View
+                        style={[
+                            styles.inputInderline,
+                            {
+                                backgroundColor: error ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                            }
+                        ]}
+                    ></View>
                 </View>
             </View>
             <TouchableOpacity
@@ -142,7 +235,7 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     authorizationText: {
-        color: '#6E737A',
+        color: 'black',
         fontSize: 15,
         marginBottom: 10,
         fontFamily: 'SFUIDisplay-Regular'
