@@ -5,12 +5,12 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
-import { handleLogin } from '../auth/firebase';
 import { auth } from '../auth/firebase-config';
 
 const { width, height } = Dimensions.get('window');
 
 const LoginScreen = ({ navigation }) => {
+    const [error, setError] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
@@ -25,7 +25,7 @@ const LoginScreen = ({ navigation }) => {
         return <AppLoading />;
     }
 
-    const handleLogin = (email: any, password: any) => {
+    const handleLogin = (email: string, password: string) => {
         auth.signInWithEmailAndPassword(email, password)
             .then((userCredentials: { user: any }) => {
                 const user = userCredentials.user;
@@ -33,6 +33,8 @@ const LoginScreen = ({ navigation }) => {
                 navigation.navigate('Browse');
             })
             .catch((error: { message: string }) => {
+                setError(true);
+                setPassword('');
                 alert(error.message);
             });
     };
@@ -50,19 +52,45 @@ const LoginScreen = ({ navigation }) => {
             <Text style={[styles.loginText]}>Login</Text>
             <View style={[styles.authorizationPlace]}>
                 <View>
-                    <Text style={[styles.authorizationText]}>Email</Text>
+                    <Text
+                        style={[
+                            styles.authorizationText,
+                            {
+                                color: error ? '#F3534A' : 'black'
+                            }
+                        ]}
+                    >
+                        Email
+                    </Text>
                     <TextInput
                         style={[styles.textInput]}
                         placeholder="simpleEmail@mail.ru"
                         value={email}
                         onChangeText={(inputText) => {
                             setEmail(inputText);
+                            setError(false);
                         }}
                     />
-                    <View style={[styles.inputInderline]}></View>
+                    <View
+                        style={[
+                            styles.inputInderline,
+                            {
+                                backgroundColor: error ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                            }
+                        ]}
+                    ></View>
                 </View>
                 <View>
-                    <Text style={[styles.authorizationText]}>Password</Text>
+                    <Text
+                        style={[
+                            styles.authorizationText,
+                            {
+                                color: error ? '#F3534A' : 'black'
+                            }
+                        ]}
+                    >
+                        Password
+                    </Text>
                     <View style={[styles.passwordInput]}>
                         <TextInput
                             keyboardType="email-address"
@@ -76,6 +104,7 @@ const LoginScreen = ({ navigation }) => {
                             }
                             onChangeText={(inputText) => {
                                 passwordVisible ? setPassword(inputText) : null;
+                                setError(false);
                             }}
                             placeholder="yourCoolPassword"
                         />
@@ -88,7 +117,14 @@ const LoginScreen = ({ navigation }) => {
                             }}
                         />
                     </View>
-                    <View style={[styles.inputInderline]}></View>
+                    <View
+                        style={[
+                            styles.inputInderline,
+                            {
+                                backgroundColor: error ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                            }
+                        ]}
+                    ></View>
                 </View>
             </View>
             <TouchableOpacity
@@ -136,7 +172,6 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     authorizationText: {
-        color: '#6E737A',
         fontSize: 15,
         marginBottom: 10,
         fontFamily: 'SFUIDisplay-Regular'

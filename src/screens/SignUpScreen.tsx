@@ -5,7 +5,6 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
-import { handleSignUp } from '../auth/firebase';
 import { auth } from '../auth/firebase-config';
 
 const { width, height } = Dimensions.get('window');
