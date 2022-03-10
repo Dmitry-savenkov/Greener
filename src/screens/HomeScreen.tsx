@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, Button, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -7,12 +7,13 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import HomeScreenData from '../data/HomeScreenData';
 import 'react-native-reanimated';
 import { MotiView } from 'moti';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ModalTermsOfService } from '../components/ModalTermsOfService';
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
     const flatlistRef = useRef(null);
+    const [isModalVisible, setModalVisible] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     useEffect(() => {
         flatlistRef.current?.scrollToIndex({
@@ -28,6 +29,11 @@ const HomeScreen = ({ navigation }) => {
         'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
         'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
     });
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
@@ -126,14 +132,16 @@ const HomeScreen = ({ navigation }) => {
                     <Text>Sign up</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={toggleModal}>
                 <View style={[styles.blockCentering]}>
                     <Text style={[styles.serviceLinkText]}>Terms of service</Text>
                 </View>
             </TouchableOpacity>
+            {ModalTermsOfService(isModalVisible, toggleModal)}
         </View>
     );
 };
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

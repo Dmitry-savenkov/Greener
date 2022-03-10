@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
