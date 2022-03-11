@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Switch, Slider } from 'react-native';
 import React, { useState } from 'react';
 import BackIcon from '../components/BackIcon';
 import { useFonts } from 'expo-font';
@@ -7,7 +7,11 @@ import { width, height, colors } from '../constants/theme';
 import SettingsScreenData from '../data/SettingsScreenData';
 
 const SettingsScreen = ({ navigation }) => {
+    const [isEnabledNotification, setIsEnabledNotification] = useState(false);
+    const [isEnabledNewsLetter, setIsEnabledNewsLetter] = useState(false);
     const [userName, setUserNamee] = useState(SettingsScreenData.username);
+    const [budget, setBudget] = useState(0);
+    const [montclyCap, setMontlyCap] = useState(0);
     const [userNameStatus, setUserNameStatus] = useState(false);
     const [location, setLocation] = useState(SettingsScreenData.location);
     const [locationStatus, setLocationStatus] = useState(false);
@@ -15,6 +19,14 @@ const SettingsScreen = ({ navigation }) => {
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
         'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf')
     });
+    const toggleSwitch =
+        (fn: {
+            (value: React.SetStateAction<boolean>): void;
+            (value: React.SetStateAction<boolean>): void;
+            (arg0: (previousState: any) => boolean): any;
+        }) =>
+        () =>
+            fn((previousState) => !previousState);
     if (!fontsLoaded) {
         return <AppLoading />;
     }
@@ -73,6 +85,51 @@ const SettingsScreen = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={[styles.grayLine]}></View>
+                <Text style={[styles.userName]}>Budget</Text>
+                <Slider
+                    minimumValue={0}
+                    maximumValue={999}
+                    minimumTrackTintColor="rgba(10, 196, 186, 1)"
+                    onValueChange={(value) => {
+                        setBudget(parseInt(value.toLocaleString(), 10));
+                    }}
+                />
+                <View style={[styles.sliderBlock]}>
+                    <Text style={[styles.styleSliderText]}>${budget}</Text>
+                </View>
+                <Text style={[styles.userName, { marginTop: 15 }]}>Monthly Cap</Text>
+                <Slider
+                    minimumValue={0}
+                    maximumValue={999}
+                    minimumTrackTintColor="rgba(10, 196, 186, 1)"
+                    onValueChange={(value) => {
+                        setMontlyCap(parseInt(value.toLocaleString(), 10));
+                    }}
+                />
+                <View style={[styles.sliderBlock]}>
+                    <Text style={[styles.styleSliderText]}>${montclyCap}</Text>
+                </View>
+            </View>
+            <View style={[styles.grayLine]}></View>
+            <View>
+                <View style={[styles.switchBlock]}>
+                    <Text style={[styles.userName]}>Notifications</Text>
+                    <Switch
+                        thumbColor={colors.white}
+                        trackColor={{ false: colors.gray2, true: colors.primary }}
+                        onValueChange={toggleSwitch(setIsEnabledNotification)}
+                        value={isEnabledNotification}
+                    />
+                </View>
+                <View style={[styles.switchBlock]}>
+                    <Text style={[styles.userName]}>Newsletter</Text>
+                    <Switch
+                        thumbColor={colors.white}
+                        trackColor={{ false: colors.gray2, true: colors.primary }}
+                        onValueChange={toggleSwitch(setIsEnabledNewsLetter)}
+                        value={isEnabledNewsLetter}
+                    />
+                </View>
             </View>
         </View>
     );
@@ -132,6 +189,16 @@ const styles = StyleSheet.create({
         height: 1,
         backgroundColor: colors.gray2,
         marginBottom: 20
+    },
+    switchBlock: {
+        marginTop: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    sliderBlock: {},
+    styleSliderText: {
+        color: colors.gray
     }
 });
 
