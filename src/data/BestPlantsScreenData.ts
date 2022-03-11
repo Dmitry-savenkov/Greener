@@ -1,4 +1,4 @@
-const ProductsScreenData = [
+export const BestPlantsScreenData = [
     {
         id: 1,
         name: '16 Best Plants That Thrive In Your Bedroom',
@@ -20,4 +20,17 @@ const ProductsScreenData = [
     }
 ];
 
-export default ProductsScreenData;
+export const BestPlantsScreenCategories = [
+    {
+        id: 0,
+        name: 'Interior'
+    },
+    {
+        id: 1,
+        name: '27m²'
+    },
+    {
+        id: 2,
+        name: 'Ideas'
+    }
+];

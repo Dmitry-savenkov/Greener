@@ -8,8 +8,7 @@ import HomeScreenData from '../data/HomeScreenData';
 import 'react-native-reanimated';
 import { MotiView } from 'moti';
 import { ModalTermsOfService } from '../components/ModalTermsOfService';
-
-const { width, height } = Dimensions.get('window');
+import { width, height } from '../constants/theme';
 
 const HomeScreen = ({ navigation }) => {
     const flatlistRef = useRef(null);

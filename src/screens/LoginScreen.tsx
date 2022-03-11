@@ -6,8 +6,7 @@ import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
 import { auth } from '../auth/firebase-config';
-
-const { width, height } = Dimensions.get('window');
+import { width, height } from '../constants/theme';
 
 const LoginScreen = ({ navigation }) => {
     const [error, setError] = useState(false);

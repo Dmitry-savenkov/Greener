@@ -5,8 +5,7 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { BrowseScreenData } from '../data/BrowseScreenData';
 import { BrowseNameCategories } from '../data/BrowseScreenData';
-
-const { width, height } = Dimensions.get('window');
+import { width, height } from '../constants/theme';
 
 const BrowseScreen = ({ navigation }) => {
     const [activeCategory, setActiveCategory] = useState(0);

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFonts } from 'expo-font';
@@ -6,8 +6,7 @@ import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
 import { auth } from '../auth/firebase-config';
-
-const { width, height } = Dimensions.get('window');
+import { width, height, colors } from '../constants/theme';
 
 const SignUpScreen = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -65,7 +64,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.authorizationText,
                             {
-                                color: errorName ? '#F3534A' : 'black'
+                                color: errorName ? colors.accent : colors.black
                             }
                         ]}
                     >
@@ -83,7 +82,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.inputInderline,
                             {
-                                backgroundColor: errorName ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                                backgroundColor: errorName ? colors.accent : colors.gray2
                             }
                         ]}
                     ></View>
@@ -93,7 +92,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.authorizationText,
                             {
-                                color: errorLastName ? '#F3534A' : 'black'
+                                color: errorLastName ? colors.accent : colors.black
                             }
                         ]}
                     >
@@ -111,7 +110,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.inputInderline,
                             {
-                                backgroundColor: errorLastName ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                                backgroundColor: errorLastName ? colors.accent : colors.gray2
                             }
                         ]}
                     ></View>
@@ -121,7 +120,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.authorizationText,
                             {
-                                color: error ? '#F3534A' : 'black'
+                                color: error ? colors.accent : colors.black
                             }
                         ]}
                     >
@@ -139,7 +138,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.inputInderline,
                             {
-                                backgroundColor: error ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                                backgroundColor: error ? colors.accent : colors.gray2
                             }
                         ]}
                     ></View>
@@ -149,7 +148,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.authorizationText,
                             {
-                                color: error ? '#F3534A' : 'black'
+                                color: error ? colors.accent : colors.black
                             }
                         ]}
                     >
@@ -174,7 +173,7 @@ const SignUpScreen = ({ navigation }) => {
                         <Entypo
                             name={passwordVisible ? 'eye' : 'eye-with-line'}
                             size={20}
-                            color="#6E737A"
+                            color={colors.gray}
                             onPress={() => {
                                 setPasswordVisible(!passwordVisible);
                             }}
@@ -184,7 +183,7 @@ const SignUpScreen = ({ navigation }) => {
                         style={[
                             styles.inputInderline,
                             {
-                                backgroundColor: error ? '#F3534A' : 'rgba(225, 227, 232, 1)'
+                                backgroundColor: error ? colors.accent : colors.gray2
                             }
                         ]}
                     ></View>
@@ -199,7 +198,7 @@ const SignUpScreen = ({ navigation }) => {
                     <LinearGradient
                         start={{ x: 0, y: 15 }}
                         end={{ x: 1.33, y: 5 }}
-                        colors={['rgba(10, 196, 186, 1)', 'rgba(43, 218, 142, 1)']}
+                        colors={[colors.primary, colors.secondary, colors.tertiary]}
                         style={[styles.buttonLogin, styles.blockCentering]}
                     >
                         <Text style={styles.loginButtonText}>Sign Up</Text>
@@ -218,7 +217,7 @@ const SignUpScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.white,
         paddingHorizontal: width * 0.085,
         paddingTop: height * 0.1
     },
@@ -235,7 +234,7 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     authorizationText: {
-        color: 'black',
+        color: colors.black,
         fontSize: 15,
         marginBottom: 10,
         fontFamily: 'SFUIDisplay-Regular'
@@ -243,11 +242,11 @@ const styles = StyleSheet.create({
     inputInderline: {
         width: '100%',
         height: 1,
-        backgroundColor: 'rgba(225, 227, 232, 1)',
+        backgroundColor: colors.gray2,
         marginBottom: 20
     },
     textInput: {
-        color: 'rgba(50, 54, 67, 1)',
+        color: colors.black,
         marginBottom: 20,
         fontFamily: 'SFUIDisplay-Medium'
     },
@@ -262,12 +261,12 @@ const styles = StyleSheet.create({
         borderRadius: 9
     },
     loginButtonText: {
-        color: '#ffffff',
+        color: colors.white,
         fontFamily: 'SFUIDisplay-Regular',
         fontSize: 16
     },
     forgotPasswordText: {
-        color: 'rgba(157, 163, 180, 1)',
+        color: colors.gray,
         marginTop: 20,
         textDecorationLine: 'underline'
     },
