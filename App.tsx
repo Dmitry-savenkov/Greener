@@ -17,7 +17,7 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen
                     name="Home"
-                    component={BestPlantsScreen}
+                    component={SettingsScreen}
                     options={{
                         headerShown: false
                     }}

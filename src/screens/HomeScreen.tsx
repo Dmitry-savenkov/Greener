@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';

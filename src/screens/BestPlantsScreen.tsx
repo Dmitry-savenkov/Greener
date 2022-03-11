@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import React, { useState } from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import BackIcon from '../components/BackIcon';
@@ -9,6 +8,7 @@ import DotsIcon from '../components/DotsIcon';
 import { BestPlantsScreenData } from '../data/BestPlantsScreenData';
 import { BestPlantsScreenCategories } from '../data/BestPlantsScreenData';
 import { ScrollView } from 'react-native-gesture-handler';
+
 const BestPlantsScreen = ({ navigation }) => {
     const [indexIndicator, setIndexIndicator] = useState(2);
     const [image, setImage] = useState(require('../assets/images/plants_1.png'));
