@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFonts } from 'expo-font';

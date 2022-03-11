@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import BackIcon from '../components/BackIcon';
 import { useFonts } from 'expo-font';
