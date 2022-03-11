@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     categoryNameItem: {
-        marginRight: 34
+        borderWidth: 1
     },
     categoryNameText: {
         fontFamily: 'SFUIDisplay-Medium',
