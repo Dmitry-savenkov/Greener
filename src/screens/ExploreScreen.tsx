@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -9,11 +9,13 @@ import BackIcon from '../components/BackIcon';
 import SearchIcon from '../components/SearchIcon';
 
 const ExploreScreen = ({ navigation }) => {
+    const [inputValue, setInputValue] = useState('');
     const [fontsLoaded] = useFonts({
         'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
         'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
         'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
     });
+    console.log(inputValue);
     if (!fontsLoaded) {
         return <AppLoading />;
     }
@@ -30,7 +32,14 @@ const ExploreScreen = ({ navigation }) => {
                 <View style={[styles.header]}>
                     <Text style={[styles.sectionTitle]}>Explore</Text>
                     <View style={[styles.textInputBlock]}>
-                        <TextInput placeholder="Search" style={[styles.textInput]} />
+                        <TextInput
+                            placeholder="Search"
+                            style={[styles.textInput]}
+                            value={inputValue}
+                            onChangeText={(text) => {
+                                setInputValue(text);
+                            }}
+                        />
                         <TouchableOpacity>
                             <SearchIcon />
                         </TouchableOpacity>
@@ -53,6 +62,18 @@ const ExploreScreen = ({ navigation }) => {
                     <Image source={ExploreScreenData[5]} style={{ width: '100%', borderRadius: 10 }} />
                 </View>
             </ScrollView>
+            <TouchableOpacity>
+                <View style={[styles.centerModeFilter]}>
+                    <LinearGradient
+                        start={{ x: 0, y: 15 }}
+                        end={{ x: 1.33, y: 5 }}
+                        colors={[colors.primary, colors.secondary, colors.tertiary]}
+                        style={[styles.centerModeFilter]}
+                    >
+                        <Text style={styles.filtersText}>Filters</Text>
+                    </LinearGradient>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -99,6 +120,26 @@ const styles = StyleSheet.create({
     },
     bottomImage: {
         marginTop: 25
+    },
+    filtersText: {
+        paddingVertical: 11,
+        paddingHorizontal: 50,
+        color: colors.white,
+        fontFamily: 'SFUIDisplay-Regular',
+        fontSize: 16
+    },
+    centerMode: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    centerModeFilter: {
+        position: 'absolute',
+        bottom: height * 0.04,
+        right: width * 0.12,
+        zIndex: 400,
+        borderRadius: 6,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
