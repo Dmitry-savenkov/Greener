@@ -8,6 +8,7 @@ import BrowseScreen from './src/screens/BrowseScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import BestPlantsScreen from './src/screens/BestPlantsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import ThemesContextProvider from './src/context/ThemeContext';
 
 const Stack = createStackNavigator();
@@ -27,6 +28,13 @@ export default function App() {
                     <Stack.Screen
                         name="Login"
                         component={LoginScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="ForgotPassword"
+                        component={ForgotPasswordScreen}
                         options={{
                             headerShown: false
                         }}
