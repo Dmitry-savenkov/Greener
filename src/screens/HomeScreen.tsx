@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect, useRef } from 'react';
-import { useFonts } from 'expo-font';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
@@ -8,7 +7,8 @@ import HomeScreenData from '../data/HomeScreenData';
 import 'react-native-reanimated';
 import { MotiView } from 'moti';
 import { ModalTermsOfService } from '../components/ModalTermsOfService';
-import { width, height } from '../constants/theme';
+import { width, height, colors } from '../constants/theme';
+import { ThemesContext } from '../context/ThemeContext';
 
 const HomeScreen = ({ navigation }) => {
     const flatlistRef = useRef(null);
@@ -23,11 +23,7 @@ const HomeScreen = ({ navigation }) => {
         });
     }, [activeIndex]);
 
-    const [fontsLoaded] = useFonts({
-        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
-        'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
-    });
+    const { fontsLoaded } = useContext(ThemesContext);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -45,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
                 <View>
                     <MaskedView maskElement={<Text style={[styles.titleGradientElement]}>Greener.</Text>}>
                         <LinearGradient
-                            colors={['rgba(10, 196, 186, 1)', 'rgba(43, 218, 142, 1)']}
+                            colors={[colors.primary, colors.secondary, colors.tertiary]}
                             start={{ x: 1, y: 1 }}
                             end={{ x: 0, y: 0.33 }}
                             style={{ width: 120, height: 35 }}
@@ -96,8 +92,7 @@ const HomeScreen = ({ navigation }) => {
                                             width: activeIndex === index ? 7 : 5,
 
                                             height: activeIndex === index ? 7 : 5,
-                                            backgroundColor:
-                                                activeIndex === index ? '#9DA3B4' : 'rgba(157, 163, 180, 0.4)'
+                                            backgroundColor: activeIndex === index ? colors.gray : colors.gray2
                                         }
                                     ]}
                                 ></MotiView>
@@ -115,7 +110,7 @@ const HomeScreen = ({ navigation }) => {
                     <LinearGradient
                         start={{ x: 0, y: 15 }}
                         end={{ x: 1.33, y: 5 }}
-                        colors={['rgba(12, 197, 184, 1)', 'rgba(43, 218, 142, 1)']}
+                        colors={[colors.primary, colors.secondary, colors.tertiary]}
                         style={[styles.buttonLogin, styles.blockCentering]}
                     >
                         <Text style={styles.loginButtonText}>Login</Text>
@@ -144,7 +139,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.white,
         paddingTop: height * 0.1
     },
     blockCentering: {
@@ -152,7 +147,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     titleText: {
-        color: 'rgba(50, 54, 67, 1)',
+        color: colors.black,
         fontSize: 32,
         fontFamily: 'SFUIDisplay-Bold'
     },
@@ -161,7 +156,7 @@ const styles = StyleSheet.create({
         fontFamily: 'SFUIDisplay-Bold'
     },
     textUnderTitle: {
-        color: 'rgba(197, 204, 214, 1)',
+        color: colors.gray2,
         marginTop: 10,
         fontSize: 18
     },
@@ -191,7 +186,6 @@ const styles = StyleSheet.create({
         margin: 3,
         width: 5,
         height: 5,
-        backgroundColor: '#9DA3B4',
         borderRadius: 6
     },
     buttonCenterMode: {
@@ -206,7 +200,7 @@ const styles = StyleSheet.create({
         borderRadius: 9
     },
     loginButtonText: {
-        color: '#ffffff',
+        color: colors.white,
         fontFamily: 'SFUIDisplay-Regular',
         fontSize: 16
     },
@@ -215,7 +209,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 26,
         marginHorizontal: width * 0.15,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.white,
         height: 48,
         borderRadius: 9,
         shadowColor: '#171717',
@@ -225,7 +219,7 @@ const styles = StyleSheet.create({
     },
     serviceLinkText: {
         marginTop: 20,
-        color: 'rgba(157, 163, 180, 1)',
+        color: colors.gray,
         fontSize: 13,
         fontFamily: 'SFUIDisplay-Regular'
     }

@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
-import React, { useState } from 'react';
-import { useFonts } from 'expo-font';
+import React, { useState, useContext } from 'react';
 import AppLoading from 'expo-app-loading';
 import BackIcon from '../components/BackIcon';
 import { width, height, colors } from '../constants/theme';
@@ -8,16 +7,13 @@ import DotsIcon from '../components/DotsIcon';
 import { BestPlantsScreenData } from '../data/BestPlantsScreenData';
 import { BestPlantsScreenCategories } from '../data/BestPlantsScreenData';
 import { ScrollView } from 'react-native-gesture-handler';
+import { ThemesContext } from '../context/ThemeContext';
 
 const BestPlantsScreen = ({ navigation }) => {
     const [indexIndicator, setIndexIndicator] = useState(2);
     const [image, setImage] = useState(require('../assets/images/plants_1.png'));
     const [displayStatus, setDisplayStatus] = useState(true);
-    const [fontsLoaded] = useFonts({
-        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
-        'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
-    });
+    const { fontsLoaded } = useContext(ThemesContext);
 
     if (!fontsLoaded) {
         return <AppLoading />;

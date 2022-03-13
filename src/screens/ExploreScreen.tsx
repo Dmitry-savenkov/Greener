@@ -1,21 +1,17 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
-import React, { useState } from 'react';
-import { useFonts } from 'expo-font';
+import React, { useState, useContext } from 'react';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import ExploreScreenData from '../data/ExploreScreenData';
 import { width, height, colors } from '../constants/theme';
 import BackIcon from '../components/BackIcon';
 import SearchIcon from '../components/SearchIcon';
+import { ThemesContext } from '../context/ThemeContext';
 
 const ExploreScreen = ({ navigation }) => {
     const [inputValue, setInputValue] = useState('');
-    const [fontsLoaded] = useFonts({
-        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
-        'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
-    });
-    console.log(inputValue);
+    const { fontsLoaded } = useContext(ThemesContext);
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
@@ -45,9 +41,13 @@ const ExploreScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate('BestPlants');
+                    }}
+                >
                     <Image source={ExploreScreenData[0]} style={{ width: '100%', borderRadius: 10 }} />
-                </View>
+                </TouchableOpacity>
                 <View style={[styles.rowStyle]}>
                     <Image source={ExploreScreenData[1]} style={{ width: '66%', borderRadius: 10 }} />
 
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.white,
-        paddingTop: height * 0.1,
+        paddingTop: height * 0.06,
         paddingHorizontal: width * 0.085
     },
     sectionTitle: {

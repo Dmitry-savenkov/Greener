@@ -8,63 +8,66 @@ import BrowseScreen from './src/screens/BrowseScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import BestPlantsScreen from './src/screens/BestPlantsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import ThemesContextProvider from './src/context/ThemeContext';
 
 const Stack = createStackNavigator();
 
 export default function App() {
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Explore">
-                <Stack.Screen
-                    name="Home"
-                    component={HomeScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen
-                    name="Login"
-                    component={LoginScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen
-                    name="Browse"
-                    component={BrowseScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen
-                    name="Explore"
-                    component={ExploreScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen
-                    name="BestPlants"
-                    component={BestPlantsScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen
-                    name="Settings"
-                    component={SettingsScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen
-                    name="SignUp"
-                    component={SignUpScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <ThemesContextProvider>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen
+                        name="Home"
+                        component={HomeScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Login"
+                        component={LoginScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Browse"
+                        component={BrowseScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Explore"
+                        component={ExploreScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="BestPlants"
+                        component={BestPlantsScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Settings"
+                        component={SettingsScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="SignUp"
+                        component={SignUpScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </ThemesContextProvider>
     );
 }

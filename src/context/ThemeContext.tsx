@@ -1,34 +1,18 @@
-// import * as React from 'react';
-// import { useFonts } from 'expo-font';
+import { useFonts } from 'expo-font';
+import React, { createContext } from 'react';
 
-// interface AppContextInterface {
-//     name: string;
-//     author: string;
-//     url: string;
-// }
+export const ThemesContext = createContext();
 
-// const AppCtx = React.createContext<AppContextInterface | null>(null);
+const ThemesContextProvider = (props: {
+    children: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
+}) => {
+    const [fontsLoaded] = useFonts({
+        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
+        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
+        'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
+    });
 
-// // Provider in your app
+    return <ThemesContext.Provider value={{ fontsLoaded }}>{props.children}</ThemesContext.Provider>;
+};
 
-// const sampleAppContext: AppContextInterface = {
-//     name: 'Using React Context in a Typescript App',
-//     author: 'thehappybug',
-//     url: 'http://www.example.com'
-// };
-
-// export const App = () => <AppCtx.Provider value={sampleAppContext}>...</AppCtx.Provider>;
-
-// // Consume in your app
-
-// export const PostInfo = () => {
-//     const appContext = React.useContext(AppCtx);
-//     const [fontsLoaded] = useFonts({
-//         SFUIText: require('./src/assets/FontsFree-Net-sf-ui-text-regular-58646b56a688c.ttf')
-//     });
-//     return (
-//         <div>
-//             Name: {appContext.name}, Author: {appContext.author}, Url: {appContext.url}
-//         </div>
-//     );
-// };
+export default ThemesContextProvider;

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Switch, Slider } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import BackIcon from '../components/BackIcon';
-import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { width, height, colors } from '../constants/theme';
 import SettingsScreenData from '../data/SettingsScreenData';
+import { ThemesContext } from '../context/ThemeContext';
 
 const SettingsScreen = ({ navigation }) => {
     const [isEnabledNotification, setIsEnabledNotification] = useState(false);
@@ -15,10 +15,8 @@ const SettingsScreen = ({ navigation }) => {
     const [userNameStatus, setUserNameStatus] = useState(false);
     const [location, setLocation] = useState(SettingsScreenData.location);
     const [locationStatus, setLocationStatus] = useState(false);
-    const [fontsLoaded] = useFonts({
-        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf')
-    });
+    const { fontsLoaded } = useContext(ThemesContext);
+
     const toggleSwitch =
         (fn: {
             (value: React.SetStateAction<boolean>): void;
@@ -32,7 +30,13 @@ const SettingsScreen = ({ navigation }) => {
     }
     return (
         <View style={[styles.container]}>
-            <BackIcon />
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.goBack();
+                }}
+            >
+                <BackIcon />
+            </TouchableOpacity>
             <View style={[styles.titlePhoto]}>
                 <Text style={[styles.title]}>Settings</Text>
                 <Image source={SettingsScreenData.avatar} style={[styles.avatarImage]} />

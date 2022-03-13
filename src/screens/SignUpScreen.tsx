@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
 import { auth } from '../auth/firebase-config';
 import { width, height, colors } from '../constants/theme';
+import { ThemesContext } from '../context/ThemeContext';
 
 const SignUpScreen = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -18,11 +18,7 @@ const SignUpScreen = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
 
-    const [fontsLoaded] = useFonts({
-        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
-        'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
-    });
+    const { fontsLoaded } = useContext(ThemesContext);
 
     const handleSignUp = (email: string, password: string) => {
         if (name === '') {

@@ -1,34 +1,30 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
-import React, { useState } from 'react';
-import BackIcon from '../components/BackIcon';
-import { useFonts } from 'expo-font';
+import React, { useState, useContext } from 'react';
 import AppLoading from 'expo-app-loading';
 import { BrowseScreenData } from '../data/BrowseScreenData';
 import { BrowseNameCategories } from '../data/BrowseScreenData';
-import { width, height } from '../constants/theme';
+import { width, height, colors } from '../constants/theme';
+import SettingsScreenData from '../data/SettingsScreenData';
+import { ThemesContext } from '../context/ThemeContext';
 
 const BrowseScreen = ({ navigation }) => {
     const [activeCategory, setActiveCategory] = useState(0);
     const [activeCategoryName, setActiveCategoryName] = useState('products');
-    const [fontsLoaded] = useFonts({
-        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf')
-    });
+    const { fontsLoaded } = useContext(ThemesContext);
     if (!fontsLoaded) {
         return <AppLoading />;
     }
     return (
         <View style={[styles.container]}>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.goBack();
-                }}
-            >
-                <BackIcon />
-            </TouchableOpacity>
             <View style={[styles.titlePhoto]}>
                 <Text style={[styles.title]}>Browse</Text>
-                <View style={[styles.avatarImage]}></View>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate('Settings');
+                    }}
+                >
+                    <Image source={SettingsScreenData.avatar} style={[styles.avatarImage]} />
+                </TouchableOpacity>
             </View>
             <View>
                 <FlatList
@@ -53,7 +49,7 @@ const BrowseScreen = ({ navigation }) => {
                                         style={[
                                             styles.categoryNameText,
                                             {
-                                                color: activeCategory === index ? 'rgba(10, 196, 186, 1)' : '#C5CCD6'
+                                                color: activeCategory === index ? colors.primary : colors.gray2
                                             }
                                         ]}
                                     >
@@ -76,7 +72,13 @@ const BrowseScreen = ({ navigation }) => {
                 >
                     {BrowseScreenData.map((item, index) => {
                         return item.tags.includes(activeCategoryName) ? (
-                            <TouchableOpacity style={[styles.categoryBlock]} key={index}>
+                            <TouchableOpacity
+                                style={[styles.categoryBlock]}
+                                key={index}
+                                onPress={() => {
+                                    navigation.navigate(item.navigateTo);
+                                }}
+                            >
                                 <View style={[styles.imageBG]}>
                                     <Image source={item.image} />
                                 </View>
@@ -94,14 +96,14 @@ const BrowseScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.white,
         paddingHorizontal: width * 0.085,
         paddingTop: height * 0.1
     },
     title: {
         fontFamily: 'SFUIDisplay-Medium',
         fontSize: 28,
-        color: 'rgba(50, 54, 67, 1)'
+        color: colors.black
     },
     titlePhoto: {
         marginTop: 35,
@@ -112,18 +114,16 @@ const styles = StyleSheet.create({
     avatarImage: {
         width: 36,
         height: 36,
-        borderRadius: 36,
-        backgroundColor: 'rgba(50, 54, 67, 1)'
+        borderRadius: 36
     },
     listCategory: {
         marginTop: 50
     },
     categoryNameItem: {
-        borderWidth: 1
+        marginRight: 30
     },
     categoryNameText: {
         fontFamily: 'SFUIDisplay-Medium',
-        color: '#C5CCD6',
         fontSize: 18
     },
     grayLine: {
@@ -136,14 +136,14 @@ const styles = StyleSheet.create({
         marginTop: 21,
         width: '100%',
         height: 3,
-        backgroundColor: 'rgba(10, 196, 186, 1)'
+        backgroundColor: colors.primary
     },
     categoryBlock: {
         alignItems: 'center',
         width: '45%',
         height: 150,
         margin: 7.5,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.white,
         shadowColor: '#171717',
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.02,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         marginBottom: 4
     },
     categoryBlockCount: {
-        color: 'rgba(197, 204, 214, 1)',
+        color: colors.gray2,
         fontFamily: 'SFUIDisplay-Regular'
     }
 });

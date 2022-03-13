@@ -1,24 +1,19 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
 import { auth } from '../auth/firebase-config';
 import { width, height } from '../constants/theme';
+import { ThemesContext } from '../context/ThemeContext';
 
 const LoginScreen = ({ navigation }) => {
     const [error, setError] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(true);
-
-    const [fontsLoaded] = useFonts({
-        'SFUIDisplay-Regular': require('./../assets/fonts/SFUIDisplay-Regular.ttf'),
-        'SFUIDisplay-Medium': require('./../assets/fonts/SFUIDisplay-Medium.ttf'),
-        'SFUIDisplay-Bold': require('./../assets/fonts/SFUIDisplay-Bold.ttf')
-    });
+    const { fontsLoaded } = useContext(ThemesContext);
 
     if (!fontsLoaded) {
         return <AppLoading />;
@@ -29,7 +24,10 @@ const LoginScreen = ({ navigation }) => {
             .then((userCredentials: { user: any }) => {
                 const user = userCredentials.user;
                 console.log('Logged in with:', user.email);
-                navigation.navigate('Browse');
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Browse' }]
+                });
             })
             .catch((error: { message: string }) => {
                 setError(true);
@@ -165,7 +163,7 @@ const styles = StyleSheet.create({
     loginText: {
         marginTop: 35,
         fontSize: 26,
-        fontFamily: 'SFUIDisplay-Medium'
+        fontFamily: 'SFUIDisplay-Bold'
     },
     authorizationPlace: {
         marginTop: 50
