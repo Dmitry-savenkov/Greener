@@ -20,7 +20,7 @@ const BrowseScreen = ({ navigation }) => {
                 <Text style={[styles.title]}>Browse</Text>
                 <TouchableOpacity
                     onPress={() => {
-                        navigation.navigate('Settings');
+                        navigation.navigate('DrawerNavigator', { screen: 'Settings' });
                     }}
                 >
                     <Image source={SettingsScreenData.avatar} style={[styles.avatarImage]} />

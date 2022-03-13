@@ -26,7 +26,7 @@ const LoginScreen = ({ navigation }) => {
                 console.log('Logged in with:', user.email);
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: 'Browse' }]
+                    routes: [{ name: 'DrawerNavigator', screen: 'Browse' }]
                 });
             })
             .catch((error: { message: string }) => {

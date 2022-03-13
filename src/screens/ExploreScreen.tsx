@@ -42,7 +42,7 @@ const ExploreScreen = ({ navigation }) => {
                 </View>
                 <TouchableOpacity
                     onPress={() => {
-                        navigation.navigate('BestPlants');
+                        navigation.navigate('DrawerNavigator', { screen: 'BestPlants' });
                     }}
                 >
                     <Image source={ExploreScreenData[0]} style={{ width: '100%', borderRadius: 10 }} />
