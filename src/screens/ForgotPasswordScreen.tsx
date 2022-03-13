@@ -1,22 +1,34 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState, useContext } from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
+import { auth } from '../auth/firebase-config';
 
 const ForgotPasswordScreen = ({ navigation }) => {
     const [error, setError] = useState(false);
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordVisible, setPasswordVisible] = useState(true);
     const { fontsLoaded } = useContext(ThemesContext);
 
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
+    const handleReset = (email: string) => {
+        auth.sendPasswordResetEmail(email)
+            .then(() => {
+                alert('Password reset email sent!');
+                navigation.navigate('Login');
+            })
+            .catch((error: { code: string; message: string }) => {
+                setError(true);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert('error code:' + errorCode + '.' + 'error message:' + errorMessage + '.');
+            });
+    };
 
     return (
         <View style={[styles.container]}>
@@ -60,7 +72,11 @@ const ForgotPasswordScreen = ({ navigation }) => {
                     ></View>
                 </View>
             </View>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity
+                onPress={() => {
+                    handleReset(email);
+                }}
+            >
                 <View style={[styles.buttonCenterMode]}>
                     <LinearGradient
                         start={{ x: 0, y: 15 }}
