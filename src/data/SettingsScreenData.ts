@@ -1,7 +1,7 @@
 const SettingsScreenData = {
-    username: 'react-ui-kit',
+    username: 'Helena',
     location: 'Europe',
-    email: 'contact@react-ui-kit.com',
+    email: 'helenaGomes@mail.com',
     avatar: require('../assets/images/avatar.png'),
     budget: 1000,
     monthly_cap: 5000,

@@ -7,6 +7,7 @@ import { width, height, colors } from '../constants/theme';
 import BackIcon from '../components/BackIcon';
 import SearchIcon from '../components/SearchIcon';
 import { ThemesContext } from '../context/ThemeContext';
+import DotsIcon from '../components/DotsIcon';
 
 const ExploreScreen = ({ navigation }) => {
     const [inputValue, setInputValue] = useState('');
@@ -16,13 +17,18 @@ const ExploreScreen = ({ navigation }) => {
     }
     return (
         <View style={[styles.container]}>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.goBack();
-                }}
-            >
-                <BackIcon />
-            </TouchableOpacity>
+            <View style={[styles.headerIcons]}>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.goBack();
+                    }}
+                >
+                    <BackIcon />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <DotsIcon />
+                </TouchableOpacity>
+            </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={[styles.header]}>
                     <Text style={[styles.sectionTitle]}>Explore</Text>
@@ -83,6 +89,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         paddingTop: height * 0.06,
         paddingHorizontal: width * 0.085
+    },
+    headerIcons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     sectionTitle: {
         fontSize: 26,

@@ -11,41 +11,18 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import ThemesContextProvider from './src/context/ThemeContext';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import CustomDrawer from './src/navigation/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 const DrawerNavigator = () => {
     return (
-        <Drawer.Navigator>
-            <Drawer.Screen
-                name="Browse"
-                component={BrowseScreen}
-                options={{
-                    headerShown: false
-                }}
-            />
-            <Drawer.Screen
-                name="Explore"
-                component={ExploreScreen}
-                options={{
-                    headerShown: false
-                }}
-            />
-            <Drawer.Screen
-                name="Best"
-                component={BestPlantsScreen}
-                options={{
-                    headerShown: false
-                }}
-            />
-            <Drawer.Screen
-                name="Settings"
-                component={SettingsScreen}
-                options={{
-                    headerShown: false
-                }}
-            />
+        <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />} screenOptions={{ headerShown: false }}>
+            <Drawer.Screen name="Browse" component={BrowseScreen} />
+            <Drawer.Screen name="Explore" component={ExploreScreen} />
+            <Drawer.Screen name="BestPlants" component={BestPlantsScreen} />
+            <Drawer.Screen name="Settings" component={SettingsScreen} />
         </Drawer.Navigator>
     );
 };
@@ -54,64 +31,12 @@ export default function App() {
     return (
         <ThemesContextProvider>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Home">
-                    <Stack.Screen
-                        name="Home"
-                        component={HomeScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} options={{ headerShown: false }} />
-                    <Stack.Screen
-                        name="Login"
-                        component={LoginScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name="ForgotPassword"
-                        component={ForgotPasswordScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name="Browse"
-                        component={BrowseScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name="Explore"
-                        component={ExploreScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name="BestPlants"
-                        component={BestPlantsScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name="Settings"
-                        component={SettingsScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name="SignUp"
-                        component={SignUpScreen}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
+                <Stack.Navigator initialRouteName="DrawerNavigator" screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                    <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+                    <Stack.Screen name="SignUp" component={SignUpScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </ThemesContextProvider>

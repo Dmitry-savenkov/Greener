@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.white,
         paddingHorizontal: width * 0.085,
-        paddingTop: height * 0.1
+        paddingTop: height * 0.085
     },
     title: {
         fontFamily: 'SFUIDisplay-Medium',

@@ -5,6 +5,7 @@ import AppLoading from 'expo-app-loading';
 import { width, height, colors } from '../constants/theme';
 import SettingsScreenData from '../data/SettingsScreenData';
 import { ThemesContext } from '../context/ThemeContext';
+import DotsIcon from '../components/DotsIcon';
 
 const SettingsScreen = ({ navigation }) => {
     const [isEnabledNotification, setIsEnabledNotification] = useState(false);
@@ -30,13 +31,18 @@ const SettingsScreen = ({ navigation }) => {
     }
     return (
         <View style={[styles.container]}>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.goBack();
-                }}
-            >
-                <BackIcon />
-            </TouchableOpacity>
+            <View style={[styles.headerIcons]}>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.goBack();
+                    }}
+                >
+                    <BackIcon />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <DotsIcon />
+                </TouchableOpacity>
+            </View>
             <View style={[styles.titlePhoto]}>
                 <Text style={[styles.title]}>Settings</Text>
                 <Image source={SettingsScreenData.avatar} style={[styles.avatarImage]} />
@@ -144,7 +150,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.white,
         paddingHorizontal: width * 0.085,
-        paddingTop: height * 0.1
+        paddingTop: height * 0.067
+    },
+    headerIcons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     title: {
         fontFamily: 'SFUIDisplay-Medium',
