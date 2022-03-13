@@ -1,38 +1,32 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState, useContext } from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackIcon from '../components/BackIcon';
-import { auth } from '../auth/firebase-config';
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
+import { auth } from '../auth/firebase-config';
 
-const LoginScreen = ({ navigation }) => {
+const ForgotPasswordScreen = ({ navigation }) => {
     const [error, setError] = useState(false);
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordVisible, setPasswordVisible] = useState(true);
     const { fontsLoaded } = useContext(ThemesContext);
 
     if (!fontsLoaded) {
         return <AppLoading />;
     }
 
-    const handleLogin = (email: string, password: string) => {
-        auth.signInWithEmailAndPassword(email, password)
-            .then((userCredentials: { user: any }) => {
-                const user = userCredentials.user;
-                console.log('Logged in with:', user.email);
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: 'Browse' }]
-                });
+    const handleReset = (email: string) => {
+        auth.sendPasswordResetEmail(email)
+            .then(() => {
+                alert('Password reset email sent!');
+                navigation.navigate('Login');
             })
-            .catch((error: { message: string }) => {
+            .catch((error: { code: string; message: string }) => {
                 setError(true);
-                setPassword('');
-                alert(error.message);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert('error code:' + errorCode + '.' + 'error message:' + errorMessage + '.');
             });
     };
 
@@ -46,7 +40,7 @@ const LoginScreen = ({ navigation }) => {
                 <BackIcon />
             </TouchableOpacity>
 
-            <Text style={[styles.loginText]}>Login</Text>
+            <Text style={[styles.recoveryText]}>Password recovery</Text>
             <View style={[styles.authorizationPlace]}>
                 <View>
                     <Text
@@ -77,56 +71,10 @@ const LoginScreen = ({ navigation }) => {
                         ]}
                     ></View>
                 </View>
-                <View>
-                    <Text
-                        style={[
-                            styles.authorizationText,
-                            {
-                                color: error ? colors.accent : colors.black
-                            }
-                        ]}
-                    >
-                        Password
-                    </Text>
-                    <View style={[styles.passwordInput]}>
-                        <TextInput
-                            keyboardType="email-address"
-                            style={[styles.textInput]}
-                            value={
-                                passwordVisible
-                                    ? password
-                                    : [...Array(password.length)].reduce((acc) => {
-                                          return (acc += '*');
-                                      }, '')
-                            }
-                            onChangeText={(inputText) => {
-                                passwordVisible ? setPassword(inputText) : null;
-                                setError(false);
-                            }}
-                            placeholder="yourCoolPassword"
-                        />
-                        <Entypo
-                            name={passwordVisible ? 'eye' : 'eye-with-line'}
-                            size={20}
-                            color="#6E737A"
-                            onPress={() => {
-                                setPasswordVisible(!passwordVisible);
-                            }}
-                        />
-                    </View>
-                    <View
-                        style={[
-                            styles.inputInderline,
-                            {
-                                backgroundColor: error ? colors.accent : colors.gray2
-                            }
-                        ]}
-                    ></View>
-                </View>
             </View>
             <TouchableOpacity
                 onPress={() => {
-                    handleLogin(email, password);
+                    handleReset(email);
                 }}
             >
                 <View style={[styles.buttonCenterMode]}>
@@ -136,17 +84,17 @@ const LoginScreen = ({ navigation }) => {
                         colors={[colors.primary, colors.secondary, colors.tertiary]}
                         style={[styles.buttonLogin, styles.blockCentering]}
                     >
-                        <Text style={styles.loginButtonText}>Login</Text>
+                        <Text style={styles.loginButtonText}>Get password</Text>
                     </LinearGradient>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('ForgotPassword');
+                    navigation.navigate('Login');
                 }}
             >
                 <View style={[styles.blockCentering]}>
-                    <Text style={[styles.forgotPasswordText]}>Forgot your password?</Text>
+                    <Text style={[styles.forgotPasswordText]}>Go back to login</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -164,13 +112,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    loginText: {
+    recoveryText: {
         marginTop: 35,
         fontSize: 26,
         fontFamily: 'SFUIDisplay-Medium'
     },
     authorizationPlace: {
-        marginTop: 50
+        marginTop: 135
     },
     authorizationText: {
         fontSize: 15,
@@ -214,4 +162,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginScreen;
+export default ForgotPasswordScreen;

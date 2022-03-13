@@ -11,7 +11,6 @@ import { ThemesContext } from '../context/ThemeContext';
 const ExploreScreen = ({ navigation }) => {
     const [inputValue, setInputValue] = useState('');
     const { fontsLoaded } = useContext(ThemesContext);
-
     if (!fontsLoaded) {
         return <AppLoading />;
     }
