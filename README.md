@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> A creative and modern clothes shopping app design for react-native using the native-base UI components.
+> A creative and modern plants app design for react-native using the expo and native-base UI components.
 It works well with both IOS and Android.
 
 
