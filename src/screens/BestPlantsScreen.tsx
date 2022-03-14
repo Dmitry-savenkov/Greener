@@ -28,7 +28,11 @@ const BestPlantsScreen = ({ navigation }) => {
                 >
                     <BackIcon />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.openDrawer();
+                    }}
+                >
                     <DotsIcon />
                 </TouchableOpacity>
             </View>

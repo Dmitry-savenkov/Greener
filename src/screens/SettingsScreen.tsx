@@ -39,7 +39,11 @@ const SettingsScreen = ({ navigation }) => {
                 >
                     <BackIcon />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.openDrawer();
+                    }}
+                >
                     <DotsIcon />
                 </TouchableOpacity>
             </View>
