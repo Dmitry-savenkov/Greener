@@ -69,8 +69,8 @@ export default function App() {
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
                     <Stack.Screen name="Login" component={LoginScreen} />
-                    <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
                     <Stack.Screen name="SignUp" component={SignUpScreen} />
+                    <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </ThemesContextProvider>
