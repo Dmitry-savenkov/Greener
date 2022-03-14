@@ -35,6 +35,24 @@ Side Menu          |  Browser         |  Explore    |  Best Plants       |  Sett
 
 ```
 git clone https://github.com/Dmitry-savenkov/Greener.git
-yarn
-yarn start
+```
+
+In order to run the project, you need to first create a `env.ts` file in the root of the project.
+
+```
+const API_KEY = 'your_api_key';
+const AUTH_DOMAIN = 'your_auth_domain';
+const PROJECT_ID = 'your_project_id';
+const STORAGE_BUCKET = 'your_storage_bucket';
+const MESSAGING_SENDER_ID = 'your_messaging';
+const APP_ID = 'your_app_id';
+export { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID };
+
+```
+
+The keys is a private firebase keys. To generate this keys [visit this link](https://console.firebase.google.com) and create project with auth
+
+```
+npm i
+expo start / yarn start
 ```
