@@ -12,17 +12,51 @@ import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import ThemesContextProvider from './src/context/ThemeContext';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from './src/navigation/CustomDrawer';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 const DrawerNavigator = () => {
     return (
-        <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />} screenOptions={{ headerShown: false }}>
-            <Drawer.Screen name="Browse" component={BrowseScreen} />
-            <Drawer.Screen name="Explore" component={ExploreScreen} />
-            <Drawer.Screen name="BestPlants" component={BestPlantsScreen} />
-            <Drawer.Screen name="Settings" component={SettingsScreen} />
+        <Drawer.Navigator
+            drawerContent={(props) => <CustomDrawer {...props} />}
+            screenOptions={{
+                headerShown: false,
+                drawerLabelStyle: { marginLeft: -15 },
+                drawerActiveBackgroundColor: 'rgba(91,224,177, 0.7)',
+                drawerActiveTintColor: 'white',
+                drawerInactiveTintColor: '#323643'
+            }}
+        >
+            <Drawer.Screen
+                name="Browse"
+                component={BrowseScreen}
+                options={{
+                    drawerIcon: ({ color }) => <Entypo name="air" size={20} color={color} />
+                }}
+            />
+            <Drawer.Screen
+                name="Explore"
+                component={ExploreScreen}
+                options={{
+                    drawerIcon: ({ color }) => <Entypo name="baidu" size={20} color={color} />
+                }}
+            />
+            <Drawer.Screen
+                name="BestPlants"
+                component={BestPlantsScreen}
+                options={{
+                    drawerIcon: ({ color }) => <Entypo name="flower" size={20} color={color} />
+                }}
+            />
+            <Drawer.Screen
+                name="Settings"
+                component={SettingsScreen}
+                options={{
+                    drawerIcon: ({ color }) => <Entypo name="tools" size={20} color={color} />
+                }}
+            />
         </Drawer.Navigator>
     );
 };
