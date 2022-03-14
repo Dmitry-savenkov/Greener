@@ -1,16 +1,15 @@
 import * as firebase from 'firebase';
+import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from '../../env';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AIzaSyAc2Jo6fsf6yQN3barCyLRaSrnMByQegpA',
-    authDomain: 'greener-7a3a1.firebaseapp.com',
-    projectId: 'greener-7a3a1',
-    storageBucket: 'greener-7a3a1.appspot.com',
-    messagingSenderId: '649597953455',
-    appId: '1:649597953455:web:347f07dc88dab6cc9a7b5a'
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN,
+    projectId: PROJECT_ID,
+    storageBucket: STORAGE_BUCKET,
+    messagingSenderId: MESSAGING_SENDER_ID,
+    appId: APP_ID
 };
 
-// Initialize Firebase
 let app;
 if (firebase.apps.length === 0) {
     app = firebase.initializeApp(firebaseConfig);
