@@ -12,3 +12,4 @@ web-build/
 env.ts
 # macOS
 .DS_Store
+yarn.lock
