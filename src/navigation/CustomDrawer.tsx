@@ -13,87 +13,88 @@ import { ThemesContext } from '../context/ThemeContext';
 import SettingsScreenData from '../data/SettingsScreenData';
 
 const CustomDrawer = (props) => {
-    const { fontsLoaded } = useContext(ThemesContext);
+  const { fontsLoaded } = useContext(ThemesContext);
 
-    if (!fontsLoaded) {
-        return <AppLoading />;
-    }
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
-    return (
-        <View style={{ flex: 1 }}>
-            <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: colors.white }}>
-                <View>
-                    <Image source={SettingsScreenData.avatar} style={[styles.avatarLogo]} />
-                    <Text style={[styles.userName]}>
-                        {SettingsScreenData.username} {SettingsScreenData.userLastName}
-                    </Text>
-                    <Text style={[styles.userMail]}>mail: {SettingsScreenData.email}</Text>
-                </View>
-                <DrawerItemList {...props} />
-            </DrawerContentScrollView>
-            <View style={[styles.grayUnderline]}></View>
-            <TouchableOpacity
-                onPress={() => {
-                    auth.signOut()
-                        .then(() => {
-                            props.navigation.reset({
-                                index: 0,
-                                routes: [{ name: 'Home' }]
-                            });
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                }}
-            >
-                <View style={[styles.logOutButton]}>
-                    <Entypo name="log-out" size={20} color={colors.black} />
-                    <Text style={[styles.logOutText]}>Log out</Text>
-                </View>
-            </TouchableOpacity>
+  return (
+    <View style={{ flex: 1 }}>
+      <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: colors.white }}>
+        <View>
+          <Image source={SettingsScreenData.avatar} style={[styles.avatarLogo]} />
+          <Text style={[styles.userName]}>
+            {SettingsScreenData.username} {SettingsScreenData.userLastName}
+          </Text>
+          <Text style={[styles.userMail]}>mail: {SettingsScreenData.email}</Text>
         </View>
-    );
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+      <View style={[styles.grayUnderline]}></View>
+      <TouchableOpacity
+        onPress={() => {
+          auth
+            .signOut()
+            .then(() => {
+              props.navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home' }],
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }}
+      >
+        <View style={[styles.logOutButton]}>
+          <Entypo name="log-out" size={20} color={colors.black} />
+          <Text style={[styles.logOutText]}>Log out</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    grayUnderline: {
-        width: '100%',
-        height: 1,
-        backgroundColor: colors.gray2,
-        marginBottom: 20
-    },
-    avatarLogo: {
-        width: 80,
-        height: 80,
-        marginLeft: 10
-    },
-    userName: {
-        fontFamily: 'SFUIDisplay-Regular',
-        fontSize: 16,
-        color: colors.black,
-        marginLeft: 10,
-        marginTop: 10
-    },
-    userMail: {
-        fontFamily: 'SFUIDisplay-Regular',
-        fontSize: 16,
-        color: colors.black,
-        marginLeft: 10,
-        marginTop: 5,
-        marginBottom: 20
-    },
-    logOutButton: {
-        paddingBottom: 60,
-        paddingLeft: 20,
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
-    logOutText: {
-        fontFamily: 'SFUIDisplay-Regular',
-        fontSize: 16,
-        color: colors.black,
-        marginLeft: 15
-    }
+  grayUnderline: {
+    width: '100%',
+    height: 1,
+    backgroundColor: colors.gray2,
+    marginBottom: 20,
+  },
+  avatarLogo: {
+    width: 80,
+    height: 80,
+    marginLeft: 10,
+  },
+  userName: {
+    fontFamily: 'SFUIDisplay-Regular',
+    fontSize: 16,
+    color: colors.black,
+    marginLeft: 10,
+    marginTop: 10,
+  },
+  userMail: {
+    fontFamily: 'SFUIDisplay-Regular',
+    fontSize: 16,
+    color: colors.black,
+    marginLeft: 10,
+    marginTop: 5,
+    marginBottom: 20,
+  },
+  logOutButton: {
+    paddingBottom: 60,
+    paddingLeft: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  logOutText: {
+    fontFamily: 'SFUIDisplay-Regular',
+    fontSize: 16,
+    color: colors.black,
+    marginLeft: 15,
+  },
 });
 
 export default CustomDrawer;

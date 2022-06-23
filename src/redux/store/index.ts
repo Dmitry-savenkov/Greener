@@ -12,17 +12,18 @@ import mainSaga from '../sagas';
 import rootReducer from '../reducers';
 
 const persistConfig = {
-    key: 'root',
-    storage: AsyncStorage,
-    version: 1,
-    whitelist: []
+  key: 'root',
+  storage: AsyncStorage,
+  version: 1,
+  whitelist: [],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
-const configureStore = () => createStore(persistedReducer, {}, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+const configureStore = () =>
+  createStore(persistedReducer, {}, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 const configuredStore = configureStore();
 const persist = persistStore(configuredStore);
