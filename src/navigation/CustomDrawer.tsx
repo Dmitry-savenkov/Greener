@@ -14,9 +14,11 @@ import SettingsScreenData from '../data/SettingsScreenData';
 
 const CustomDrawer = (props) => {
     const { fontsLoaded } = useContext(ThemesContext);
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: colors.white }}>
