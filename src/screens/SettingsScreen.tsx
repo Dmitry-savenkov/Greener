@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Switch, Slider } from 'react-native';
+// Lib
 import React, { useState, useContext } from 'react';
-import BackIcon from '../components/BackIcon';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Switch, Slider } from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { width, height, colors } from '../constants/theme';
-import SettingsScreenData from '../data/SettingsScreenData';
-import { ThemesContext } from '../context/ThemeContext';
+import BackIcon from '../components/BackIcon';
+
+// Components
 import DotsIcon from '../components/DotsIcon';
+
+// UI
+import { width, height, colors } from '../constants/theme';
+import { ThemesContext } from '../context/ThemeContext';
+
+// Data
+import SettingsScreenData from '../data/SettingsScreenData';
 
 const SettingsScreen = ({ navigation }) => {
     const [isEnabledNotification, setIsEnabledNotification] = useState(false);
@@ -26,9 +33,11 @@ const SettingsScreen = ({ navigation }) => {
         }) =>
         () =>
             fn((previousState) => !previousState);
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
     return (
         <View style={[styles.container]}>
             <View style={[styles.headerIcons]}>

@@ -1,19 +1,27 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+// Lib
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
-import HomeScreenData from '../data/HomeScreenData';
 import 'react-native-reanimated';
 import { MotiView } from 'moti';
-import { ModalTermsOfService } from '../components/ModalTermsOfService';
+
+// Components
+import ModalTermsOfService from '../components/ModalTermsOfService';
 import { width, height, colors } from '../constants/theme';
+
+// UI
 import { ThemesContext } from '../context/ThemeContext';
+
+// Data
+import HomeScreenData from '../data/HomeScreenData';
 
 const HomeScreen = ({ navigation }) => {
     const flatlistRef = useRef(null);
     const [isModalVisible, setModalVisible] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
+
     useEffect(() => {
         flatlistRef.current?.scrollToIndex({
             index: activeIndex,
@@ -32,6 +40,7 @@ const HomeScreen = ({ navigation }) => {
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>

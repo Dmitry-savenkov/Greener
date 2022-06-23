@@ -1,19 +1,26 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+// Lib
 import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import AppLoading from 'expo-app-loading';
+
+// UI
+import { width, height, colors } from '../constants/theme';
+import { ThemesContext } from '../context/ThemeContext';
+
+// Data
 import { BrowseScreenData } from '../data/BrowseScreenData';
 import { BrowseNameCategories } from '../data/BrowseScreenData';
-import { width, height, colors } from '../constants/theme';
 import SettingsScreenData from '../data/SettingsScreenData';
-import { ThemesContext } from '../context/ThemeContext';
 
 const BrowseScreen = ({ navigation }) => {
     const [activeCategory, setActiveCategory] = useState(0);
     const [activeCategoryName, setActiveCategoryName] = useState('products');
     const { fontsLoaded } = useContext(ThemesContext);
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
     return (
         <View style={[styles.container]}>
             <View style={[styles.titlePhoto]}>

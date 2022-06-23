@@ -1,20 +1,29 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+// Lib
 import React, { useState, useContext } from 'react';
-import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
-import ExploreScreenData from '../data/ExploreScreenData';
-import { width, height, colors } from '../constants/theme';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import AppLoading from 'expo-app-loading';
+
+// Components
 import BackIcon from '../components/BackIcon';
 import SearchIcon from '../components/SearchIcon';
-import { ThemesContext } from '../context/ThemeContext';
 import DotsIcon from '../components/DotsIcon';
+
+// UI
+import { ThemesContext } from '../context/ThemeContext';
+import { width, height, colors } from '../constants/theme';
+
+// Data
+import ExploreScreenData from '../data/ExploreScreenData';
 
 const ExploreScreen = ({ navigation }) => {
     const [inputValue, setInputValue] = useState('');
     const { fontsLoaded } = useContext(ThemesContext);
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
     return (
         <View style={[styles.container]}>
             <View style={[styles.headerIcons]}>

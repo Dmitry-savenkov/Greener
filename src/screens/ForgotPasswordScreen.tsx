@@ -1,11 +1,16 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+// Lib
 import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
+
+// Components
 import BackIcon from '../components/BackIcon';
+import { auth } from '../auth/firebase-config';
+
+// UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
-import { auth } from '../auth/firebase-config';
 
 const ForgotPasswordScreen = ({ navigation }) => {
     const [error, setError] = useState(false);

@@ -1,9 +1,13 @@
+// Lib
 import React from 'react';
 import { Provider } from 'react-redux';
 import store, { persist } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+//Components
 import HomeScreen from './src/screens/HomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
@@ -13,7 +17,6 @@ import BestPlantsScreen from './src/screens/BestPlantsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import ThemesContextProvider from './src/context/ThemeContext';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from './src/navigation/CustomDrawer';
 import Entypo from 'react-native-vector-icons/Entypo';
 

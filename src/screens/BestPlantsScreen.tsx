@@ -1,13 +1,19 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+// Lib
 import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import AppLoading from 'expo-app-loading';
+
+// Components
 import BackIcon from '../components/BackIcon';
-import { width, height, colors } from '../constants/theme';
 import DotsIcon from '../components/DotsIcon';
+
+// UI
+import { width, height, colors } from '../constants/theme';
+import { ThemesContext } from '../context/ThemeContext';
+
+// Data
 import { BestPlantsScreenData } from '../data/BestPlantsScreenData';
 import { BestPlantsScreenCategories } from '../data/BestPlantsScreenData';
-import { ScrollView } from 'react-native-gesture-handler';
-import { ThemesContext } from '../context/ThemeContext';
 
 const BestPlantsScreen = ({ navigation }) => {
     const [indexIndicator, setIndexIndicator] = useState(2);
@@ -18,6 +24,7 @@ const BestPlantsScreen = ({ navigation }) => {
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
     return (
         <View style={[styles.container]}>
             <View style={[styles.header]}>

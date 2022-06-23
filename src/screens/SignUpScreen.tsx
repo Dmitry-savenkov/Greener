@@ -1,10 +1,15 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+// Lib
 import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
+
+// Components
 import BackIcon from '../components/BackIcon';
 import { auth } from '../auth/firebase-config';
+
+// UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
 
@@ -44,6 +49,7 @@ const SignUpScreen = ({ navigation }) => {
     if (!fontsLoaded) {
         return <AppLoading />;
     }
+
     return (
         <View style={[styles.container]}>
             <TouchableOpacity

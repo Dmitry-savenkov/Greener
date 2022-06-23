@@ -1,15 +1,16 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+// Lib
 import React, { useContext } from 'react';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { colors } from '../constants/theme';
-import SettingsScreenData from '../data/SettingsScreenData';
-import { ThemesContext } from '../context/ThemeContext';
 import AppLoading from 'expo-app-loading';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { auth } from '../auth/firebase-config';
+import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 
-const user = auth.currentUser;
+//Components
+import { colors } from '../constants/theme';
+import { auth } from '../auth/firebase-config';
+import { ThemesContext } from '../context/ThemeContext';
+import SettingsScreenData from '../data/SettingsScreenData';
 
 const CustomDrawer = (props) => {
     const { fontsLoaded } = useContext(ThemesContext);

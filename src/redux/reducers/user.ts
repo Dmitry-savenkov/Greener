@@ -1,6 +1,7 @@
 // Lib
 import { handleActions } from 'redux-actions';
 
+// Actions
 import { UserDataLoaded } from '../actions/user';
 
 const initialState = {
