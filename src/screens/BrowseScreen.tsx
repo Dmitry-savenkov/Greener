@@ -10,17 +10,19 @@ import {
   ScrollView,
 } from 'react-native';
 import AppLoading from 'expo-app-loading';
+import { useSelector } from 'react-redux';
 
 // UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
 
-// Data
-import { BrowseScreenData } from '../data/BrowseScreenData';
-import { BrowseNameCategories } from '../data/BrowseScreenData';
-import SettingsScreenData from '../data/SettingsScreenData';
-
 const BrowseScreen = ({ navigation }) => {
+  const { browseScreenData, browseNameCategories, avatar } = useSelector((state) => ({
+    browseScreenData: state?.Browse.browseScreenData,
+    browseNameCategories: state?.Browse.browseNameCategories,
+    avatar: state?.User.avatar,
+  }));
+
   const [activeCategory, setActiveCategory] = useState(0);
   const [activeCategoryName, setActiveCategoryName] = useState('products');
   const { fontsLoaded } = useContext(ThemesContext);
@@ -38,7 +40,7 @@ const BrowseScreen = ({ navigation }) => {
             navigation.navigate('DrawerNavigator', { screen: 'Settings' });
           }}
         >
-          <Image source={SettingsScreenData.avatar} style={[styles.avatarImage]} />
+          <Image source={avatar} style={[styles.avatarImage]} />
         </TouchableOpacity>
       </View>
       <View>
@@ -46,7 +48,7 @@ const BrowseScreen = ({ navigation }) => {
           style={[styles.listCategory]}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          data={BrowseNameCategories}
+          data={browseNameCategories}
           bounces={false}
           keyExtractor={(_item, index) => {
             return index + Math.random().toString();
@@ -85,22 +87,24 @@ const BrowseScreen = ({ navigation }) => {
           bounces={false}
           contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
         >
-          {BrowseScreenData.map((item, index) => {
-            return item.tags.includes(activeCategoryName) ? (
-              <TouchableOpacity
-                style={[styles.categoryBlock]}
-                key={index}
-                onPress={() => {
-                  navigation.navigate(item.navigateTo);
-                }}
-              >
-                <View style={[styles.imageBG]}>
-                  <Image source={item.image} />
-                </View>
-                <Text style={[styles.categoryBlockTitle]}>{item.name}</Text>
-                <Text style={[styles.categoryBlockCount]}>{item.count} products</Text>
-              </TouchableOpacity>
-            ) : null;
+          {browseScreenData.map((item, index) => {
+            return (
+              item.tags.includes(activeCategoryName) && (
+                <TouchableOpacity
+                  style={[styles.categoryBlock]}
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate(item.navigateTo);
+                  }}
+                >
+                  <View style={[styles.imageBG]}>
+                    <Image source={item.image} />
+                  </View>
+                  <Text style={[styles.categoryBlockTitle]}>{item.name}</Text>
+                  <Text style={[styles.categoryBlockCount]}>{item.count} products</Text>
+                </TouchableOpacity>
+              )
+            );
           })}
         </ScrollView>
       </View>

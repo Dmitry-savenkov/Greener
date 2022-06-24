@@ -1,11 +1,14 @@
-export const BrowseScreenData = {
-  BrowseScreenData: [
+// Lib
+import { handleActions } from 'redux-actions';
+
+const initialState = {
+  browseScreenData: [
     {
       id: 'plants',
       name: 'Plants',
       tags: ['products', 'inspirations', 'houseplants'],
       count: 17,
-      image: require('../assets/icons/plants.png'),
+      image: require('../../assets/icons/plants.png'),
       navigateTo: 'Explore',
     },
     {
@@ -13,7 +16,7 @@ export const BrowseScreenData = {
       name: 'Seeds',
       tags: ['products', 'shop', 'dried flowers'],
       count: 16,
-      image: require('../assets/icons/seeds.png'),
+      image: require('../../assets/icons/seeds.png'),
       navigateTo: 'Explore',
     },
     {
@@ -21,7 +24,7 @@ export const BrowseScreenData = {
       name: 'Flowers',
       tags: ['products', 'inspirations'],
       count: 68,
-      image: require('../assets/icons/flowers.png'),
+      image: require('../../assets/icons/flowers.png'),
       navigateTo: 'Explore',
     },
     {
@@ -29,7 +32,7 @@ export const BrowseScreenData = {
       name: 'Sprayers',
       tags: ['products', 'shop', 'dried flowers'],
       count: 17,
-      image: require('../assets/icons/sprayers.png'),
+      image: require('../../assets/icons/sprayers.png'),
       navigateTo: 'Explore',
     },
     {
@@ -37,7 +40,7 @@ export const BrowseScreenData = {
       name: 'Pots',
       tags: ['products', 'shop', 'houseplants'],
       count: 47,
-      image: require('../assets/icons/pots.png'),
+      image: require('../../assets/icons/pots.png'),
       navigateTo: 'Explore',
     },
     {
@@ -45,7 +48,7 @@ export const BrowseScreenData = {
       name: 'fertilizers',
       tags: ['products', 'shop'],
       count: 84,
-      image: require('../assets/icons/fertilizers.png'),
+      image: require('../../assets/icons/fertilizers.png'),
       navigateTo: 'Explore',
     },
     {
@@ -53,7 +56,7 @@ export const BrowseScreenData = {
       name: 'Plants',
       tags: ['products', 'inspirations'],
       count: 312,
-      image: require('../assets/icons/plants.png'),
+      image: require('../../assets/icons/plants.png'),
       navigateTo: 'Explore',
     },
     {
@@ -61,7 +64,7 @@ export const BrowseScreenData = {
       name: 'Sprayers',
       tags: ['products', 'shop'],
       count: 7,
-      image: require('../assets/icons/sprayers.png'),
+      image: require('../../assets/icons/sprayers.png'),
       navigateTo: 'Explore',
     },
     {
@@ -69,7 +72,7 @@ export const BrowseScreenData = {
       name: 'Pots',
       tags: ['products', 'shop'],
       count: 41,
-      image: require('../assets/icons/pots.png'),
+      image: require('../../assets/icons/pots.png'),
       navigateTo: 'Explore',
     },
     {
@@ -77,30 +80,17 @@ export const BrowseScreenData = {
       name: 'fertilizers',
       tags: ['products', 'shop', 'houseplants'],
       count: 47,
-      image: require('../assets/icons/fertilizers.png'),
+      image: require('../../assets/icons/fertilizers.png'),
       navigateTo: 'Explore',
     },
   ],
-  BrowseNameCategories: [
-    {
-      id: 'products',
-      name: 'Products',
-    },
-    {
-      id: 'inspirations',
-      name: 'Inspirations',
-    },
-    {
-      id: 'shop',
-      name: 'Shop',
-    },
-    {
-      id: 'houseplants',
-      name: 'Houseplants',
-    },
-    {
-      id: 'dried flowers',
-      name: 'Dried flowers',
-    },
+  browseNameCategories: [
+    { id: 'products', name: 'Products' },
+    { id: 'inspirations', name: 'Inspirations' },
+    { id: 'shop', name: 'Shop' },
+    { id: 'houseplants', name: 'Houseplants' },
+    { id: 'dried flowers', name: 'Dried flowers' },
   ],
 };
+
+export default handleActions({}, initialState);
