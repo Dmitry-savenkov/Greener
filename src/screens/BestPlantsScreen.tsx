@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import AppLoading from 'expo-app-loading';
+import { useSelector } from 'react-redux';
 
 // Components
 import BackIcon from '../components/BackIcon';
@@ -19,11 +20,14 @@ import DotsIcon from '../components/DotsIcon';
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
 
-// Data
-import { BestPlantsScreenData } from '../data/BestPlantsScreenData';
-import { BestPlantsScreenCategories } from '../data/BestPlantsScreenData';
-
 const BestPlantsScreen = ({ navigation }) => {
+  const { name, description, tags, images } = useSelector((state) => ({
+    name: state?.BestPlants.name,
+    description: state?.BestPlants.description,
+    tags: state?.BestPlants.tags,
+    images: state?.BestPlants.images,
+  }));
+
   const [indexIndicator, setIndexIndicator] = useState(2);
   const [image, setImage] = useState(require('../assets/images/plants_1.png'));
   const [displayStatus, setDisplayStatus] = useState(true);
@@ -57,13 +61,13 @@ const BestPlantsScreen = ({ navigation }) => {
         </View>
         <View style={[styles.payloadContent]}>
           <View style={[styles.titleCategory]}>
-            <Text style={[styles.titleText]}>{BestPlantsScreenData[0].name}</Text>
+            <Text style={[styles.titleText]}>{name}</Text>
           </View>
           <View style={[styles.listCategory]}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               horizontal={true}
-              data={BestPlantsScreenCategories}
+              data={tags}
               bounces={false}
               keyExtractor={(_, index) => {
                 return index + Math.random().toString();
@@ -78,7 +82,7 @@ const BestPlantsScreen = ({ navigation }) => {
             />
           </View>
           <View>
-            <Text style={[styles.descriptionText]}>{BestPlantsScreenData[0].description}</Text>
+            <Text style={[styles.descriptionText]}>{description}</Text>
           </View>
           <View style={[styles.grayInderline]}></View>
           <View style={[styles.galleryBlock]}>
@@ -87,7 +91,7 @@ const BestPlantsScreen = ({ navigation }) => {
               <FlatList
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
-                data={BestPlantsScreenData[0].images.slice(0, indexIndicator)}
+                data={images.slice(0, indexIndicator)}
                 bounces={false}
                 keyExtractor={(_, index) => {
                   return index + Math.random().toString();
@@ -108,13 +112,13 @@ const BestPlantsScreen = ({ navigation }) => {
               />
               <TouchableOpacity
                 onPress={() => {
-                  setIndexIndicator(BestPlantsScreenData[0].images.length);
+                  setIndexIndicator(images.length);
                   setDisplayStatus(false);
                 }}
                 style={{ display: displayStatus ? 'flex' : 'none' }}
               >
                 <View style={[styles.grayBlock]}>
-                  <Text>+{BestPlantsScreenData[0].images.length - 2}</Text>
+                  <Text>+{images.length - 2}</Text>
                 </View>
               </TouchableOpacity>
             </View>
