@@ -51,7 +51,7 @@ const BestPlantsScreen = ({ navigation }) => {
           <DotsIcon />
         </TouchableOpacity>
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.imageStyleHeader]}>
           <Image source={image} style={[styles.headerImage]} />
         </View>
