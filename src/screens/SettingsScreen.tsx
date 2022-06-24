@@ -10,28 +10,50 @@ import {
   Switch,
   Slider,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import AppLoading from 'expo-app-loading';
-import BackIcon from '../components/BackIcon';
 
 // Components
 import DotsIcon from '../components/DotsIcon';
+import BackIcon from '../components/BackIcon';
 
 // UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
 
-// Data
-import SettingsScreenData from '../data/SettingsScreenData';
-
 const SettingsScreen = ({ navigation }) => {
-  const [isEnabledNotification, setIsEnabledNotification] = useState(false);
-  const [isEnabledNewsLetter, setIsEnabledNewsLetter] = useState(false);
-  const [userName, setUserNamee] = useState(SettingsScreenData.username);
-  const [budget, setBudget] = useState(0);
-  const [montclyCap, setMontlyCap] = useState(0);
+  const {
+    userName,
+    userLastName,
+    location,
+    email,
+    avatar,
+    budget,
+    monthlyCap,
+    notifications,
+    newsletter,
+  } = useSelector((state: any) => ({
+    userName: state?.User?.userName,
+    userLastName: state?.User?.userLastName,
+    location: state?.User?.location,
+    email: state?.User?.email,
+    avatar: state?.User?.avatar,
+    budget: state?.User?.budget,
+    monthlyCap: state?.User?.monthlyCap,
+    notifications: state?.User?.notifications,
+    newsletter: state?.User?.newsletter,
+  }));
+
   const [userNameStatus, setUserNameStatus] = useState(false);
-  const [location, setLocation] = useState(SettingsScreenData.location);
   const [locationStatus, setLocationStatus] = useState(false);
+
+  const [montclyCap, setMontlyCap] = useState(monthlyCap);
+  const [budgetUpdated, setBudgetUpdated] = useState(budget);
+  const [locationUpdated, setLocationUpdated] = useState(location);
+  const [userNameUpdated, setUserNameUpdtated] = useState(userName);
+  const [isEnabledNewsLetter, setIsEnabledNewsLetter] = useState(newsletter);
+  const [isEnabledNotification, setIsEnabledNotification] = useState(notifications);
+
   const { fontsLoaded } = useContext(ThemesContext);
 
   const toggleSwitch =
@@ -67,7 +89,7 @@ const SettingsScreen = ({ navigation }) => {
       </View>
       <View style={[styles.titlePhoto]}>
         <Text style={[styles.title]}>Settings</Text>
-        <Image source={SettingsScreenData.avatar} style={[styles.avatarImage]} />
+        <Image source={avatar} style={[styles.avatarImage]} />
       </View>
       <View style={[styles.settings]}>
         <View style={[styles.userInput]}>
@@ -75,10 +97,10 @@ const SettingsScreen = ({ navigation }) => {
           <View style={[styles.textInputEdit]}>
             <TextInput
               editable={userNameStatus}
-              value={userName}
+              value={userNameUpdated}
               style={[styles.inputTextStyle]}
               onChangeText={(textInput) => {
-                setUserNamee(textInput);
+                setUserNameUpdtated(textInput);
               }}
             />
             <TouchableOpacity
@@ -95,10 +117,10 @@ const SettingsScreen = ({ navigation }) => {
           <View style={[styles.textInputEdit]}>
             <TextInput
               editable={locationStatus}
-              value={location}
+              value={locationUpdated}
               style={[styles.inputTextStyle]}
               onChangeText={(textInput) => {
-                setLocation(textInput);
+                setLocationUpdated(textInput);
               }}
             />
             <TouchableOpacity
@@ -113,26 +135,26 @@ const SettingsScreen = ({ navigation }) => {
         <View style={[styles.userInput]}>
           <Text style={[styles.userName]}>E-mail</Text>
           <View style={[styles.textInputEdit]}>
-            <Text style={[styles.inputTextStyle, { marginBottom: 10 }]}>
-              {SettingsScreenData.email}
-            </Text>
+            <Text style={[styles.inputTextStyle, { marginBottom: 10 }]}>{email}</Text>
           </View>
         </View>
         <View style={[styles.grayLine]}></View>
         <Text style={[styles.userName]}>Budget</Text>
         <Slider
+          value={budgetUpdated}
           minimumValue={0}
           maximumValue={999}
           minimumTrackTintColor="rgba(10, 196, 186, 1)"
           onValueChange={(value) => {
-            setBudget(parseInt(value.toLocaleString(), 10));
+            setBudgetUpdated(parseInt(value.toLocaleString(), 10));
           }}
         />
         <View style={[styles.sliderBlock]}>
-          <Text style={[styles.styleSliderText]}>${budget}</Text>
+          <Text style={[styles.styleSliderText]}>${budgetUpdated}</Text>
         </View>
         <Text style={[styles.userName, { marginTop: 15 }]}>Monthly Cap</Text>
         <Slider
+          value={montclyCap}
           minimumValue={0}
           maximumValue={999}
           minimumTrackTintColor="rgba(10, 196, 186, 1)"
