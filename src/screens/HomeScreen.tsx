@@ -14,9 +14,6 @@ import { width, height, colors } from '../constants/theme';
 // UI
 import { ThemesContext } from '../context/ThemeContext';
 
-// Data
-import HomeScreenData from '../data/HomeScreenData';
-
 const HomeScreen = ({ navigation }) => {
   const flatlistRef = useRef(null);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -40,6 +37,12 @@ const HomeScreen = ({ navigation }) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
+  const sliderImages = [
+    { id: 0, image: require('./../assets/images/Plant.png') },
+    { id: 1, image: require('./../assets/images/Plant2.png') },
+    { id: 2, image: require('./../assets/images/Plant3.png') },
+  ];
 
   return (
     <View style={styles.container}>
@@ -67,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
           ref={flatlistRef}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={HomeScreenData}
+          data={sliderImages}
           decelerationRate="fast"
           bounces={false}
           onMomentumScrollEnd={(ev) => {

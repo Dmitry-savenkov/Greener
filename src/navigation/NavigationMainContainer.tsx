@@ -15,7 +15,7 @@ const NavigationMainContainer = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="DrawerNavigator" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
         <Stack.Screen name="Login" component={LoginScreen} />

@@ -2,8 +2,12 @@
 import { combineReducers } from 'redux';
 
 // Reducers
-import user from './user';
+import User from './User';
+import BestPlants from './BestPlants';
+import Browse from './Browse';
 
 export default combineReducers({
-  user,
+  User,
+  BestPlants,
+  Browse,
 });
