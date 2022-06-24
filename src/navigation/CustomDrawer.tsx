@@ -5,14 +5,23 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { useSelector } from 'react-redux';
 
 //Components
-import { colors } from '../constants/theme';
 import { auth } from '../auth/firebase-config';
 import { ThemesContext } from '../context/ThemeContext';
-import SettingsScreenData from '../data/SettingsScreenData';
+
+//UI
+import { colors } from '../constants/theme';
 
 const CustomDrawer = (props) => {
+  const { userName, userLastName, email, avatar } = useSelector((state) => ({
+    userName: state?.User?.userName,
+    userLastName: state?.User?.userLastName,
+    email: state?.User?.email,
+    avatar: state?.User?.avatar,
+  }));
+
   const { fontsLoaded } = useContext(ThemesContext);
 
   if (!fontsLoaded) {
@@ -23,11 +32,11 @@ const CustomDrawer = (props) => {
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: colors.white }}>
         <View>
-          <Image source={SettingsScreenData.avatar} style={[styles.avatarLogo]} />
+          <Image source={avatar} style={[styles.avatarLogo]} />
           <Text style={[styles.userName]}>
-            {SettingsScreenData.username} {SettingsScreenData.userLastName}
+            {userName} {userLastName}
           </Text>
-          <Text style={[styles.userMail]}>mail: {SettingsScreenData.email}</Text>
+          <Text style={[styles.userMail]}>mail: {email}</Text>
         </View>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>

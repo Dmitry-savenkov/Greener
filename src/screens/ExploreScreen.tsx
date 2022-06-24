@@ -21,9 +21,6 @@ import DotsIcon from '../components/DotsIcon';
 import { ThemesContext } from '../context/ThemeContext';
 import { width, height, colors } from '../constants/theme';
 
-// Data
-import ExploreScreenData from '../data/ExploreScreenData';
-
 const ExploreScreen = ({ navigation }) => {
   const [inputValue, setInputValue] = useState('');
   const { fontsLoaded } = useContext(ThemesContext);
@@ -72,20 +69,38 @@ const ExploreScreen = ({ navigation }) => {
             navigation.navigate('DrawerNavigator', { screen: 'BestPlants' });
           }}
         >
-          <Image source={ExploreScreenData[0]} style={{ width: '100%', borderRadius: 10 }} />
+          <Image
+            source={require('../assets/images/explore_1.png')}
+            style={{ width: '100%', borderRadius: 10 }}
+          />
         </TouchableOpacity>
         <View style={[styles.rowStyle]}>
-          <Image source={ExploreScreenData[1]} style={{ width: '66%', borderRadius: 10 }} />
+          <Image
+            source={require('../assets/images/explore_2.png')}
+            style={{ width: '66%', borderRadius: 10 }}
+          />
 
-          <Image source={ExploreScreenData[2]} style={{ width: '30%', borderRadius: 10 }} />
+          <Image
+            source={require('../assets/images/explore_3.png')}
+            style={{ width: '30%', borderRadius: 10 }}
+          />
         </View>
         <View style={[styles.rowStyle]}>
-          <Image source={ExploreScreenData[3]} style={{ width: '48%', borderRadius: 10 }} />
+          <Image
+            source={require('../assets/images/explore_4.png')}
+            style={{ width: '48%', borderRadius: 10 }}
+          />
 
-          <Image source={ExploreScreenData[4]} style={{ width: '48%', borderRadius: 10 }} />
+          <Image
+            source={require('../assets/images/explore_5.png')}
+            style={{ width: '48%', borderRadius: 10 }}
+          />
         </View>
         <View style={[styles.bottomImage]}>
-          <Image source={ExploreScreenData[5]} style={{ width: '100%', borderRadius: 10 }} />
+          <Image
+            source={require('../assets/images/explore_6.png')}
+            style={{ width: '100%', borderRadius: 10 }}
+          />
         </View>
       </ScrollView>
       <TouchableOpacity>
