@@ -89,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <View style={[styles.paginationSlider, styles.blockCentering]}>
-          {HomeScreenData.map((_, index) => {
+          {sliderImages.map((_, index) => {
             return (
               <TouchableOpacity
                 key={index}
