@@ -32,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
         console.log('Logged in with:', user.email);
         navigation.reset({
           index: 0,
-          routes: [{ name: 'DrawerNavigator', screen: 'Browse' }],
+          routes: [{ name: 'BottomTabNavigator', screen: 'Browse' }],
         });
       })
       .catch((error: { message: string }) => {
