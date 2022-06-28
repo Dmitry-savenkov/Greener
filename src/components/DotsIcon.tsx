@@ -1,6 +1,8 @@
-import { View } from 'react-native';
+// Lib
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { View } from 'react-native';
+
 const DotsIcon = () => {
     return (
         <View>
