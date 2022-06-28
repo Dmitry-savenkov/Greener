@@ -21,7 +21,7 @@ import BackIcon from '../components/BackIcon';
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
 
-const SettingsScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   const {
     userName,
     userLastName,
@@ -262,4 +262,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
+export default ProfileScreen;
