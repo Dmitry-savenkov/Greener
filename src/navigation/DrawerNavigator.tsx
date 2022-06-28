@@ -5,10 +5,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 //Components
 import CustomDrawer from './CustomDrawer';
-import BrowseScreen from '../screens/BrowseScreen';
+import HomeScreen from '../screens/HomeScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 import ExploreScreen from '../screens/ExploreScreen';
-import BestPlantsScreen from '../screens/BestPlantsScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,29 +25,29 @@ const DrawerNavigator = () => {
       }}
     >
       <Drawer.Screen
-        name="Browse"
-        component={BrowseScreen}
+        name="Home"
+        component={HomeScreen}
         options={{
           drawerIcon: ({ color }) => <Entypo name="air" size={20} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={{
+          drawerIcon: ({ color }) => <Entypo name="baidu" size={20} color={color} />,
         }}
       />
       <Drawer.Screen
         name="Explore"
         component={ExploreScreen}
         options={{
-          drawerIcon: ({ color }) => <Entypo name="baidu" size={20} color={color} />,
-        }}
-      />
-      <Drawer.Screen
-        name="BestPlants"
-        component={BestPlantsScreen}
-        options={{
           drawerIcon: ({ color }) => <Entypo name="flower" size={20} color={color} />,
         }}
       />
       <Drawer.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="Profile"
+        component={ProfileScreen}
         options={{
           drawerIcon: ({ color }) => <Entypo name="tools" size={20} color={color} />,
         }}

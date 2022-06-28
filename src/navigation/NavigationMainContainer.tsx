@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 //Components
-import HomeScreen from '../screens/HomeScreen';
-import DrawerNavigator from './DrawerNavigator';
+import WelcomeScreen from '../screens/WelcomeScreen';
+// import DrawerNavigator from './DrawerNavigator';
 import BottomTabNavigator from './BottomTabNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -16,8 +16,8 @@ const NavigationMainContainer = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />

@@ -2,7 +2,7 @@
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-  browseScreenData: [
+  homeScreenData: [
     {
       id: 'plants',
       name: 'Plants',

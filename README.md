@@ -18,15 +18,15 @@ Side Menu          |  Browser         |  Explore    |  Best Plants       |  Sett
 
 > This is the list of the availables pages with this source code:
 
-* [Welcome Page](./src/screens/HomeScreen.tsx)
+* [Welcome Page](./src/screens/WelcomeScreen.tsx)
 * [SignIn Page](./src/screens/LoginScreen.tsx)
 * [SignUp Page](./src/screens/SignUpScreen.tsx)
 * [Password Recovery](./src/screens/ForgotPasswordScreen.tsx)
 * [Side Menu](./src/navigation/CustomDrawer.tsx)
-* [Browser](./src/screens/BrowseScreen.tsx)
-* [Explore](./src/screens/ExploreScreen.tsx)
+* [Browser](./src/screens/HomeScreen.tsx)
+* [Explore](./src/screens/FavoritesScreen.tsx)
 * [Best Plants](./src/screens/BestPlantsScreen.tsx)
-* [Settings](./src/screens/SettingsScreen.tsx)
+* [Settings](./src/screens/ProfileScreen.tsx)
 
 
 ## Installation

@@ -20,7 +20,7 @@ import DotsIcon from '../components/DotsIcon';
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
 
-const BestPlantsScreen = ({ navigation }) => {
+const CartScreen = ({ navigation }) => {
   const { name, description, tags, images } = useSelector((state) => ({
     name: state?.BestPlants.name,
     description: state?.BestPlants.description,
@@ -214,4 +214,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BestPlantsScreen;
+export default CartScreen;

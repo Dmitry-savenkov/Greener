@@ -1,149 +1,113 @@
 // Lib
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { LinearGradient } from 'expo-linear-gradient';
-import MaskedView from '@react-native-masked-view/masked-view';
-import 'react-native-reanimated';
-import { MotiView } from 'moti';
-
-// Components
-import ModalTermsOfService from '../components/ModalTermsOfService';
-import { width, height, colors } from '../constants/theme';
+import { useSelector } from 'react-redux';
 
 // UI
+import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
 
 const HomeScreen = ({ navigation }) => {
-  const flatlistRef = useRef(null);
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { homeScreenData, browseNameCategories, avatar } = useSelector((state) => ({
+    homeScreenData: state?.Browse.homeScreenData,
+    browseNameCategories: state?.Browse.browseNameCategories,
+    avatar: state?.User.avatar,
+  }));
 
-  useEffect(() => {
-    flatlistRef.current?.scrollToIndex({
-      index: activeIndex,
-      animated: true,
-      viewOffset: 10,
-      viewPosition: 1,
-    });
-  }, [activeIndex]);
-
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeCategoryName, setActiveCategoryName] = useState('products');
   const { fontsLoaded } = useContext(ThemesContext);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
 
   if (!fontsLoaded) {
     return <AppLoading />;
   }
 
-  const sliderImages = [
-    { id: 0, image: require('./../assets/images/Plant.png') },
-    { id: 1, image: require('./../assets/images/Plant2.png') },
-    { id: 2, image: require('./../assets/images/Plant3.png') },
-  ];
-
   return (
-    <View style={styles.container}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-        <View>
-          <Text style={[styles.titleText]}>Your home. </Text>
-        </View>
-        <View>
-          <MaskedView maskElement={<Text style={[styles.titleGradientElement]}>Greener.</Text>}>
-            <LinearGradient
-              colors={[colors.primary, colors.secondary, colors.tertiary]}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0.33 }}
-              style={{ width: 120, height: 35 }}
-            />
-          </MaskedView>
-        </View>
+    <View style={[styles.container]}>
+      <View style={[styles.titlePhoto]}>
+        <Text style={[styles.title]}>Browse</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('BottomTabNavigator', { screen: 'Settings' });
+          }}
+        >
+          <Image source={avatar} style={[styles.avatarImage]} />
+        </TouchableOpacity>
       </View>
-      <View style={styles.blockCentering}>
-        <Text style={[styles.textUnderTitle]}>Enjoy the experience</Text>
-      </View>
-      <View style={[styles.sliderContainer]}>
-        <View style={[styles.slider]}></View>
+      <View>
         <FlatList
-          ref={flatlistRef}
-          horizontal={true}
+          style={[styles.listCategory]}
           showsHorizontalScrollIndicator={false}
-          data={sliderImages}
-          decelerationRate="fast"
+          horizontal={true}
+          data={browseNameCategories}
           bounces={false}
-          onMomentumScrollEnd={(ev) => {
-            const newIndex = Math.round(ev.nativeEvent.contentOffset.x / width);
-            setActiveIndex(newIndex);
+          keyExtractor={(_item, index) => {
+            return index + Math.random().toString();
           }}
-          keyExtractor={(item, index) => {
-            return item.id + index.toString();
-          }}
-          renderItem={({ item }) => {
+          renderItem={({ item, index }) => {
             return (
-              <MotiView>
-                <Image style={[styles.sliderImage]} source={item.image} />
-              </MotiView>
+              <TouchableOpacity
+                onPress={() => {
+                  setActiveCategory(index);
+                  setActiveCategoryName(item.id);
+                }}
+              >
+                <View style={[styles.categoryNameItem]}>
+                  <Text
+                    style={[
+                      styles.categoryNameText,
+                      {
+                        color: activeCategory === index ? colors.primary : colors.gray2,
+                      },
+                    ]}
+                  >
+                    {item.name}
+                  </Text>
+                  {activeCategory === index ? <View style={[styles.underlineGreen]}></View> : null}
+                </View>
+              </TouchableOpacity>
             );
           }}
         />
-        <View style={[styles.paginationSlider, styles.blockCentering]}>
-          {sliderImages.map((_, index) => {
+      </View>
+      <View style={[styles.grayLine]}></View>
+      <View style={[styles.shadowFlatList]}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ marginLeft: -7.5, marginBottom: 250 }}
+          bounces={false}
+          contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+        >
+          {homeScreenData.map((item, index) => {
             return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  setActiveIndex(index);
-                }}
-              >
-                <MotiView
-                  style={[
-                    styles.paginationDot,
-                    {
-                      width: activeIndex === index ? 7 : 5,
-
-                      height: activeIndex === index ? 7 : 5,
-                      backgroundColor: activeIndex === index ? colors.gray : colors.gray2,
-                    },
-                  ]}
-                ></MotiView>
-              </TouchableOpacity>
+              item.tags.includes(activeCategoryName) && (
+                <TouchableOpacity
+                  style={[styles.categoryBlock]}
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate(item.navigateTo);
+                  }}
+                >
+                  <View style={[styles.imageBG]}>
+                    <Image source={item.image} />
+                  </View>
+                  <Text style={[styles.categoryBlockTitle]}>{item.name}</Text>
+                  <Text style={[styles.categoryBlockCount]}>{item.count} products</Text>
+                </TouchableOpacity>
+              )
             );
           })}
-        </View>
+        </ScrollView>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Login');
-        }}
-      >
-        <View style={[styles.buttonCenterMode]}>
-          <LinearGradient
-            start={{ x: 0, y: 15 }}
-            end={{ x: 1.33, y: 5 }}
-            colors={[colors.primary, colors.secondary, colors.tertiary]}
-            style={[styles.buttonLogin, styles.blockCentering]}
-          >
-            <Text style={styles.loginButtonText}>Login</Text>
-          </LinearGradient>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('SignUp');
-        }}
-      >
-        <View style={[styles.buttonSignUp, styles.blockCentering]}>
-          <Text>Sign up</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={toggleModal}>
-        <View style={[styles.blockCentering]}>
-          <Text style={[styles.serviceLinkText]}>Terms of service</Text>
-        </View>
-      </TouchableOpacity>
-      {ModalTermsOfService(isModalVisible, toggleModal)}
     </View>
   );
 };
@@ -152,87 +116,82 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: height * 0.1,
+    paddingHorizontal: width * 0.085,
+    paddingTop: height * 0.085,
   },
-  blockCentering: {
-    justifyContent: 'center',
+  title: {
+    fontFamily: 'SFUIDisplay-Medium',
+    fontSize: 28,
+    color: colors.black,
+  },
+  titlePhoto: {
+    marginTop: 35,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
-  titleText: {
-    color: colors.black,
-    fontSize: 32,
-    fontFamily: 'SFUIDisplay-Bold',
+  avatarImage: {
+    width: 36,
+    height: 36,
+    borderRadius: 36,
   },
-  titleGradientElement: {
-    fontSize: 32,
-    fontFamily: 'SFUIDisplay-Bold',
+  listCategory: {
+    marginTop: 50,
   },
-  textUnderTitle: {
-    color: colors.gray2,
-    marginTop: 10,
+  categoryNameItem: {
+    marginRight: 30,
+  },
+  categoryNameText: {
+    fontFamily: 'SFUIDisplay-Medium',
     fontSize: 18,
   },
-  sliderContainer: {
-    marginTop: 35,
-  },
-  slider: {
-    position: 'absolute',
-    backgroundColor: 'rgba(197, 204, 214, 0.15)',
-    left: -width * 0.05,
-    width: width * 1.1,
-    height: width * 1.1,
-    borderRadius: width,
-  },
-  sliderImage: {
-    width: width,
-    height: height * 0.5,
-    resizeMode: 'cover',
-  },
-  paginationSlider: {
-    top: height * 0.43,
-    left: width * 0.45,
-    position: 'absolute',
-    flexDirection: 'row',
-  },
-  paginationDot: {
-    margin: 3,
-    width: 5,
-    height: 5,
-    borderRadius: 6,
-  },
-  buttonCenterMode: {
-    marginTop: 26,
-    paddingHorizontal: width * 0.15,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonLogin: {
+  grayLine: {
     width: '100%',
-    height: 48,
-    borderRadius: 9,
+    height: 1,
+    backgroundColor: 'rgba(225, 227, 232, 1)',
+    marginBottom: 40,
   },
-  loginButtonText: {
-    color: colors.white,
-    fontFamily: 'SFUIDisplay-Regular',
-    fontSize: 16,
+  underlineGreen: {
+    marginTop: 21,
+    width: '100%',
+    height: 3,
+    backgroundColor: colors.primary,
   },
-  buttonSignUp: {
-    fontFamily: 'SFUIDisplay-Regular',
-    fontSize: 16,
-    marginTop: 26,
-    marginHorizontal: width * 0.15,
+  categoryBlock: {
+    alignItems: 'center',
+    width: '45%',
+    height: 150,
+    margin: 7.5,
     backgroundColor: colors.white,
-    height: 48,
-    borderRadius: 9,
     shadowColor: '#171717',
-    shadowOffset: { width: -1, height: 10 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.02,
     shadowRadius: 10,
   },
-  serviceLinkText: {
-    marginTop: 20,
-    color: colors.gray,
-    fontSize: 13,
+  shadowFlatList: {
+    shadowColor: '#171717',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.08,
+    shadowRadius: 10,
+  },
+  imageBG: {
+    marginTop: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: 'rgba(43, 218, 142, 0.2)',
+    marginBottom: 15,
+  },
+  categoryBlockTitle: {
+    fontSize: 14,
+    color: 'black',
+    fontFamily: 'SFUIDisplay-Medium',
+    marginBottom: 4,
+  },
+  categoryBlockCount: {
+    color: colors.gray2,
     fontFamily: 'SFUIDisplay-Regular',
   },
 });

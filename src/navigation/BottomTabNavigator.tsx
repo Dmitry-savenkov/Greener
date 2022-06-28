@@ -7,10 +7,11 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //Components
-import BrowseScreen from '../screens/BrowseScreen';
+import HomeScreen from '../screens/HomeScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 import ExploreScreen from '../screens/ExploreScreen';
-import BestPlantsScreen from '../screens/BestPlantsScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import CartScreen from '../screens/CartScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,21 +27,21 @@ const BottomTabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={BrowseScreen}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ color }) => <AntDesign name="home" size={20} color={color} />,
         }}
       />
       <Tab.Screen
         name="Favorites"
-        component={ExploreScreen}
+        component={FavoritesScreen}
         options={{
           tabBarIcon: ({ color }) => <AntDesign name="heart" size={20} color={color} />,
         }}
       />
       <Tab.Screen
         name="Explore"
-        component={BestPlantsScreen}
+        component={ExploreScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="flower" size={20} color={color} />
@@ -49,14 +50,14 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Cart"
-        component={SettingsScreen}
+        component={CartScreen}
         options={{
           tabBarIcon: ({ color }) => <Entypo name="shopping-basket" size={20} color={color} />,
         }}
       />
       <Tab.Screen
         name="Profile"
-        component={SettingsScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ color }) => <FontAwesome5 name="user" size={20} color={color} />,
         }}
