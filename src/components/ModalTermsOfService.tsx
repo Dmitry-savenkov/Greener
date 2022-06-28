@@ -1,12 +1,9 @@
-// Lib
+import CloseIcon from '../components/CloseIcon';
+import { Text, View, Modal, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import React from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Text, View, Modal, TouchableOpacity, GestureResponderEvent } from 'react-native';
 
-//Components
-import CloseIcon from '../components/CloseIcon';
-
-const ModalTermsOfService = (
+export const ModalTermsOfService = (
     isModalVisible: boolean | undefined,
     toggleModal: ((event: GestureResponderEvent) => void) | undefined
 ) => {
@@ -65,5 +62,3 @@ const ModalTermsOfService = (
         </Modal>
     );
 };
-
-export default ModalTermsOfService;

@@ -1,8 +1,6 @@
-// Lib
+import { View } from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { View } from 'react-native';
-
 const CloseIcon = () => {
     return (
         <View>
