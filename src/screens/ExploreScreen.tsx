@@ -66,7 +66,7 @@ const ExploreScreen = ({ navigation }) => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('DrawerNavigator', { screen: 'BestPlants' });
+            navigation.navigate('BottomTabNavigator', { screen: 'BestPlants' });
           }}
         >
           <Image
