@@ -1,5 +1,5 @@
 // Lib
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,9 +8,16 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useSelector } from 'react-redux';
+import { MotiView } from 'moti';
+import 'react-native-reanimated';
+
+//Components
+import SearchIcon from '../components/icons/SearchIcon';
+import NotificationsIcon from '../components/icons//NotificationsIcon';
 
 // UI
 import { width, height, colors } from '../constants/theme';
@@ -23,117 +30,157 @@ const HomeScreen = ({ navigation }) => {
     avatar: state?.User.avatar,
   }));
 
-  const [activeCategory, setActiveCategory] = useState(0);
-  const [activeCategoryName, setActiveCategoryName] = useState('products');
+  const flatlistRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const [inputValue, setInputValue] = useState('');
   const { fontsLoaded } = useContext(ThemesContext);
+
+  useEffect(() => {
+    flatlistRef.current?.scrollToIndex({
+      index: activeIndex,
+      animated: true,
+    });
+  }, [activeIndex]);
 
   if (!fontsLoaded) {
     return <AppLoading />;
   }
 
   return (
-    <View style={[styles.container]}>
-      <View style={[styles.titlePhoto]}>
-        <Text style={[styles.title]}>Browse</Text>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('BottomTabNavigator', { screen: 'Settings' });
-          }}
-        >
-          <Image source={avatar} style={[styles.avatarImage]} />
+    <ScrollView style={[styles.container]}>
+      <View style={[styles.header]}>
+        <View style={[styles.searchForm]}>
+          <TouchableOpacity>
+            <SearchIcon />
+          </TouchableOpacity>
+          <TextInput
+            placeholder="Search"
+            value={inputValue}
+            onChangeText={(text) => setInputValue(text)}
+            style={{ marginRight: 15, width: '85%' }}
+          />
+        </View>
+        <TouchableOpacity>
+          <NotificationsIcon size={30} color={colors.gray3} />
         </TouchableOpacity>
       </View>
+
       <View>
         <FlatList
-          style={[styles.listCategory]}
-          showsHorizontalScrollIndicator={false}
+          ref={flatlistRef}
           horizontal={true}
-          data={browseNameCategories}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4]}
+          decelerationRate="fast"
           bounces={false}
-          keyExtractor={(_item, index) => {
-            return index + Math.random().toString();
+          onMomentumScrollEnd={(ev) => {
+            setActiveIndex(Math.round(ev.nativeEvent.contentOffset.x / width));
           }}
-          renderItem={({ item, index }) => {
+          keyExtractor={(item, index) => {
+            return item.id + index.toString();
+          }}
+          renderItem={({ item }) => {
             return (
-              <TouchableOpacity
-                onPress={() => {
-                  setActiveCategory(index);
-                  setActiveCategoryName(item.id);
-                }}
-              >
-                <View style={[styles.categoryNameItem]}>
-                  <Text
-                    style={[
-                      styles.categoryNameText,
-                      {
-                        color: activeCategory === index ? colors.primary : colors.gray2,
-                      },
-                    ]}
-                  >
-                    {item.name}
-                  </Text>
-                  {activeCategory === index ? <View style={[styles.underlineGreen]}></View> : null}
+              <MotiView style={{ width: width, overflow: 'hidden' }}>
+                <View
+                  style={{
+                    width: width - width * 0.08 * 2,
+                    height: 100,
+                    backgroundColor: '#CCF1BE',
+                    marginTop: 40,
+                    borderRadius: 15,
+                  }}
+                >
+                  <View style={{ marginLeft: 12, marginTop: 13 }}>
+                    <View
+                      style={{
+                        width: 100,
+                        height: 23,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'row',
+                        backgroundColor: colors.white,
+                        borderRadius: 10,
+                      }}
+                    >
+                      <Image source={require('../assets/twemoji_potted-plant.png')} />
+                      <View>
+                        <Text style={{ color: '#5A5A5A', marginLeft: 5 }}>Plant tips</Text>
+                      </View>
+                    </View>
+                    <View style={{ marginTop: 10, width: 120 }}>
+                      <Text style={{ color: '#5A5A5A', fontWeight: '500', fontSize: 18 }}>
+                        Plants make people happy!
+                      </Text>
+                    </View>
+                  </View>
                 </View>
-              </TouchableOpacity>
+                <Image
+                  source={require('../assets/unsplash_XXpbdU_31Sg.png')}
+                  style={{ position: 'absolute', right: width * 0.08 * 2, bottom: 0 }}
+                />
+              </MotiView>
             );
           }}
         />
       </View>
-      <View style={[styles.grayLine]}></View>
-      <View style={[styles.shadowFlatList]}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{ marginLeft: -7.5, marginBottom: 250 }}
-          bounces={false}
-          contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 18 }}>
+        <View
+          style={{
+            width: 50,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
         >
-          {homeScreenData.map((item, index) => {
+          {[1, 2, 3, 4].map((_, index) => {
             return (
-              item.tags.includes(activeCategoryName) && (
-                <TouchableOpacity
-                  style={[styles.categoryBlock]}
-                  key={index}
-                  onPress={() => {
-                    navigation.navigate(item.navigateTo);
-                  }}
-                >
-                  <View style={[styles.imageBG]}>
-                    <Image source={item.image} />
-                  </View>
-                  <Text style={[styles.categoryBlockTitle]}>{item.name}</Text>
-                  <Text style={[styles.categoryBlockCount]}>{item.count} products</Text>
-                </TouchableOpacity>
-              )
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  setActiveIndex(index);
+                }}
+              >
+                <MotiView
+                  style={[
+                    {
+                      width: activeIndex === index ? 7 : 5,
+
+                      height: activeIndex === index ? 7 : 5,
+                      backgroundColor: activeIndex === index ? '#60BF96' : '#CCF1BE',
+                      borderRadius: 10,
+                    },
+                  ]}
+                ></MotiView>
+              </TouchableOpacity>
             );
           })}
-        </ScrollView>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
-    paddingHorizontal: width * 0.085,
+    backgroundColor: colors.background,
+    paddingHorizontal: width * 0.08,
     paddingTop: height * 0.085,
   },
-  title: {
-    fontFamily: 'SFUIDisplay-Medium',
-    fontSize: 28,
-    color: colors.black,
-  },
-  titlePhoto: {
-    marginTop: 35,
+  header: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
-  avatarImage: {
-    width: 36,
-    height: 36,
-    borderRadius: 36,
+  searchForm: {
+    flexDirection: 'row',
+    width: '85%',
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    backgroundColor: colors.white,
   },
   listCategory: {
     marginTop: 50,

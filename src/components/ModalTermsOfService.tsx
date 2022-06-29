@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Text, View, Modal, TouchableOpacity, GestureResponderEvent } from 'react-native';
 
 //Components
-import CloseIcon from '../components/CloseIcon';
+import CloseIcon from '../components/icons/CloseIcon';
 
 const ModalTermsOfService = (
   isModalVisible: boolean | undefined,

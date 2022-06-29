@@ -8,7 +8,7 @@ const SearchIcon = () => {
     <View>
       <AntDesign
         name="search1"
-        size={18}
+        size={20}
         color="#C5CCD6"
         style={{ paddingVertical: 7, paddingRight: 12 }}
       />

@@ -13,9 +13,9 @@ import {
 import AppLoading from 'expo-app-loading';
 
 // Components
-import BackIcon from '../components/BackIcon';
-import SearchIcon from '../components/SearchIcon';
-import DotsIcon from '../components/DotsIcon';
+import BackIcon from '../components/icons/BackIcon';
+import SearchIcon from '../components/icons/SearchIcon';
+import DotsIcon from '../components/icons/DotsIcon';
 
 // UI
 import { ThemesContext } from '../context/ThemeContext';
