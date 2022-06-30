@@ -128,6 +128,29 @@ const HomeScreen = ({ navigation }) => {
           })}
         </View>
       </View>
+      <View style={[styles.blockTitleWrapper]}>
+        <Text style={[styles.blockTitle]}>Categories</Text>
+      </View>
+      <FlatList
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        data={[1, 2, 3, 4, 5]}
+        decelerationRate="fast"
+        bounces={false}
+        keyExtractor={(item, index) => {
+          return item.id + index.toString();
+        }}
+        renderItem={() => (
+          <TouchableOpacity>
+            <View style={[styles.categoriesItem]}>
+              <View style={[styles.categoriesImageWrapper]}>
+                <Image source={require('../assets/twemoji_potted-plant.png')} />
+              </View>
+              <Text style={[styles.categoriesTitle]}>Plants</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
     </ScrollView>
   );
 };
@@ -207,6 +230,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 18,
   },
+  blockTitleWrapper: {
+    marginTop: 24,
+  },
+  blockTitle: {
+    color: '#5A5A5A',
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  categoriesItem: {
+    marginTop: 14,
+    width: 80,
+    height: 78,
+    backgroundColor: colors.white,
+    marginRight: 18,
+    borderRadius: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  categoriesImageWrapper: {
+    width: 40,
+    height: 40,
+    backgroundColor: '#CCF1BE',
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  categoriesTitle: { fontSize: 14, fontWeight: '400', color: '#5A5A5A', marginTop: 5 },
   // categoryBlock: {
   //   alignItems: 'center',
   //   width: '45%',
