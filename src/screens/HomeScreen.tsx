@@ -276,6 +276,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   categoriesItem: {
+    marginBottom: 10,
     marginTop: 14,
     width: 80,
     height: 78,
@@ -285,6 +286,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.09,
+    shadowRadius: 5,
   },
   categoriesImageWrapper: {
     width: 40,
@@ -301,12 +306,17 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   bestPlantsItem: {
+    marginBottom: 10,
     marginTop: 10,
     marginRight: 23,
     backgroundColor: 'white',
     borderRadius: 10,
     width: 150,
     height: 230,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
   },
   bestPlantsLabel: {
     position: 'absolute',
@@ -354,17 +364,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#5A5A5A',
   },
-  // categoryBlock: {
-  //   alignItems: 'center',
-  //   width: '45%',
-  //   height: 150,
-  //   margin: 7.5,
-  //   backgroundColor: colors.white,
-  // shadowColor: '#171717',
-  // shadowOffset: { width: 0, height: 0 },
-  // shadowOpacity: 0.02,
-  // shadowRadius: 10,
-  // },
 });
 
 export default HomeScreen;
