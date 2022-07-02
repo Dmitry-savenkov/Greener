@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 // UI
 import { colors } from '../../constants/theme';
 
-const BestPlants = () => {
+const BestPlants = ({ navigation }) => {
   const { bestPlantsSelling } = useSelector((state) => ({
     bestPlantsSelling: state?.BestPlantsSelling.bestPlantsSelling,
   }));
@@ -27,7 +27,13 @@ const BestPlants = () => {
             return item.id + index.toString();
           }}
           renderItem={({ item }) => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('PlantsCategoryItem', {
+                  item: item,
+                });
+              }}
+            >
               <View style={[styles.bestPlantsItem]}>
                 <View>
                   <View style={[styles.bestPlantsLabel]}>

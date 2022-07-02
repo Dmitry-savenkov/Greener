@@ -42,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <Slider />
       <Categories />
-      <BestPlants />
+      <BestPlants navigation={navigation} />
     </ScrollView>
   );
 };
