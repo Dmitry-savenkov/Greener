@@ -14,8 +14,8 @@ import { useSelector } from 'react-redux';
 import AppLoading from 'expo-app-loading';
 
 // Components
-import DotsIcon from '../components/DotsIcon';
-import BackIcon from '../components/BackIcon';
+import DotsIcon from '../components/icons/DotsIcon';
+import BackIcon from '../components/icons/BackIcon';
 
 // UI
 import { width, height, colors } from '../constants/theme';

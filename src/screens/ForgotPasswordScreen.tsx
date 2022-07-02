@@ -5,7 +5,7 @@ import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 
 // Components
-import BackIcon from '../components/BackIcon';
+import BackIcon from '../components/icons/BackIcon';
 import { auth } from '../auth/firebase-config';
 
 // UI

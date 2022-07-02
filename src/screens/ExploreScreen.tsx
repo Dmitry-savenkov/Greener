@@ -13,8 +13,8 @@ import AppLoading from 'expo-app-loading';
 import { useSelector } from 'react-redux';
 
 // Components
-import BackIcon from '../components/BackIcon';
-import DotsIcon from '../components/DotsIcon';
+import BackIcon from '../components/icons/BackIcon';
+import DotsIcon from '../components/icons/DotsIcon';
 
 // UI
 import { width, height, colors } from '../constants/theme';
