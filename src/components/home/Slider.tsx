@@ -13,28 +13,21 @@ const DEFAULT_SLIDES = [
     sliderLabelImage: require('../../assets/twemoji_potted-plant.png'),
     sliderLabelText: 'Plant tips',
     sliderTitleText: 'Plants make people happy!',
-    sliderOverflowImage: require('../../assets/unsplash_XXpbdU_31Sg.png'),
+    sliderOverflowImage: require('../../assets/slide1.png'),
   },
   {
     id: 2,
     sliderLabelImage: require('../../assets/twemoji_potted-plant.png'),
     sliderLabelText: 'Plant tips',
     sliderTitleText: 'Plants make people happy!',
-    sliderOverflowImage: require('../../assets/unsplash_XXpbdU_31Sg.png'),
+    sliderOverflowImage: require('../../assets/slide2.png'),
   },
   {
     id: 3,
     sliderLabelImage: require('../../assets/twemoji_potted-plant.png'),
     sliderLabelText: 'Plant tips',
     sliderTitleText: 'Plants make people happy!',
-    sliderOverflowImage: require('../../assets/unsplash_XXpbdU_31Sg.png'),
-  },
-  {
-    id: 4,
-    sliderLabelImage: require('../../assets/twemoji_potted-plant.png'),
-    sliderLabelText: 'Plant tips',
-    sliderTitleText: 'Plants make people happy!',
-    sliderOverflowImage: require('../../assets/unsplash_XXpbdU_31Sg.png'),
+    sliderOverflowImage: require('../../assets/slide3.png'),
   },
 ];
 
@@ -163,7 +156,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
   },
   dotsWrapper: {
-    width: 50,
+    width: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
