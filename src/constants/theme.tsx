@@ -9,7 +9,10 @@ export const colors = {
   white: '#FFFFFF',
   gray: '#9DA3B4',
   gray2: '#C5CCD6',
-  gray3: '#5A5A5A',
+  blackPrimary: '#000000',
+  grayDefault: '#5A5A5A',
+  greenLight: '#CCF1BE',
+  greenCold: '#60BF96',
   background: '#F2F2F2',
 };
 
