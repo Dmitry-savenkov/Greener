@@ -1,11 +1,16 @@
 // Lib
 import React, { Fragment } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
 // UI
 import { colors } from '../../constants/theme';
 
 const BestPlants = () => {
+  const { bestPlantsSelling } = useSelector((state) => ({
+    bestPlantsSelling: state?.BestPlantsSelling.bestPlantsSelling,
+  }));
+
   return (
     <Fragment>
       <View style={[styles.blockTitleWrapper]}>
@@ -15,26 +20,23 @@ const BestPlants = () => {
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3]}
+          data={bestPlantsSelling}
           decelerationRate="fast"
           bounces={false}
           keyExtractor={(item, index) => {
             return item.id + index.toString();
           }}
-          renderItem={() => (
+          renderItem={({ item }) => (
             <TouchableOpacity>
               <View style={[styles.bestPlantsItem]}>
                 <View>
                   <View style={[styles.bestPlantsLabel]}>
-                    <Text style={[styles.bestPlantsLabelText]}>Best Seller</Text>
+                    <Text style={[styles.bestPlantsLabelText]}>{item.label}</Text>
                   </View>
-                  <Image
-                    source={require('../../assets/photoPlant.png')}
-                    style={[styles.bestPlantsImage]}
-                  />
+                  <Image source={item.previewImage} style={[styles.bestPlantsImage]} />
                 </View>
                 <View>
-                  <Text style={[styles.bestPlantsTitle]}>Monstera Delisiosa</Text>
+                  <Text style={[styles.bestPlantsTitle]}>{item.title}</Text>
                   <Text style={[styles.bestPlantsPrice]}>40-90$</Text>
                   <View style={[styles.bestPlantsLinkWrapper]}>
                     <Text style={[styles.bestPlantsLinkText]}>Show More</Text>
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     width: 150,
-    height: 230,
+    height: 250,
     shadowColor: colors.blackPrimary,
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.1,
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
     width: 150,
-    height: 155,
+    height: 180,
     resizeMode: 'cover',
   },
   bestPlantsTitle: {
