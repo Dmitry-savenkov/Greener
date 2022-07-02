@@ -1,6 +1,7 @@
 // Lib
 import React, { useState, useRef, useEffect, Fragment } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { MotiView } from 'moti';
 import 'react-native-reanimated';
 
@@ -60,7 +61,12 @@ const Slider = () => {
         renderItem={({ item }) => {
           return (
             <MotiView style={[styles.sliderContainer]}>
-              <View style={styles.sliderBackground}>
+              <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1.45, y: 0 }}
+                colors={[colors.greenLight, colors.white]}
+                style={styles.sliderBackground}
+              >
                 <View style={[styles.sliderInfoWrapper]}>
                   <View style={[styles.sliderLabel]}>
                     <Image source={item.sliderLabelImage} />
@@ -72,7 +78,7 @@ const Slider = () => {
                     <Text style={[styles.sliderTitleText]}>{item.sliderTitleText}</Text>
                   </View>
                 </View>
-              </View>
+              </LinearGradient>
               <Image source={item.sliderOverflowImage} style={[styles.sliderOverflowImage]} />
             </MotiView>
           );
