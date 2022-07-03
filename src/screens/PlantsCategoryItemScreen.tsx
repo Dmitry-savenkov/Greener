@@ -30,13 +30,41 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
 
   return (
     <View style={[styles.container]}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.goBack();
-        }}
-      >
-        <BackIcon />
-      </TouchableOpacity>
+      <View style={[styles.header]}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <BackIcon />
+        </TouchableOpacity>
+      </View>
+      <View>
+        <View>
+          <Image
+            source={item.previewImage}
+            style={{ width: '100%', height: 490, resizeMode: 'stretch' }}
+          />
+        </View>
+        <View style={{ position: 'absolute' }}>
+          <FlatList
+            style={{ height: 200 }}
+            horizontal={false}
+            showsVerticalScrollIndicator={false}
+            data={item.payload.sliderPhotos}
+            decelerationRate="fast"
+            bounces={false}
+            keyExtractor={(item, index) => {
+              return item.id + index.toString();
+            }}
+            renderItem={({ item }) => (
+              <TouchableOpacity>
+                <Image source={item.image} style={{ width: 40, height: 40 }} />
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </View>
     </View>
   );
 };
@@ -46,6 +74,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     paddingTop: height * 0.07,
+  },
+  header: {
+    paddingHorizontal: width * 0.08,
   },
 });
 
