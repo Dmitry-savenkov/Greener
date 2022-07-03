@@ -43,7 +43,9 @@ const BestPlants = ({ navigation }) => {
                 </View>
                 <View>
                   <Text style={[styles.bestPlantsTitle]}>{item.title}</Text>
-                  <Text style={[styles.bestPlantsPrice]}>40-90$</Text>
+                  <Text style={[styles.bestPlantsPrice]}>
+                    ${item.price.lowPrice} {item.price.highPrice ? '- ' + item.price.highPrice : ''}
+                  </Text>
                   <View style={[styles.bestPlantsLinkWrapper]}>
                     <Text style={[styles.bestPlantsLinkText]}>Show More</Text>
                   </View>
