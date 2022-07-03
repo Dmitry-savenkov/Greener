@@ -35,20 +35,20 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
   const planterColors = item.payload?.planterColor;
   const description = item.payload?.description;
   const sliderPhotos = item.payload?.sliderPhotos;
-  const activeImageObject = sliderPhotos[0];
 
+  const [activeImageObject, setactiveImageObject] = useState(sliderPhotos[0]);
   const [mainImage, setMainImage] = useState(activeImageObject.image);
   const [activeSize, setActiveSize] = useState(activeImageObject.size);
   const [activeColor, setActiveColor] = useState(activeImageObject.color);
-  console.log(activeSize);
 
   const findCurrentImage = useCallback((active, updated, sliderPhotos) => {
-    const current = sliderPhotos.find((obj) => {
+    const current = sliderPhotos.find((obj: { size: string; color: string }) => {
       if (obj.size === updated.size && obj.color === updated.color) {
         return obj;
       }
     });
     current ? setMainImage(current.image) : setMainImage(active.image);
+    current ? setactiveImageObject(current) : setactiveImageObject(active);
   }, []);
 
   const { fontsLoaded } = useContext(ThemesContext);
@@ -164,7 +164,6 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
           </View>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
             {planterColors.map((planterColor: any) => {
-              console.log(planterColor.toLocaleLowerCase());
               return (
                 <TouchableOpacity
                   style={{ marginRight: 10 }}
