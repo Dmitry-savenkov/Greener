@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 
 // Components
 import BackIcon from '../components/icons/BackIcon';
+import DropDown from '../components/DropDown';
 
 // UI
 import { width, height, colors, plantColors } from '../constants/theme';
@@ -35,6 +36,9 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
   const planterColors = item.payload?.planterColor;
   const description = item.payload?.description;
   const sliderPhotos = item.payload?.sliderPhotos;
+  const careGuide = item.payload?.careGuide;
+  const sadPlantSigns = item.payload?.sadPlantSigns;
+  const guarantee = item.payload?.guarantee?.description;
 
   const [activeImageObject, setactiveImageObject] = useState(sliderPhotos[0]);
   const [mainImage, setMainImage] = useState(activeImageObject.image);
@@ -196,9 +200,10 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               );
             })}
           </View>
-          <View>
-            <Text>{description}</Text>
-          </View>
+          <DropDown description={description} />
+          <DropDown careGuide={careGuide} />
+          <DropDown sadPlantSigns={sadPlantSigns} />
+          <DropDown guarantee={guarantee} />
         </View>
       </View>
     </ScrollView>
