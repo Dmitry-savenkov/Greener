@@ -8,31 +8,42 @@ import {
   UIManager,
   View,
 } from 'react-native';
+import Arrowdown from './icons/Arrowdown';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-const DropDown = ({ description, careGuide, sadPlantSigns, guarantee }) => {
+
+const DropDown = () => {
   const [expanded, setExpanded] = useState(false);
+
   return (
-    <View style={style.container}>
-      <TouchableOpacity
-        onPress={() => {
-          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-          setExpanded(!expanded);
-        }}
-      >
-        <Text>Press me to {expanded ? 'collapse' : 'expand'}!</Text>
-      </TouchableOpacity>
+    <View>
+      <View style={style.container}>
+        <TouchableOpacity
+          onPress={() => {
+            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+            setExpanded(!expanded);
+          }}
+        >
+          <View style={{ transform: [{ rotateX: expanded ? '180deg' : '0deg' }] }}>
+            <Arrowdown />
+          </View>
+        </TouchableOpacity>
+      </View>
       {expanded && (
-        <View>
-          <Text>first</Text>
+        <View style={{ alignItems: 'flex-start' }}>
+          <Text>press F</Text>
         </View>
       )}
     </View>
   );
 };
 
-const style = StyleSheet.create({});
+const style = StyleSheet.create({
+  container: {
+    alignItems: 'flex-end',
+  },
+});
 
 export default DropDown;
