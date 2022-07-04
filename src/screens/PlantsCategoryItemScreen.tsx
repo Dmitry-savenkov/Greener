@@ -65,24 +65,22 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
             onPress={() => {
               navigation.goBack();
             }}
+            style={{ marginBottom: 15 }}
           >
             <BackIcon />
           </TouchableOpacity>
         </View>
         <View>
           <View>
-            <Image
-              source={mainImage}
-              style={{ width: '100%', height: 490, resizeMode: 'stretch' }}
-            />
+            <Image source={mainImage} style={[styles.mainImage]} />
           </View>
-          <View style={{ position: 'absolute', top: 90, right: 0 }}>
+          <View style={[styles.sliderImagesListWrapper]}>
             <FlatList
               nestedScrollEnabled={true}
-              style={{ height: 200 }}
+              style={[styles.sliderImagesList]}
               horizontal={false}
               showsVerticalScrollIndicator={false}
-              data={[...sliderPhotos, ...sliderPhotos]}
+              data={sliderPhotos}
               decelerationRate="fast"
               bounces={false}
               keyExtractor={(item, index) => {
@@ -91,40 +89,32 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => setMainImage(item.image)}
-                  style={{ marginBottom: 10 }}
+                  style={{ marginBottom: 20 }}
                   key={item.price?.lowPrice + Math.random()}
                 >
-                  <Image source={item.image} style={{ width: 40, height: 40 }} />
+                  <Image source={item.image} style={[styles.sliderImagesListItem]} />
                 </TouchableOpacity>
               )}
             />
           </View>
         </View>
-        <View style={{ paddingHorizontal: width * 0.08 }}>
-          <View
-            style={{
-              marginTop: 10,
-            }}
-          >
-            <Text>{title}</Text>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>${lowPrice}-</Text>
-            <Text>{hightPrice}</Text>
+        <View style={[styles.plantPayloadWrapper]}>
+          <View style={styles.titleWrapper}>
+            <Text style={[styles.titleText]}>{title}</Text>
           </View>
           <View>
-            <Text>Size</Text>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Text style={[styles.choiceCategoryTitle]}>Size:</Text>
+            <View style={[styles.choiceCategoryList]}>
               {dimensions.map((size: string) => {
                 return (
                   <TouchableOpacity
                     style={{
-                      marginRight: 10,
-                      paddingHorizontal: 5,
-                      paddingVertical: 2,
+                      marginRight: 20,
                       borderRadius: 3,
-                      borderWidth: 1,
-                      backgroundColor: activeSize === size ? 'white' : 'white',
+                      borderWidth: 0.7,
+                      borderColor: activeSize === size ? colors.blackPrimary : colors.grayDefault,
+                      paddingHorizontal: activeSize === size ? 22 : 20,
+                      paddingVertical: activeSize === size ? 12 : 12,
                     }}
                     key={size + Math.random}
                     onPress={() => {
@@ -138,35 +128,28 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                       );
                     }}
                   >
-                    <Text>{size}</Text>
+                    <Text style={[styles.choiceCategoryItemText]}>{size}</Text>
                   </TouchableOpacity>
                 );
               })}
             </View>
           </View>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Text style={[styles.choiceCategoryTitle]}>Planter:</Text>
+          <View style={[styles.choiceCategoryList]}>
             {planters.map((planter: string) => {
               return (
-                <TouchableOpacity
-                  style={{
-                    marginRight: 10,
-                    paddingHorizontal: 5,
-                    paddingVertical: 2,
-                    borderRadius: 3,
-                    borderWidth: 1,
-                  }}
-                  key={planter + Math.random}
-                >
-                  <Text>{planter}</Text>
+                <TouchableOpacity style={[styles.planterCategoryItem]} key={planter + Math.random}>
+                  <Text style={[styles.choiceCategoryItemText]}>{planter}</Text>
                 </TouchableOpacity>
               );
             })}
           </View>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Text style={[styles.choiceCategoryTitle]}>Color:</Text>
+          <View style={[styles.choiceCategoryList]}>
             {planterColors.map((planterColor: any) => {
               return (
                 <TouchableOpacity
-                  style={{ marginRight: 10 }}
+                  style={[styles.colorsCategoryList]}
                   key={planterColor + Math.random}
                   onPress={() => {
                     findCurrentImage(
@@ -179,15 +162,16 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                     );
                   }}
                 >
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 20,
-                      backgroundColor: plantColors[planterColor.toLocaleLowerCase()],
-                    }}
-                  ></View>
-                  <Text>{planterColor}</Text>
+                  <View style={[styles.colorCategoryWrapper]}>
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 20,
+                        backgroundColor: plantColors[planterColor.toLocaleLowerCase()],
+                      }}
+                    ></View>
+                  </View>
                 </TouchableOpacity>
               );
             })}
@@ -209,6 +193,75 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: width * 0.08,
+  },
+  mainImage: {
+    width: '100%',
+    height: 490,
+    resizeMode: 'stretch',
+  },
+  sliderImagesListWrapper: {
+    position: 'absolute',
+    top: (490 - 240) / 2,
+    right: 12,
+  },
+  sliderImagesList: {
+    height: 240,
+  },
+  sliderImagesListItem: {
+    width: 40,
+    height: 40,
+    borderWidth: 1,
+    borderColor: colors.background,
+  },
+  plantPayloadWrapper: {
+    paddingHorizontal: width * 0.08,
+  },
+  titleWrapper: {
+    marginTop: 15,
+  },
+  titleText: {
+    color: colors.grayDefault,
+    fontSize: 16,
+  },
+  choiceCategoryTitle: {
+    marginBottom: 7,
+    fontSize: 16,
+    color: colors.grayDefault,
+    marginTop: 10,
+  },
+  choiceCategoryList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  choiceCategoryItemText: {
+    color: colors.grayDefault,
+    fontSize: 12,
+    fontWeight: '400',
+  },
+  planterCategoryItem: {
+    width: 91,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 3,
+    borderWidth: 0.7,
+    borderColor: colors.grayDefault,
+    marginBottom: 10,
+  },
+  colorsCategoryList: {
+    marginRight: 10,
+  },
+  colorCategoryWrapper: {
+    width: 28,
+    height: 28,
+    borderRadius: 20,
+    margin: 4,
+    borderWidth: 1,
+    borderColor: colors.grayDefault,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
