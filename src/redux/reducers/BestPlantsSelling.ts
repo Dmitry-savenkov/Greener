@@ -14,7 +14,7 @@ const initialState = {
       payload: {
         sliderPhotos: [
           {
-            size: 'Small',
+            size: 'Small - 5"',
             color: 'Cream',
             planter: 'Bryant',
             choice: true,
@@ -42,7 +42,7 @@ const initialState = {
             image: require('../../assets/images/categoriesPlants/BestForBeginners/MoneyTreePlant/money-tree_gallery_small_all_all_03.webp'),
           },
         ],
-        size: ['Small - 5'],
+        size: ['Small - 5"'],
         planter: ['Bryant'],
         planterColor: ['Cream'],
         description:
@@ -97,25 +97,25 @@ const initialState = {
       payload: {
         sliderPhotos: [
           {
-            size: 'Small',
+            size: 'Small - 5"',
             color: 'Avocado',
             planter: 'Upcycled',
             image: require('../../assets/images/categoriesPlants/BestForBeginners/Rhipsalis/rhipsalis_small_upcycled_avocado.webp'),
           },
           {
-            size: 'Small',
+            size: 'Small - 5"',
             color: 'Blue',
             planter: 'Upcycled',
             image: require('../../assets/images/categoriesPlants/BestForBeginners/Rhipsalis/rhipsalis_small_upcycled_blue.webp'),
           },
           {
-            size: 'Small',
+            size: 'Small - 5"',
             color: 'Cream',
             planter: 'Upcycled',
             image: require('../../assets/images/categoriesPlants/BestForBeginners/Rhipsalis/rhipsalis_small_upcycled_cream.webp'),
           },
           {
-            size: 'Small',
+            size: 'Small - 5"',
             color: 'Stonewash',
             planter: 'Upcycled',
             image: require('../../assets/images/categoriesPlants/BestForBeginners/Rhipsalis/rhipsalis_small_upcycled_stonewash.webp'),
@@ -127,7 +127,7 @@ const initialState = {
             image: require('../../assets/images/categoriesPlants/BestForBeginners/Rhipsalis/rhipsalis_small_gallery.webp'),
           },
         ],
-        size: ['Small - 5'],
+        size: ['Small - 5"'],
         planter: ['Grow Pot', 'Grant', 'Hyde', 'Upcucled'],
         planterColor: ['Blue', 'Avocado', 'Cream', 'Stonewash'],
         description:
@@ -187,13 +187,13 @@ const initialState = {
       payload: {
         sliderPhotos: [
           {
-            size: 'Large',
+            size: 'Large - 11"',
             color: 'White',
             planter: 'Pallas',
             image: require('../../assets/images/categoriesPlants/BestForBeginners/LargeZZPlants/zz-plant_large_pallas_white.webp'),
           },
           {
-            size: 'Large',
+            size: 'Large - 11"',
             color: 'Blush',
             planter: 'Pallas',
             image: require('../../assets/images/categoriesPlants/BestForBeginners/LargeZZPlants/zz-plant_large_pallas_almond.webp'),
@@ -217,7 +217,7 @@ const initialState = {
             image: require('../../assets/images/categoriesPlants/BestForBeginners/LargeZZPlants/large-zz-plant_gallery_all_06.webp'),
           },
         ],
-        size: ['Large - 11'],
+        size: ['Large - 11"'],
         planter: ['Grow Pot', 'Burbank', 'Upcucled'],
         planterColor: ['Almond', 'Stonewash', 'White', 'Blush'],
         description:

@@ -47,6 +47,8 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
         return obj;
       }
     });
+    setActiveSize(updated.size);
+    setActiveColor(updated.color);
     current ? setMainImage(current.image) : setMainImage(active.image);
     current ? setactiveImageObject(current) : setactiveImageObject(active);
   }, []);
@@ -122,13 +124,24 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                         activeImageObject,
                         {
                           ...activeImageObject,
-                          size: size.split(' ')[0],
+                          size: size,
                         },
                         sliderPhotos,
                       );
                     }}
                   >
-                    <Text style={[styles.choiceCategoryItemText]}>{size}</Text>
+                    <Text
+                      style={[
+                        styles.choiceCategoryItemText,
+                        {
+                          color: activeSize === size ? '#252525' : colors.grayDefault,
+                          fontSize: 12,
+                          fontWeight: activeSize === size ? '500' : '400',
+                        },
+                      ]}
+                    >
+                      {size}
+                    </Text>
                   </TouchableOpacity>
                 );
               })}
@@ -162,7 +175,14 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                     );
                   }}
                 >
-                  <View style={[styles.colorCategoryWrapper]}>
+                  <View
+                    style={[
+                      styles.colorCategoryWrapper,
+                      {
+                        borderColor: activeColor === planterColor ? '#252525' : colors.grayDefault,
+                      },
+                    ]}
+                  >
                     <View
                       style={{
                         width: 20,
