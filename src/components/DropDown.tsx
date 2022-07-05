@@ -1,3 +1,4 @@
+//Lib
 import React, { useState } from 'react';
 import {
   LayoutAnimation,
@@ -8,6 +9,8 @@ import {
   UIManager,
   View,
 } from 'react-native';
+
+//Components
 import Arrowdown from './icons/Arrowdown';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {

@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import BackIcon from '../components/icons/BackIcon';
 import DropDown from '../components/DropDown';
 import FavoritesButton from '../components/FavoritesButton';
+import GrayLine from '../components/GrayLine';
 
 // UI
 import { width, height, colors, plantColors } from '../constants/theme';
@@ -154,10 +155,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                     onPress={() => {
                       findCurrentImage(
                         activeImageObject,
-                        {
-                          ...activeImageObject,
-                          size: size,
-                        },
+                        { ...activeImageObject, size: size },
                         sliderPhotos,
                       );
                     }}
@@ -219,10 +217,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                   onPress={() => {
                     findCurrentImage(
                       activeImageObject,
-                      {
-                        ...activeImageObject,
-                        color: planterColor,
-                      },
+                      { ...activeImageObject, color: planterColor },
                       sliderPhotos,
                     );
                   }}
@@ -248,55 +243,27 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               );
             })}
           </View>
-          <View
+          <TouchableOpacity
             style={{
+              marginTop: 10,
               width: '100%',
-              height: 1,
-              backgroundColor: colors.grayDefault,
-              marginTop: 15,
-              marginBottom: 15,
+              height: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.greenCold,
             }}
-          ></View>
+          >
+            <Text style={{ color: 'white' }}>Add To Card - ${lowPrice}</Text>
+          </TouchableOpacity>
+          <GrayLine />
           <DropDown information={description} title={'Description'} />
-          <View
-            style={{
-              width: '100%',
-              height: 1,
-              backgroundColor: colors.grayDefault,
-              marginTop: 15,
-              marginBottom: 15,
-            }}
-          ></View>
+          <GrayLine />
           <DropDown information={careGuide} title={'Care Guide'} />
-          <View
-            style={{
-              width: '100%',
-              height: 1,
-              backgroundColor: colors.grayDefault,
-              marginTop: 15,
-              marginBottom: 15,
-            }}
-          ></View>
+          <GrayLine />
           <DropDown information={sadPlantSigns} title={'Sad Plant Signs'} />
-          <View
-            style={{
-              width: '100%',
-              height: 1,
-              backgroundColor: colors.grayDefault,
-              marginTop: 15,
-              marginBottom: 15,
-            }}
-          ></View>
+          <GrayLine />
           <DropDown information={guarantee} title={'30-Day Guarantee'} />
-          <View
-            style={{
-              width: '100%',
-              height: 1,
-              backgroundColor: colors.grayDefault,
-              marginTop: 15,
-              marginBottom: 15,
-            }}
-          ></View>
+          <GrayLine />
         </View>
       </View>
     </ScrollView>
