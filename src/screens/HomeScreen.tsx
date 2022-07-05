@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: width * 0.08,
     paddingTop: height * 0.085,
   },
   header: {
+    paddingHorizontal: width * 0.08,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',

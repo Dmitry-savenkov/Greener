@@ -65,7 +65,7 @@ const Slider = () => {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1.45, y: 0 }}
                 colors={[colors.greenLight, colors.white]}
-                style={styles.sliderBackground}
+                style={[styles.sliderBackground]}
               >
                 <View style={[styles.sliderInfoWrapper]}>
                   <View style={[styles.sliderLabel]}>
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   sliderContainer: {
     width: width,
     overflow: 'hidden',
+    paddingLeft: width * 0.08,
   },
   sliderBackground: {
     width: width - width * 0.08 * 2,
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
   },
   sliderOverflowImage: {
     position: 'absolute',
-    right: width * 0.08 * 2,
+    right: width * 0.08,
     bottom: 0,
   },
   dotsContainer: {

@@ -25,7 +25,7 @@ const Information = ({ information, title }) => {
           <Text>{information.title}</Text>
           <View>
             {information.plantCare.map(({ description }) => {
-              return <Text>{description}</Text>;
+              return <Text key={description}>{description}</Text>;
             })}
           </View>
         </View>
@@ -36,7 +36,7 @@ const Information = ({ information, title }) => {
         <View>
           {information?.map(({ title, description }) => {
             return (
-              <View>
+              <View key={title}>
                 <Text>{title}</Text>
                 <Text>{description}</Text>
               </View>

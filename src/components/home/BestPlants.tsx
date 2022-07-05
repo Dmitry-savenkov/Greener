@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react
 import { useSelector } from 'react-redux';
 
 // UI
-import { colors } from '../../constants/theme';
+import { colors, width } from '../../constants/theme';
 
 const BestPlants = ({ navigation }) => {
   const { bestPlantsSelling } = useSelector((state) => ({
@@ -26,7 +26,7 @@ const BestPlants = ({ navigation }) => {
           keyExtractor={(item, index) => {
             return item.id + index.toString();
           }}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('PlantsCategoryItem', {
@@ -34,7 +34,12 @@ const BestPlants = ({ navigation }) => {
                 });
               }}
             >
-              <View style={[styles.bestPlantsItem]}>
+              <View
+                style={[
+                  styles.bestPlantsItem,
+                  { marginRight: index + 1 === bestPlantsSelling.length ? width * 0.08 : 0 },
+                ]}
+              >
                 <View>
                   <View style={[styles.bestPlantsLabel]}>
                     <Text style={[styles.bestPlantsLabelText]}>{item.label}</Text>
@@ -64,6 +69,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   blockTitle: {
+    marginLeft: width * 0.08,
     color: colors.grayDefault,
     fontSize: 24,
     fontWeight: '600',
@@ -71,7 +77,7 @@ const styles = StyleSheet.create({
   bestPlantsItem: {
     marginBottom: 10,
     marginTop: 10,
-    marginRight: 23,
+    marginLeft: width * 0.08,
     backgroundColor: colors.white,
     borderRadius: 10,
     width: 150,
