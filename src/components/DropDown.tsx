@@ -14,6 +14,45 @@ if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
+const Information = ({ information, title }) => {
+  switch (title) {
+    case 'Description': {
+      return <Text>{information}</Text>;
+    }
+    case 'Care Guide': {
+      return (
+        <View>
+          <Text>{information.title}</Text>
+          <View>
+            {information.plantCare.map(({ description }) => {
+              return <Text>{description}</Text>;
+            })}
+          </View>
+        </View>
+      );
+    }
+    case 'Sad Plant Signs': {
+      return (
+        <View>
+          {information?.map(({ title, description }) => {
+            return (
+              <View>
+                <Text>{title}</Text>
+                <Text>{description}</Text>
+              </View>
+            );
+          })}
+        </View>
+      );
+    }
+    case '30-Day Guarantee': {
+      return <Text>{information}</Text>;
+    }
+    default:
+      return <View></View>;
+  }
+};
+
 const DropDown = ({ information, title }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -38,7 +77,7 @@ const DropDown = ({ information, title }) => {
       </View>
       {expanded && (
         <View style={{ alignItems: 'flex-start' }}>
-          <Text style={{ color: '#2C2C2C' }}>press F</Text>
+          <Information information={information} title={title} />
         </View>
       )}
     </View>

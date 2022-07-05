@@ -210,7 +210,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
             })}
           </View>
           <Text style={[styles.choiceCategoryTitle]}>Color:</Text>
-          <View style={[styles.choiceCategoryList]}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
             {planterColors.map((planterColor: any) => {
               return (
                 <TouchableOpacity
@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
     height: 28,
     borderRadius: 20,
     margin: 4,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: colors.grayDefault,
     alignItems: 'center',
     justifyContent: 'center',
