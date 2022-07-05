@@ -128,7 +128,7 @@ const initialState = {
           },
         ],
         size: ['Small - 5"'],
-        planter: ['Grow Pot', 'Grant', 'Hyde', 'Upcucled'],
+        planter: ['Grow Pot', 'Grant', 'Hyde', 'Upcycled'],
         planterColor: ['Blue', 'Avocado', 'Cream', 'Stonewash'],
         description:
           "The Rhipsalis, or mistletoe cactus, is known for its clusters of branching, pencil-thin stems. The ideal growing conditions for the Rhipsalis mirror those of the jungle understory: bright filtered (indirect) light with weekly waterings. Added bonus, it's pet-safe!",

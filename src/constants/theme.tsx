@@ -16,7 +16,7 @@ export const colors = {
   background: '#F2F2F2',
 };
 
-export const plantColors: PlantColors = {
+export const plantColors: any = {
   cream: '#eee8df',
   black: '#3d3d3d',
   blush: '#fad9c2',

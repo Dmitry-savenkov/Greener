@@ -14,7 +14,7 @@ if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const DropDown = () => {
+const DropDown = ({ information, title }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -26,14 +26,19 @@ const DropDown = () => {
             setExpanded(!expanded);
           }}
         >
-          <View style={{ transform: [{ rotateX: expanded ? '180deg' : '0deg' }] }}>
-            <Arrowdown />
+          <View
+            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+          >
+            <Text style={{ color: '#2C2C2C' }}>{title}</Text>
+            <View style={{ transform: [{ rotateX: expanded ? '180deg' : '0deg' }] }}>
+              <Arrowdown />
+            </View>
           </View>
         </TouchableOpacity>
       </View>
       {expanded && (
         <View style={{ alignItems: 'flex-start' }}>
-          <Text>press F</Text>
+          <Text style={{ color: '#2C2C2C' }}>press F</Text>
         </View>
       )}
     </View>
@@ -42,7 +47,7 @@ const DropDown = () => {
 
 const style = StyleSheet.create({
   container: {
-    alignItems: 'flex-end',
+    width: '100%',
   },
 });
 

@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux';
 // Components
 import BackIcon from '../components/icons/BackIcon';
 import DropDown from '../components/DropDown';
+import FavoritesButton from '../components/FavoritesButton';
 
 // UI
 import { width, height, colors, plantColors } from '../constants/theme';
@@ -43,6 +44,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
   const [activeImageObject, setactiveImageObject] = useState(sliderPhotos[0]);
   const [mainImage, setMainImage] = useState(activeImageObject.image);
   const [activeSize, setActiveSize] = useState(activeImageObject.size);
+  const [activePlanter, setActivePlanter] = useState(activeImageObject.planter);
   const [activeColor, setActiveColor] = useState(activeImageObject.color);
 
   const findCurrentImage = useCallback((active, updated, sliderPhotos) => {
@@ -105,8 +107,32 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
           </View>
         </View>
         <View style={[styles.plantPayloadWrapper]}>
-          <View style={styles.titleWrapper}>
-            <Text style={[styles.titleText]}>{title}</Text>
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              marginTop: 15,
+            }}
+          >
+            <View>
+              <Text style={[styles.titleText, { color: '#2C2C2C' }]}>{title}</Text>
+              <Text style={{ fontSize: 12, color: 'rgba(44, 44, 44, 0.6)', marginTop: 4 }}>
+                Choose your style&color
+              </Text>
+            </View>
+            <View
+              style={{
+                backgroundColor: plantColors.stonewash,
+                width: 40,
+                height: 40,
+                borderRadius: 40,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <FavoritesButton />
+            </View>
           </View>
           <View>
             <Text style={[styles.choiceCategoryTitle]}>Size:</Text>
@@ -119,8 +145,10 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                       borderRadius: 3,
                       borderWidth: 0.7,
                       borderColor: activeSize === size ? colors.blackPrimary : colors.grayDefault,
-                      paddingHorizontal: activeSize === size ? 22 : 20,
-                      paddingVertical: activeSize === size ? 12 : 12,
+                      width: 90,
+                      height: 32,
+                      alignItems: 'center',
+                      justifyContent: 'center',
                     }}
                     key={size + Math.random}
                     onPress={() => {
@@ -138,7 +166,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                       style={[
                         styles.choiceCategoryItemText,
                         {
-                          color: activeSize === size ? '#252525' : colors.grayDefault,
+                          color: activeSize === size ? '#2C2C2C' : colors.grayDefault,
                           fontSize: 12,
                           fontWeight: activeSize === size ? '500' : '400',
                         },
@@ -155,8 +183,28 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
           <View style={[styles.choiceCategoryList]}>
             {planters.map((planter: string) => {
               return (
-                <TouchableOpacity style={[styles.planterCategoryItem]} key={planter + Math.random}>
-                  <Text style={[styles.choiceCategoryItemText]}>{planter}</Text>
+                <TouchableOpacity
+                  style={[
+                    styles.planterCategoryItem,
+                    {
+                      borderColor:
+                        activePlanter === planter ? colors.blackPrimary : colors.grayDefault,
+                    },
+                  ]}
+                  key={planter + Math.random}
+                >
+                  <Text
+                    style={[
+                      styles.choiceCategoryItemText,
+                      {
+                        color: activePlanter === planter ? '#2C2C2C' : colors.grayDefault,
+                        fontSize: 12,
+                        fontWeight: activePlanter === planter ? '500' : '400',
+                      },
+                    ]}
+                  >
+                    {planter}
+                  </Text>
                 </TouchableOpacity>
               );
             })}
@@ -183,7 +231,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                     style={[
                       styles.colorCategoryWrapper,
                       {
-                        borderColor: activeColor === planterColor ? '#252525' : colors.grayDefault,
+                        borderColor: activeColor === planterColor ? '#2C2C2C' : colors.grayDefault,
                       },
                     ]}
                   >
@@ -200,10 +248,55 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               );
             })}
           </View>
-          <DropDown description={description} />
-          <DropDown careGuide={careGuide} />
-          <DropDown sadPlantSigns={sadPlantSigns} />
-          <DropDown guarantee={guarantee} />
+          <View
+            style={{
+              width: '100%',
+              height: 1,
+              backgroundColor: colors.grayDefault,
+              marginTop: 15,
+              marginBottom: 15,
+            }}
+          ></View>
+          <DropDown information={description} title={'Description'} />
+          <View
+            style={{
+              width: '100%',
+              height: 1,
+              backgroundColor: colors.grayDefault,
+              marginTop: 15,
+              marginBottom: 15,
+            }}
+          ></View>
+          <DropDown information={careGuide} title={'Care Guide'} />
+          <View
+            style={{
+              width: '100%',
+              height: 1,
+              backgroundColor: colors.grayDefault,
+              marginTop: 15,
+              marginBottom: 15,
+            }}
+          ></View>
+          <DropDown information={sadPlantSigns} title={'Sad Plant Signs'} />
+          <View
+            style={{
+              width: '100%',
+              height: 1,
+              backgroundColor: colors.grayDefault,
+              marginTop: 15,
+              marginBottom: 15,
+            }}
+          ></View>
+          <DropDown information={guarantee} title={'30-Day Guarantee'} />
+          <View
+            style={{
+              width: '100%',
+              height: 1,
+              backgroundColor: colors.grayDefault,
+              marginTop: 15,
+              marginBottom: 15,
+            }}
+          ></View>
         </View>
       </View>
     </ScrollView>
@@ -251,7 +344,7 @@ const styles = StyleSheet.create({
   choiceCategoryTitle: {
     marginBottom: 7,
     fontSize: 16,
-    color: colors.grayDefault,
+    color: '#2C2C2C',
     marginTop: 10,
   },
   choiceCategoryList: {
