@@ -74,7 +74,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
             onPress={() => {
               navigation.goBack();
             }}
-            style={{ marginBottom: 15 }}
+            style={[styles.backIconWrapper]}
           >
             <BackIcon />
           </TouchableOpacity>
@@ -98,7 +98,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => setMainImage(item.image)}
-                  style={{ marginBottom: 20 }}
+                  style={[styles.sliderMiniItemWrapper]}
                   key={item.price?.lowPrice + Math.random()}
                 >
                   <Image source={item.image} style={[styles.sliderImagesListItem]} />
@@ -108,30 +108,12 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
           </View>
         </View>
         <View style={[styles.plantPayloadWrapper]}>
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              marginTop: 15,
-            }}
-          >
+          <View style={[styles.plantItemHeaderWrapper]}>
             <View>
-              <Text style={[styles.titleText, { color: '#2C2C2C' }]}>{title}</Text>
-              <Text style={{ fontSize: 12, color: 'rgba(44, 44, 44, 0.6)', marginTop: 4 }}>
-                Choose your style&color
-              </Text>
+              <Text style={[styles.titleText, { color: colors.black }]}>{title}</Text>
+              <Text style={[styles.choouseStyleColorTitle]}>Choose your style&color</Text>
             </View>
-            <View
-              style={{
-                backgroundColor: plantColors.stonewash,
-                width: 40,
-                height: 40,
-                borderRadius: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <View style={[styles.favoriteButtonWrapper]}>
               <FavoritesButton />
             </View>
           </View>
@@ -141,16 +123,12 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               {dimensions.map((size: string) => {
                 return (
                   <TouchableOpacity
-                    style={{
-                      marginRight: 20,
-                      borderRadius: 3,
-                      borderWidth: 0.7,
-                      borderColor: activeSize === size ? colors.blackPrimary : colors.grayDefault,
-                      width: 90,
-                      height: 32,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
+                    style={[
+                      styles.choiceSizeListItem,
+                      {
+                        borderColor: activeSize === size ? colors.blackPrimary : colors.grayDefault,
+                      },
+                    ]}
                     key={size + Math.random}
                     onPress={() => {
                       findCurrentImage(
@@ -165,7 +143,6 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                         styles.choiceCategoryItemText,
                         {
                           color: activeSize === size ? '#2C2C2C' : colors.grayDefault,
-                          fontSize: 12,
                           fontWeight: activeSize === size ? '500' : '400',
                         },
                       ]}
@@ -196,7 +173,6 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                       styles.choiceCategoryItemText,
                       {
                         color: activePlanter === planter ? '#2C2C2C' : colors.grayDefault,
-                        fontSize: 12,
                         fontWeight: activePlanter === planter ? '500' : '400',
                       },
                     ]}
@@ -208,7 +184,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
             })}
           </View>
           <Text style={[styles.choiceCategoryTitle]}>Color:</Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+          <View style={[styles.colorCategoryContainer]}>
             {planterColors.map((planterColor: any) => {
               return (
                 <TouchableOpacity
@@ -231,29 +207,18 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
                     ]}
                   >
                     <View
-                      style={{
-                        width: 20,
-                        height: 20,
-                        borderRadius: 20,
-                        backgroundColor: plantColors[planterColor.toLocaleLowerCase()],
-                      }}
+                      style={[
+                        styles.colorCategoryItemWrapper,
+                        { backgroundColor: plantColors[planterColor.toLocaleLowerCase()] },
+                      ]}
                     ></View>
                   </View>
                 </TouchableOpacity>
               );
             })}
           </View>
-          <TouchableOpacity
-            style={{
-              marginTop: 10,
-              width: '100%',
-              height: 40,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: colors.greenCold,
-            }}
-          >
-            <Text style={{ color: 'white' }}>Add To Card - ${lowPrice}</Text>
+          <TouchableOpacity style={[styles.addToCardButtonWrapper]}>
+            <Text style={[styles.addToCardButtonWrapperText]}>Add To Card - ${lowPrice}</Text>
           </TouchableOpacity>
           <GrayLine />
           <DropDown information={description} title={'Description'} />
@@ -347,6 +312,61 @@ const styles = StyleSheet.create({
     borderColor: colors.grayDefault,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  backIconWrapper: {
+    marginBottom: 15,
+  },
+  sliderMiniItemWrapper: {
+    marginBottom: 20,
+  },
+  plantItemHeaderWrapper: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginTop: 15,
+  },
+  choouseStyleColorTitle: {
+    fontSize: 12,
+    color: 'rgba(44, 44, 44, 0.6)',
+    marginTop: 4,
+  },
+  favoriteButtonWrapper: {
+    backgroundColor: plantColors.stonewash,
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  choiceSizeListItem: {
+    marginRight: 20,
+    borderRadius: 3,
+    borderWidth: 0.7,
+    width: 90,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  colorCategoryContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  addToCardButtonWrapper: {
+    marginTop: 10,
+    width: '100%',
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.greenCold,
+  },
+  addToCardButtonWrapperText: {
+    color: colors.white,
+  },
+  colorCategoryItemWrapper: {
+    width: 20,
+    height: 20,
+    borderRadius: 20,
   },
 });
 
