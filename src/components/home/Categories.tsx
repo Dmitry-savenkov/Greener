@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react
 import { useSelector } from 'react-redux';
 
 // UI
-import { colors } from '../../constants/theme';
+import { colors, width } from '../../constants/theme';
 
 const Categories = () => {
   const { categoriesMain } = useSelector((state) => ({
@@ -25,8 +25,13 @@ const Categories = () => {
         keyExtractor={(item, index) => {
           return item.id + index.toString();
         }}
-        renderItem={({ item }) => (
-          <TouchableOpacity>
+        renderItem={({ item, index }) => (
+          <TouchableOpacity
+            style={{
+              marginLeft: index === 0 ? width * 0.08 : 18,
+              marginRight: index + 1 === categoriesMain.length ? width * 0.08 : 0,
+            }}
+          >
             <View style={[styles.categoriesItem]}>
               <View style={[styles.categoriesImageWrapper]}>
                 <Image source={item.image} />
@@ -42,6 +47,7 @@ const Categories = () => {
 
 const styles = StyleSheet.create({
   blockTitleWrapper: {
+    marginLeft: width * 0.08,
     marginTop: 24,
   },
   blockTitle: {
@@ -55,7 +61,6 @@ const styles = StyleSheet.create({
     width: 80,
     height: 78,
     backgroundColor: colors.white,
-    marginRight: 18,
     borderRadius: 10,
     flexDirection: 'column',
     alignItems: 'center',

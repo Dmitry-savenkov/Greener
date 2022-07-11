@@ -12,6 +12,7 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import CartScreen from '../screens/CartScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import HomeTabNavigation from './HomeTabNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ const BottomTabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeTabNavigation}
         options={{
           tabBarIcon: ({ color }) => <AntDesign name="home" size={20} color={color} />,
         }}

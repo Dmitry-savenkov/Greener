@@ -16,4 +16,17 @@ export const colors = {
   background: '#F2F2F2',
 };
 
+export const plantColors: any = {
+  cream: '#eee8df',
+  black: '#3d3d3d',
+  blush: '#fad9c2',
+  stone: '#eaebec',
+  terracotta: '#c49378',
+  mint: '#d6e3e2',
+  avacado: '#b8a76a',
+  blue: '#3c6b78',
+  stonewash: '#dddddd',
+  red: '#DE0606',
+};
+
 export const { width, height } = Dimensions.get('window');

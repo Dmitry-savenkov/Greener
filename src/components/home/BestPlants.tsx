@@ -1,11 +1,16 @@
 // Lib
 import React, { Fragment } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
 // UI
-import { colors } from '../../constants/theme';
+import { colors, width } from '../../constants/theme';
 
-const BestPlants = () => {
+const BestPlants = ({ navigation }) => {
+  const { bestPlantsSelling } = useSelector((state) => ({
+    bestPlantsSelling: state?.BestPlantsSelling.bestPlantsSelling,
+  }));
+
   return (
     <Fragment>
       <View style={[styles.blockTitleWrapper]}>
@@ -15,27 +20,37 @@ const BestPlants = () => {
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3]}
+          data={bestPlantsSelling}
           decelerationRate="fast"
           bounces={false}
           keyExtractor={(item, index) => {
             return item.id + index.toString();
           }}
-          renderItem={() => (
-            <TouchableOpacity>
-              <View style={[styles.bestPlantsItem]}>
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('PlantsCategoryItem', {
+                  item: item,
+                });
+              }}
+            >
+              <View
+                style={[
+                  styles.bestPlantsItem,
+                  { marginRight: index + 1 === bestPlantsSelling.length ? width * 0.08 : 0 },
+                ]}
+              >
                 <View>
                   <View style={[styles.bestPlantsLabel]}>
-                    <Text style={[styles.bestPlantsLabelText]}>Best Seller</Text>
+                    <Text style={[styles.bestPlantsLabelText]}>{item.label}</Text>
                   </View>
-                  <Image
-                    source={require('../../assets/photoPlant.png')}
-                    style={[styles.bestPlantsImage]}
-                  />
+                  <Image source={item.previewImage} style={[styles.bestPlantsImage]} />
                 </View>
                 <View>
-                  <Text style={[styles.bestPlantsTitle]}>Monstera Delisiosa</Text>
-                  <Text style={[styles.bestPlantsPrice]}>40-90$</Text>
+                  <Text style={[styles.bestPlantsTitle]}>{item.title}</Text>
+                  <Text style={[styles.bestPlantsPrice]}>
+                    ${item.price.lowPrice} {item.price.highPrice ? '- ' + item.price.highPrice : ''}
+                  </Text>
                   <View style={[styles.bestPlantsLinkWrapper]}>
                     <Text style={[styles.bestPlantsLinkText]}>Show More</Text>
                   </View>
@@ -54,6 +69,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   blockTitle: {
+    marginLeft: width * 0.08,
     color: colors.grayDefault,
     fontSize: 24,
     fontWeight: '600',
@@ -61,11 +77,11 @@ const styles = StyleSheet.create({
   bestPlantsItem: {
     marginBottom: 10,
     marginTop: 10,
-    marginRight: 23,
-    backgroundColor: 'white',
+    marginLeft: width * 0.08,
+    backgroundColor: colors.white,
     borderRadius: 10,
     width: 150,
-    height: 230,
+    height: 250,
     shadowColor: colors.blackPrimary,
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.1,
@@ -90,7 +106,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
     width: 150,
-    height: 155,
+    height: 180,
     resizeMode: 'cover',
   },
   bestPlantsTitle: {
