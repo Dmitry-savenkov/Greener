@@ -35,7 +35,10 @@ const CartScreen = ({ navigation }) => {
       <View>
         {items.map((item, index) => {
           return (
-            <View key={item.title + index} style={{ width: '100%', height: 150 }}>
+            <View
+              key={item.title + index}
+              style={{ width: '100%', height: 100, alignItems: 'center', justifyContent: 'center' }}
+            >
               <Text style={{ color: 'black' }}>{item.label}</Text>
             </View>
           );

@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
     backgroundColor: plantColors.stonewash,
     width: 40,
     height: 40,
-    borderRadius: 40,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
