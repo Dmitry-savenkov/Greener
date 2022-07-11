@@ -11,7 +11,10 @@ import {
 } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { LogBox } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Actions
+import { AddItemToCard } from '../redux/actions/user';
 
 // Components
 import BackIcon from '../components/icons/BackIcon';
@@ -41,6 +44,8 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
   const careGuide = item.payload?.careGuide;
   const sadPlantSigns = item.payload?.sadPlantSigns;
   const guarantee = item.payload?.guarantee?.description;
+
+  const dispatch = useDispatch();
 
   const [activeImageObject, setactiveImageObject] = useState(sliderPhotos[0]);
   const [mainImage, setMainImage] = useState(activeImageObject.image);
@@ -217,7 +222,12 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               );
             })}
           </View>
-          <TouchableOpacity style={[styles.addToCardButtonWrapper]}>
+          <TouchableOpacity
+            style={[styles.addToCardButtonWrapper]}
+            onPress={() => {
+              dispatch(AddItemToCard(item));
+            }}
+          >
             <Text style={[styles.addToCardButtonWrapperText]}>Add To Card - ${lowPrice}</Text>
           </TouchableOpacity>
           <GrayLine />
