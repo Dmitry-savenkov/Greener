@@ -11,10 +11,16 @@ const initialState = {
 export default handleActions(
   {
     [AddItemToCard]: (state: any, { payload }: any) => ({
-      items: [...state.items, payload],
+      items: [
+        ...state.items,
+        {
+          plant: { ...payload.plant, id: payload.id },
+          activeImageObject: payload.activeImageObject,
+        },
+      ],
     }),
     [deleteItemFromCard]: (state, { payload }) => ({
-      items: state.items.filter((item) => item.title != payload.title),
+      items: state.items.filter((item) => item.plant.id !== payload.id),
     }),
   },
   initialState,

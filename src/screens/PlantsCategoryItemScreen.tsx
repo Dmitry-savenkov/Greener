@@ -47,7 +47,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
 
-  const [activeImageObject, setactiveImageObject] = useState(sliderPhotos[0]);
+  const [activeImageObject, setActiveImageObject] = useState(sliderPhotos[0]);
   const [mainImage, setMainImage] = useState(activeImageObject.image);
   const [activeSize, setActiveSize] = useState(activeImageObject.size);
   const [activePlanter, setActivePlanter] = useState(activeImageObject.planter);
@@ -62,7 +62,7 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
     setActiveSize(updated.size);
     setActiveColor(updated.color);
     current ? setMainImage(current.image) : setMainImage(active.image);
-    current ? setactiveImageObject(current) : setactiveImageObject(active);
+    current ? setActiveImageObject(current) : setActiveImageObject(active);
   }, []);
 
   const { fontsLoaded } = useContext(ThemesContext);
@@ -225,7 +225,13 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
           <TouchableOpacity
             style={[styles.addToCardButtonWrapper]}
             onPress={() => {
-              dispatch(AddItemToCard(item));
+              dispatch(
+                AddItemToCard({
+                  plant: item,
+                  activeImageObject,
+                  id: Math.random() + 'test' + Math.random(),
+                }),
+              );
             }}
           >
             <Text style={[styles.addToCardButtonWrapperText]}>Add To Card - ${lowPrice}</Text>

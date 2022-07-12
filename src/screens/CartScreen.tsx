@@ -1,14 +1,6 @@
 // Lib
 import React, { useState, useContext, useCallback } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -28,12 +20,11 @@ const CartScreen = ({ navigation }) => {
   const { items } = useSelector((state: any) => ({
     items: state?.Cart?.items,
   }));
+  console.log(items.length);
+
   const dispatch = useDispatch();
 
-  console.log(items?.length, 'length');
-
   const onDismiss = useCallback((item) => {
-    console.log(item.title);
     dispatch(deleteItemFromCard(item));
   }, []);
 
@@ -45,10 +36,14 @@ const CartScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={[styles.container]}>
-      {items &&
-        items.map((item) => (
-          <CartItem key={item.title + Math.random()} onDismiss={onDismiss} item={item} />
-        ))}
+      {items.map(({ plant, activeImageObject }) => (
+        <CartItem
+          key={plant.title + Math.random()}
+          onDismiss={onDismiss}
+          plant={plant}
+          activeImageObject={activeImageObject}
+        />
+      ))}
     </ScrollView>
   );
 };
