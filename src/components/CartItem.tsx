@@ -1,10 +1,7 @@
+// Libs
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-  PanGestureHandlerProps,
-} from 'react-native-gesture-handler';
+import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
   useAnimatedGestureHandler,
@@ -14,17 +11,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-interface ListItemProps extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'> {
-  task;
-  onDismiss?: (task) => void;
-}
-
 const LIST_ITEM_HEIGHT = 70;
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.3;
 
-const CartItem = ({ task, onDismiss, simultaneousHandlers }) => {
+const CartItem = ({ item, onDismiss }) => {
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(LIST_ITEM_HEIGHT);
   const marginVertical = useSharedValue(10);
@@ -42,7 +34,7 @@ const CartItem = ({ task, onDismiss, simultaneousHandlers }) => {
         marginVertical.value = withTiming(0);
         opacity.value = withTiming(0, undefined, (isFinished) => {
           if (isFinished && onDismiss) {
-            runOnJS(onDismiss)(task);
+            runOnJS(onDismiss)(item);
           }
         });
       } else {
@@ -77,9 +69,9 @@ const CartItem = ({ task, onDismiss, simultaneousHandlers }) => {
       <Animated.View style={[styles.iconContainer, rIconContainerStyle]}>
         <FontAwesome5 name={'trash-alt'} size={LIST_ITEM_HEIGHT * 0.4} color={'red'} />
       </Animated.View>
-      <PanGestureHandler simultaneousHandlers={simultaneousHandlers} onGestureEvent={panGesture}>
+      <PanGestureHandler onGestureEvent={panGesture}>
         <Animated.View style={[styles.task, rStyle]}>
-          <Text style={styles.taskTitle}>{task.title}</Text>
+          <Text style={styles.taskTitle}>{item.title}</Text>
         </Animated.View>
       </PanGestureHandler>
     </Animated.View>

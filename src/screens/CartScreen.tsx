@@ -1,5 +1,5 @@
 // Lib
-import React, { useState, useRef, useCallback, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,45 +11,44 @@ import {
 } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Components
 import BackIcon from '../components/icons/BackIcon';
 import CartItem from '../components/CartItem';
 
+// Actions
+import { deleteItemFromCard } from '../redux/actions/user';
+
 // UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
-import { PanGestureHandler } from 'react-native-gesture-handler';
-const TITLES = [
-  'Record the dismissible tutorial 🎥',
-  'Leave 👍🏼 to the video',
-  'Check YouTube comments',
-  'Subscribe to the channel 🚀',
-  'Leave a ⭐️ on the GitHub Repo',
-];
-
-const TASKS = TITLES.map((title, index) => ({ title, index }));
 
 const CartScreen = ({ navigation }) => {
   const { items } = useSelector((state: any) => ({
     items: state?.Cart?.items,
   }));
-  const [tasks, setTasks] = useState(TASKS);
+  const dispatch = useDispatch();
 
-  const onDismiss = useCallback((task) => {}, []);
+  console.log(items?.length, 'length');
+
+  const onDismiss = useCallback((item) => {
+    console.log(item.title);
+    dispatch(deleteItemFromCard(item));
+  }, []);
 
   const { fontsLoaded } = useContext(ThemesContext);
 
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  const scrollRef = useRef(null);
 
   return (
-    <ScrollView style={[styles.container]} ref={scrollRef}>
-      {items.map((task) => (
-        <CartItem simultaneousHandlers={scrollRef} key={task.index} task={task} />
-      ))}
+    <ScrollView style={[styles.container]}>
+      {items &&
+        items.map((item) => (
+          <CartItem key={item.title + Math.random()} onDismiss={onDismiss} item={item} />
+        ))}
     </ScrollView>
   );
 };
