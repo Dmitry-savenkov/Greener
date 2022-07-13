@@ -96,6 +96,7 @@ const CartScreen = ({ navigation }) => {
             onDismiss={onDismiss}
             plant={plant}
             activeImageObject={activeImageObject}
+            navigation={navigation}
           />
         ))}
       </View>

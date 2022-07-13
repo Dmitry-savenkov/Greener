@@ -1,13 +1,20 @@
 // Libs
 import React, { Fragment } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const CartListItem = ({ plant, activeImageObject }) => {
+const CartListItem = ({ navigation, plant, activeImageObject }) => {
   const { color, image, planter, size } = activeImageObject;
 
   return (
     <Fragment>
-      <Image source={image} style={{ width: 80, height: 100, borderRadius: 8 }} />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('PlantsCategoryItem', { item: plant });
+        }}
+      >
+        <Image source={image} style={{ width: 80, height: 100, borderRadius: 8 }} />
+      </TouchableOpacity>
       <View>
         <Text>{plant.title}</Text>
         <Text>color: {color}</Text>

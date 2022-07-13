@@ -9,9 +9,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //Components
 import FavoritesScreen from '../screens/FavoritesScreen';
 import ExploreScreen from '../screens/ExploreScreen';
-import CartScreen from '../screens/CartScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import HomeTabNavigation from './HomeTabNavigation';
+import CartTabNavigation from './CartTabNavigation';
 
 //Hooks
 import useCardItemsLength from '../hooks/useCardItemsLength';
@@ -29,7 +29,7 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeTab"
         component={HomeTabNavigation}
         options={{
           tabBarIcon: ({ color }) => <AntDesign name="home" size={20} color={color} />,
@@ -52,8 +52,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Cart"
-        component={CartScreen}
+        name="CartTab"
+        component={CartTabNavigation}
         options={{
           tabBarBadge: useCardItemsLength(),
           tabBarBadgeStyle: {

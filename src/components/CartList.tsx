@@ -19,12 +19,11 @@ const LIST_ITEM_HEIGHT = 120;
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.3;
 
-const CartList = ({ plant, onDismiss, activeImageObject }) => {
+const CartList = ({ navigation, plant, onDismiss, activeImageObject }) => {
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(LIST_ITEM_HEIGHT);
   const marginVertical = useSharedValue(10);
   const opacity = useSharedValue(1);
-  const { color, image, planter, size } = activeImageObject;
 
   const panGesture = useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
     onActive: (event) => {
@@ -75,7 +74,11 @@ const CartList = ({ plant, onDismiss, activeImageObject }) => {
       </Animated.View>
       <PanGestureHandler onGestureEvent={panGesture}>
         <Animated.View style={[styles.task, rStyle]}>
-          <CartListItem plant={plant} activeImageObject={activeImageObject} />
+          <CartListItem
+            navigation={navigation}
+            plant={plant}
+            activeImageObject={activeImageObject}
+          />
         </Animated.View>
       </PanGestureHandler>
     </Animated.View>
