@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 // Components
 import BackIcon from '../components/icons/BackIcon';
-import CartItem from '../components/CartItem';
+import CartList from '../components/CartList';
 
 // Actions
 import { deleteItemFromCard } from '../redux/actions/user';
@@ -88,14 +88,17 @@ const CartScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      {items.map(({ plant, activeImageObject }) => (
-        <CartItem
-          key={plant.title + Math.random()}
-          onDismiss={onDismiss}
-          plant={plant}
-          activeImageObject={activeImageObject}
-        />
-      ))}
+      <View style={{ paddingHorizontal: width * 0.08, marginTop: 20 }}>
+        <Text style={{ fontSize: 16, fontWeight: '600' }}>Order List</Text>
+        {items.map(({ plant, activeImageObject }) => (
+          <CartList
+            key={plant.title + Math.random()}
+            onDismiss={onDismiss}
+            plant={plant}
+            activeImageObject={activeImageObject}
+          />
+        ))}
+      </View>
     </ScrollView>
   );
 };

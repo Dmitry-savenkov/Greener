@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
 import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -11,16 +11,20 @@ import Animated, {
 } from 'react-native-reanimated';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const LIST_ITEM_HEIGHT = 70;
+// Components
+import CartListItem from './CartListItem';
+
+const LIST_ITEM_HEIGHT = 120;
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.3;
 
-const CartItem = ({ plant, onDismiss, activeImageObject }) => {
+const CartList = ({ plant, onDismiss, activeImageObject }) => {
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(LIST_ITEM_HEIGHT);
   const marginVertical = useSharedValue(10);
   const opacity = useSharedValue(1);
+  const { color, image, planter, size } = activeImageObject;
 
   const panGesture = useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
     onActive: (event) => {
@@ -67,11 +71,11 @@ const CartItem = ({ plant, onDismiss, activeImageObject }) => {
   return (
     <Animated.View style={[styles.taskContainer, rTaskContainerStyle]}>
       <Animated.View style={[styles.iconContainer, rIconContainerStyle]}>
-        <FontAwesome5 name={'trash-alt'} size={LIST_ITEM_HEIGHT * 0.4} color={'red'} />
+        <FontAwesome5 name={'trash-alt'} size={LIST_ITEM_HEIGHT * 0.3} color={'red'} />
       </Animated.View>
       <PanGestureHandler onGestureEvent={panGesture}>
         <Animated.View style={[styles.task, rStyle]}>
-          <Text style={styles.taskTitle}>{plant.title}</Text>
+          <CartListItem plant={plant} activeImageObject={activeImageObject} />
         </Animated.View>
       </PanGestureHandler>
     </Animated.View>
@@ -84,10 +88,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   task: {
-    width: '90%',
+    padding: 10,
+    width: '100%',
     height: LIST_ITEM_HEIGHT,
-    justifyContent: 'center',
-    paddingLeft: 20,
+    flexDirection: 'row',
     backgroundColor: 'white',
     borderRadius: 10,
     shadowOpacity: 0.08,
@@ -111,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CartItem;
+export default CartList;
