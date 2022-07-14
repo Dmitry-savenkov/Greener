@@ -19,7 +19,7 @@ const LIST_ITEM_HEIGHT = 120;
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.3;
 
-const CartList = ({ navigation, plant, onDismiss, activeImageObject }) => {
+const CartList = ({ navigation, plant, onDismiss, activeImageObject, count }) => {
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(LIST_ITEM_HEIGHT);
   const marginVertical = useSharedValue(10);
@@ -77,6 +77,7 @@ const CartList = ({ navigation, plant, onDismiss, activeImageObject }) => {
           <CartListItem
             navigation={navigation}
             plant={plant}
+            count={count}
             activeImageObject={activeImageObject}
           />
         </Animated.View>

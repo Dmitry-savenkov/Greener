@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const CartListItem = ({ navigation, plant, activeImageObject }) => {
+const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
   const { color, image, planter, size } = activeImageObject;
 
   return (
@@ -17,6 +17,7 @@ const CartListItem = ({ navigation, plant, activeImageObject }) => {
       </TouchableOpacity>
       <View>
         <Text>{plant.title}</Text>
+        <Text>{count}</Text>
         <Text>color: {color}</Text>
         <Text>planter type: {planter}</Text>
         <Text>planter size: {size}</Text>

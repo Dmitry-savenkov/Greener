@@ -90,11 +90,12 @@ const CartScreen = ({ navigation }) => {
       </View>
       <View style={{ paddingHorizontal: width * 0.08, marginTop: 20 }}>
         <Text style={{ fontSize: 16, fontWeight: '600' }}>Order List</Text>
-        {items.map(({ plant, activeImageObject }) => (
+        {items.map(({ plant, activeImageObject, count }) => (
           <CartList
             key={plant.title + Math.random()}
             onDismiss={onDismiss}
             plant={plant}
+            count={count}
             activeImageObject={activeImageObject}
             navigation={navigation}
           />

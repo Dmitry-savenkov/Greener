@@ -228,8 +228,9 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
               dispatch(
                 AddItemToCard({
                   plant: item,
-                  activeImageObject,
+                  activeImageObject: { ...activeImageObject, title: item.title },
                   id: Math.random() + 'test' + Math.random(),
+                  count: 1,
                 }),
               );
             }}
