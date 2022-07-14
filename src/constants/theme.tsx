@@ -23,7 +23,7 @@ export const plantColors: any = {
   stone: '#eaebec',
   terracotta: '#c49378',
   mint: '#d6e3e2',
-  avacado: '#b8a76a',
+  avocado: '#b8a76a',
   blue: '#3c6b78',
   stonewash: '#dddddd',
   red: '#DE0606',

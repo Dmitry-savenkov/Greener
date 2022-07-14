@@ -1,19 +1,20 @@
 // Lib
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 //Components
-import HomeScreen from '../screens/HomeScreen';
+import CartScreen from '../screens/CartScreen';
 import PlantsCategoryItemScreen from '../screens/PlantsCategoryItemScreen';
 
-const HomeTabNavigation = () => {
+const CartTabNavigation = () => {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Navigator initialRouteName="Cart" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Cart" component={CartScreen} />
       <Stack.Screen name="PlantsCategoryItem" component={PlantsCategoryItemScreen} />
     </Stack.Navigator>
   );
 };
 
-export default HomeTabNavigation;
+export default CartTabNavigation;
