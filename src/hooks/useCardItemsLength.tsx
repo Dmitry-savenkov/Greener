@@ -6,7 +6,7 @@ const useCardItemsLength = () => {
     items: state?.Cart?.items,
   }));
 
-  return items.length === 0 ? undefined : items.length;
+  return items.length !== 0 ? items.length : undefined;
 };
 
 export default useCardItemsLength;

@@ -14,8 +14,8 @@ import { useSelector } from 'react-redux';
 import AppLoading from 'expo-app-loading';
 
 // Components
-import DotsIcon from '../components/icons/DotsIcon';
-import BackIcon from '../components/icons/BackIcon';
+import EntypoIcon from '../components/icons/EntypoIcon';
+import AntDesignIcon from '../components/icons/AntDesignIcon';
 
 // UI
 import { width, height, colors } from '../constants/theme';
@@ -77,14 +77,10 @@ const ProfileScreen = ({ navigation }) => {
             navigation.goBack();
           }}
         >
-          <BackIcon />
+          <AntDesignIcon name="arrowleft" size={24} color="#C5CCD6" />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        >
-          <DotsIcon />
+        <TouchableOpacity>
+          <EntypoIcon name="dots-three-horizontal" size={22} color="#C5CCD6" />
         </TouchableOpacity>
       </View>
       <View style={[styles.titlePhoto]}>

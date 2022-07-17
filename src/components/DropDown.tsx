@@ -11,13 +11,13 @@ import {
 } from 'react-native';
 
 //Components
-import Arrowdown from './icons/Arrowdown';
+import EntypoIcon from './icons/EntypoIcon';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const Information = ({ information, title }) => {
+const DropDownInformation = ({ information, title }) => {
   switch (title) {
     case 'Description': {
       return <Text>{information}</Text>;
@@ -73,14 +73,14 @@ const DropDown = ({ information, title }) => {
           >
             <Text style={{ color: '#2C2C2C' }}>{title}</Text>
             <View style={{ transform: [{ rotateX: expanded ? '180deg' : '0deg' }] }}>
-              <Arrowdown />
+              <EntypoIcon name="chevron-thin-down" size={24} color="#C5CCD6" />
             </View>
           </View>
         </TouchableOpacity>
       </View>
       {expanded && (
         <View style={{ alignItems: 'flex-start' }}>
-          <Information information={information} title={title} />
+          <DropDownInformation information={information} title={title} />
         </View>
       )}
     </View>

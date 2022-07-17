@@ -5,7 +5,7 @@ import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 
 // Components
-import BackIcon from '../components/icons/BackIcon';
+import AntDesignIcon from '../components/icons/AntDesignIcon';
 import { auth } from '../auth/firebase-config';
 
 // UI
@@ -43,7 +43,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
           navigation.goBack();
         }}
       >
-        <BackIcon />
+        <AntDesignIcon name="arrowleft" size={24} color="#C5CCD6" />
       </TouchableOpacity>
 
       <Text style={[styles.recoveryText]}>Password recovery</Text>

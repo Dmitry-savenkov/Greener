@@ -29,7 +29,7 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="HomeTab"
+        name="Home"
         component={HomeTabNavigation}
         options={{
           tabBarIcon: ({ color }) => <AntDesign name="home" size={20} color={color} />,
@@ -52,7 +52,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="CartTab"
+        name="Cart"
         component={CartTabNavigation}
         options={{
           tabBarBadge: useCardItemsLength(),
