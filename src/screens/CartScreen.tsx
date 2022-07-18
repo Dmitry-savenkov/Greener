@@ -10,7 +10,7 @@ import OrderList from '../components/cart/OrderList';
 // UI
 import { width, height } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
-import ChoouseShipping from '../components/cart/ChoouseShipping';
+import ChoouseShipping from '../components/cart/ChooseShipping';
 
 const CartScreen = ({ navigation }) => {
   const { fontsLoaded } = useContext(ThemesContext);
