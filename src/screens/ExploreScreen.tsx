@@ -13,12 +13,12 @@ import AppLoading from 'expo-app-loading';
 import { useSelector } from 'react-redux';
 
 // Components
-import BackIcon from '../components/icons/BackIcon';
-import DotsIcon from '../components/icons/DotsIcon';
+import AntDesignIcon from '../components/icons/AntDesignIcon';
 
 // UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
+import EntypoIcon from '../components/icons/EntypoIcon';
 
 const ExploreScreen = ({ navigation }) => {
   const { name, description, tags, images } = useSelector((state) => ({
@@ -45,14 +45,10 @@ const ExploreScreen = ({ navigation }) => {
             navigation.goBack();
           }}
         >
-          <BackIcon />
+          <AntDesignIcon name="arrowleft" size={24} color="#C5CCD6" />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        >
-          <DotsIcon />
+        <TouchableOpacity>
+          <EntypoIcon name="dots-three-horizontal" size={22} color="#C5CCD6" />
         </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

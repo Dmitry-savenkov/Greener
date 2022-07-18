@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Text, View, Modal, TouchableOpacity, GestureResponderEvent } from 'react-native';
 
 //Components
-import CloseIcon from '../components/icons/CloseIcon';
+import AntDesignIcon from '../components/icons/AntDesignIcon';
 
 const ModalTermsOfService = (
   isModalVisible: boolean | undefined,
@@ -24,7 +24,7 @@ const ModalTermsOfService = (
         >
           <View style={{ marginLeft: -25, marginTop: -20 }}>
             <TouchableOpacity onPress={toggleModal}>
-              <CloseIcon />
+              <AntDesignIcon name={'close'} size={24} color={'#C5CCD6'} />
             </TouchableOpacity>
           </View>
           <ScrollView>

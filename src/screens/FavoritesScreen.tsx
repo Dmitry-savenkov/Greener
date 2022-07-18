@@ -13,9 +13,7 @@ import {
 import AppLoading from 'expo-app-loading';
 
 // Components
-import BackIcon from '../components/icons/BackIcon';
-import SearchIcon from '../components/icons/SearchIcon';
-import DotsIcon from '../components/icons/DotsIcon';
+import AntDesignIcon from '../components/icons/AntDesignIcon';
 
 // UI
 import { ThemesContext } from '../context/ThemeContext';
@@ -31,22 +29,6 @@ const FavoritesScreen = ({ navigation }) => {
 
   return (
     <View style={[styles.container]}>
-      <View style={[styles.headerIcons]}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <BackIcon />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        >
-          <DotsIcon />
-        </TouchableOpacity>
-      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.header]}>
           <Text style={[styles.sectionTitle]}>Explore</Text>
@@ -60,7 +42,7 @@ const FavoritesScreen = ({ navigation }) => {
               }}
             />
             <TouchableOpacity>
-              <SearchIcon />
+              <AntDesignIcon name="search1" size={20} color="#C5CCD6" />
             </TouchableOpacity>
           </View>
         </View>

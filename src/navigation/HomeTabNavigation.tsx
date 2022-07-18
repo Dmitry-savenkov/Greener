@@ -9,8 +9,8 @@ import PlantsCategoryItemScreen from '../screens/PlantsCategoryItemScreen';
 const HomeTabNavigation = () => {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Navigator initialRouteName="HomeRoot" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="HomeRoot" component={HomeScreen} />
       <Stack.Screen name="PlantsCategoryItem" component={PlantsCategoryItemScreen} />
     </Stack.Navigator>
   );
