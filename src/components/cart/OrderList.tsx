@@ -1,5 +1,5 @@
 // Lib
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -21,20 +21,23 @@ const OrderList = ({ navigation }) => {
     dispatch(deleteItemFromCard(item));
   }, []);
 
-  return (
-    <View style={[styles.container]}>
-      <Text style={[styles.title]}>Order List</Text>
-      {items.map(({ plant, activeImageObject, count }) => (
-        <CartList
-          key={plant.title + Math.random()}
-          onDismiss={onDismiss}
-          plant={plant}
-          count={count}
-          activeImageObject={activeImageObject}
-          navigation={navigation}
-        />
-      ))}
-    </View>
+  return useMemo(
+    () => (
+      <View style={[styles.container]}>
+        <Text style={[styles.title]}>Order List</Text>
+        {items.map(({ plant, activeImageObject, count }) => (
+          <CartList
+            key={plant.title + Math.random()}
+            onDismiss={onDismiss}
+            plant={plant}
+            count={count}
+            activeImageObject={activeImageObject}
+            navigation={navigation}
+          />
+        ))}
+      </View>
+    ),
+    [items],
   );
 };
 

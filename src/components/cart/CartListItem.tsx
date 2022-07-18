@@ -2,9 +2,14 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+
+// Actions
+import { DecreasingNumberItemsCart, IncreasingNumberItemsCart } from '../../redux/actions/user';
 
 const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
   const { color, image, planter, size } = activeImageObject;
+  const dispatch = useDispatch();
 
   return (
     <Fragment>
@@ -21,6 +26,28 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
         <Text>color: {color}</Text>
         <Text>planter type: {planter}</Text>
         <Text>planter size: {size}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(
+              IncreasingNumberItemsCart({
+                id: plant.id,
+              }),
+            );
+          }}
+        >
+          <Text>+</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(
+              DecreasingNumberItemsCart({
+                id: plant.id,
+              }),
+            );
+          }}
+        >
+          <Text>-</Text>
+        </TouchableOpacity>
       </View>
     </Fragment>
   );
