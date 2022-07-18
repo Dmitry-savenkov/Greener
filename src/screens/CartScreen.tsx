@@ -10,6 +10,7 @@ import OrderList from '../components/cart/OrderList';
 // UI
 import { width, height } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
+import ChoouseShipping from '../components/cart/ChoouseShipping';
 
 const CartScreen = ({ navigation }) => {
   const { fontsLoaded } = useContext(ThemesContext);
@@ -23,6 +24,7 @@ const CartScreen = ({ navigation }) => {
       <View style={[styles.payloadWrapper]}>
         <ShippingAddress />
         <OrderList navigation={navigation} />
+        <ChoouseShipping />
       </View>
     </ScrollView>
   );
