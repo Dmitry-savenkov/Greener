@@ -4,10 +4,10 @@ import { handleActions } from 'redux-actions';
 // Actions
 import {
   AddItemToCard,
-  deleteItemFromCard,
+  DeleteItemFromCard,
   IncreasingNumberItemsCart,
   DecreasingNumberItemsCart,
-} from '../actions/user';
+} from '../actions/cart';
 
 const initialState = {
   items: [],
@@ -41,7 +41,7 @@ export default handleActions(
             ],
           };
     },
-    [deleteItemFromCard]: (state, { payload }) => ({
+    [DeleteItemFromCard]: (state, { payload }) => ({
       items: state.items.filter((item) => item.plant.id !== payload.id),
     }),
     [IncreasingNumberItemsCart]: (state, { payload }) => {

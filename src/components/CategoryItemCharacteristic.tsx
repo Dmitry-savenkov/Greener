@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react
 import { useDispatch } from 'react-redux';
 
 // Actions
-import { AddItemToCard } from '../redux/actions/user';
+import { AddItemToCard } from '../redux/actions/cart';
 
 // Components
 import FavoritesButton from '../components/FavoritesButton';

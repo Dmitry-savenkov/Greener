@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import CartList from './CartList';
 
 // Actions
-import { deleteItemFromCard } from '../../redux/actions/user';
+import { DeleteItemFromCard } from '../../redux/actions/cart';
 
 const OrderList = ({ navigation }) => {
   const { items } = useSelector((state: any) => ({
@@ -18,7 +18,7 @@ const OrderList = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const onDismiss = useCallback((item) => {
-    dispatch(deleteItemFromCard(item));
+    dispatch(DeleteItemFromCard(item));
   }, []);
 
   return useMemo(

@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 
 // Actions
-import { DecreasingNumberItemsCart, IncreasingNumberItemsCart } from '../../redux/actions/user';
+import { DecreasingNumberItemsCart, IncreasingNumberItemsCart } from '../../redux/actions/cart';
 
 const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
   const { color, image, planter, size } = activeImageObject;
@@ -38,6 +38,7 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
           <Text>+</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled={count === 1}
           onPress={() => {
             dispatch(
               DecreasingNumberItemsCart({
