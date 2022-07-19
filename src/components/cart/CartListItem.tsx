@@ -6,10 +6,13 @@ import { useDispatch } from 'react-redux';
 
 // Actions
 import { DecreasingNumberItemsCart, IncreasingNumberItemsCart } from '../../redux/actions/cart';
+
+// Components
 import EntypoIcon from '../icons/EntypoIcon';
 
 const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
   const { color, image, planter, size } = activeImageObject;
+
   const dispatch = useDispatch();
 
   return (
@@ -19,27 +22,19 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
           navigation.navigate('PlantsCategoryItem', { item: plant });
         }}
       >
-        <Image source={image} style={{ width: 80, height: 100, borderRadius: 8 }} />
+        <Image source={image} style={[styles.previewImage]} />
       </TouchableOpacity>
-      <View style={{ marginLeft: 15, marginTop: 6 }}>
-        <Text style={{ fontSize: 16, color: '#2C2C2C', fontWeight: '400' }}>{plant.title}</Text>
-        <View style={{ flexDirection: 'row', marginTop: 6 }}>
-          <Text style={{ fontSize: 14, color: '#2C2C2C', fontWeight: '400' }}>{size} / </Text>
-          <Text style={{ fontSize: 14, color: '#2C2C2C', fontWeight: '400' }}>{color} / </Text>
-          <Text style={{ fontSize: 14, color: '#2C2C2C', fontWeight: '400' }}>{planter} </Text>
+      <View style={[styles.payloadContainer]}>
+        <Text style={[styles.title]}>{plant.title}</Text>
+        <View style={[styles.informationWrapper]}>
+          <Text style={[styles.informationItem]}>{size} / </Text>
+          <Text style={[styles.informationItem]}>{color} / </Text>
+          <Text style={[styles.informationItem]}>{planter} </Text>
         </View>
-        <View style={{ marginTop: 6 }}>
-          <Text style={{ fontSize: 14, color: '#2C2C2C', fontWeight: '400' }}>55$</Text>
+        <View style={[styles.priceWrapper]}>
+          <Text style={[styles.informationItem]}>55$</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: 80,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 10,
-          }}
-        >
+        <View style={[styles.countWrapper]}>
           <TouchableOpacity
             disabled={count === 1}
             onPress={() => {
@@ -51,20 +46,17 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
             }}
           >
             <View
-              style={{
-                width: 18,
-                height: 18,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 16,
-                borderWidth: 1,
-                borderColor: count === 1 ? '#848484' : '#2C2C2C',
-              }}
+              style={[
+                styles.countButton,
+                {
+                  borderColor: count === 1 ? '#848484' : '#2C2C2C',
+                },
+              ]}
             >
               <EntypoIcon name="minus" size={14} color={count === 1 ? '#848484' : '#2C2C2C'} />
             </View>
           </TouchableOpacity>
-          <Text style={{ fontSize: 16, color: '#2C2C2C', fontWeight: '400' }}>{count}</Text>
+          <Text style={[styles.count]}>{count}</Text>
           <TouchableOpacity
             onPress={() => {
               dispatch(
@@ -74,17 +66,7 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
               );
             }}
           >
-            <View
-              style={{
-                width: 18,
-                height: 18,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 16,
-                borderWidth: 1,
-                borderColor: '#2C2C2C',
-              }}
-            >
+            <View style={[styles.countButton]}>
               <EntypoIcon name="plus" size={14} color="#2C2C2C" />
             </View>
           </TouchableOpacity>
@@ -95,8 +77,52 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
 };
 
 const styles = StyleSheet.create({
-  taskTitle: {
+  previewImage: {
+    width: 80,
+    height: 100,
+    borderRadius: 8,
+  },
+  payloadContainer: {
+    marginLeft: 15,
+    marginTop: 6,
+  },
+  title: {
     fontSize: 16,
+    color: '#2C2C2C',
+    fontWeight: '400',
+  },
+  informationWrapper: {
+    flexDirection: 'row',
+    marginTop: 6,
+  },
+  informationItem: {
+    fontSize: 14,
+    color: '#2C2C2C',
+    fontWeight: '400',
+  },
+  priceWrapper: {
+    marginTop: 6,
+  },
+  count: {
+    fontSize: 16,
+    color: '#2C2C2C',
+    fontWeight: '400',
+  },
+  countWrapper: {
+    flexDirection: 'row',
+    width: 80,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  countButton: {
+    width: 18,
+    height: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#2C2C2C',
   },
 });
 
