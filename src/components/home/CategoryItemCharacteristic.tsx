@@ -194,7 +194,9 @@ const CategoryItemCharacteristic = ({
             );
           }}
         >
-          <Text style={[styles.addToCardButtonWrapperText]}>Add To Card - ${lowPrice}</Text>
+          <Text style={[styles.addToCardButtonWrapperText]}>
+            Add To Card - ${activeImageObject.price}
+          </Text>
         </TouchableOpacity>
       </View>
     </Fragment>

@@ -11,7 +11,7 @@ import { DecreasingNumberItemsCart, IncreasingNumberItemsCart } from '../../redu
 import EntypoIcon from '../icons/EntypoIcon';
 
 const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
-  const { color, image, planter, size } = activeImageObject;
+  const { color, image, planter, size, price } = activeImageObject;
 
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
           <Text style={[styles.informationItem]}>{planter} </Text>
         </View>
         <View style={[styles.priceWrapper]}>
-          <Text style={[styles.informationItem]}>55$</Text>
+          <Text style={[styles.informationItem]}>{price}$</Text>
         </View>
         <View style={[styles.countWrapper]}>
           <TouchableOpacity
