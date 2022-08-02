@@ -2,7 +2,7 @@
 import { takeEvery, put, select } from 'redux-saga/effects';
 
 // Actions
-import { AddItemToCard } from '../actions/user';
+import { AddItemToCard } from '../actions/cart';
 
 export function* userDataLoadSaga({ payload }) {}
 
