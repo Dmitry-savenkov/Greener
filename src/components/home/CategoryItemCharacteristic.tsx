@@ -84,7 +84,7 @@ const CategoryItemCharacteristic = ({
         <View>
           <Text style={[styles.choiceCategoryTitle]}>Size:</Text>
           <View style={[styles.choiceCategoryList]}>
-            {dimensions.map((size: string) => {
+            {dimensions?.map((size: string) => {
               return (
                 <TouchableOpacity
                   style={[
@@ -120,7 +120,7 @@ const CategoryItemCharacteristic = ({
         </View>
         <Text style={[styles.choiceCategoryTitle]}>Planter:</Text>
         <View style={[styles.choiceCategoryList]}>
-          {planters.map((planter: string) => {
+          {planters?.map((planter: string) => {
             return (
               <TouchableOpacity
                 style={[
@@ -149,7 +149,7 @@ const CategoryItemCharacteristic = ({
         </View>
         <Text style={[styles.choiceCategoryTitle]}>Color:</Text>
         <View style={[styles.colorCategoryContainer]}>
-          {planterColors.map((planterColor: any) => {
+          {planterColors?.map((planterColor: any) => {
             return (
               <TouchableOpacity
                 style={[styles.colorsCategoryList]}
