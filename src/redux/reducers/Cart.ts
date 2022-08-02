@@ -2,7 +2,12 @@
 import { handleActions } from 'redux-actions';
 
 // Actions
-import { AddItemToCard, deleteItemFromCard } from '../actions/user';
+import {
+  AddItemToCard,
+  DeleteItemFromCard,
+  IncreasingNumberItemsCart,
+  DecreasingNumberItemsCart,
+} from '../actions/cart';
 
 const initialState = {
   items: [],
@@ -36,9 +41,51 @@ export default handleActions(
             ],
           };
     },
-    [deleteItemFromCard]: (state, { payload }) => ({
+    [DeleteItemFromCard]: (state, { payload }) => ({
       items: state.items.filter((item) => item.plant.id !== payload.id),
     }),
+    [IncreasingNumberItemsCart]: (state, { payload }) => {
+      const index = state.items.findIndex((item) => item.plant.id === payload.id);
+      return index !== -1
+        ? {
+            items: [
+              ...state.items.map((item, i) => {
+                return i === index ? { ...item, count: item.count + 1 } : item;
+              }),
+            ],
+          }
+        : {
+            items: [
+              ...state.items,
+              {
+                plant: { ...payload.plant, id: payload.id },
+                activeImageObject: payload.activeImageObject,
+                count: payload.count,
+              },
+            ],
+          };
+    },
+    [DecreasingNumberItemsCart]: (state, { payload }) => {
+      const index = state.items.findIndex((item) => item.plant.id === payload.id);
+      return index !== -1
+        ? {
+            items: [
+              ...state.items.map((item, i) => {
+                return i === index ? { ...item, count: item.count - 1 } : item;
+              }),
+            ],
+          }
+        : {
+            items: [
+              ...state.items,
+              {
+                plant: { ...payload.plant, id: payload.id },
+                activeImageObject: payload.activeImageObject,
+                count: payload.count,
+              },
+            ],
+          };
+    },
   },
   initialState,
 );

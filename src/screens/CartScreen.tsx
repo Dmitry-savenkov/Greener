@@ -1,6 +1,6 @@
 // Lib
 import React, { useContext } from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, StatusBar, SafeAreaView } from 'react-native';
 import AppLoading from 'expo-app-loading';
 
 // Components
@@ -8,8 +8,9 @@ import ShippingAddress from '../components/cart/ShippingAddress';
 import OrderList from '../components/cart/OrderList';
 
 // UI
-import { width, height } from '../constants/theme';
+import { width, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
+import ChoouseShipping from '../components/cart/ChooseShipping';
 
 const CartScreen = ({ navigation }) => {
   const { fontsLoaded } = useContext(ThemesContext);
@@ -20,17 +21,22 @@ const CartScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={[styles.container]}>
-      <View style={[styles.payloadWrapper]}>
-        <ShippingAddress />
-        <OrderList navigation={navigation} />
-      </View>
+      <SafeAreaView>
+        <View style={[styles.payloadWrapper]}>
+          <ShippingAddress />
+          <OrderList navigation={navigation} />
+          <ChoouseShipping />
+        </View>
+      </SafeAreaView>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: height * 0.07,
+    flex: 1,
+    backgroundColor: colors.background,
+    paddingTop: StatusBar.currentHeight,
   },
   payloadWrapper: {
     paddingHorizontal: width * 0.08,

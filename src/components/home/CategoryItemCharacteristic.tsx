@@ -4,13 +4,13 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react
 import { useDispatch } from 'react-redux';
 
 // Actions
-import { AddItemToCard } from '../redux/actions/user';
+import { AddItemToCard } from '../../redux/actions/cart';
 
 // Components
-import FavoritesButton from '../components/FavoritesButton';
+import FavoritesButton from '../FavoritesButton';
 
 // UI
-import { width, colors, plantColors } from '../constants/theme';
+import { width, colors, plantColors } from '../../constants/theme';
 
 const CategoryItemCharacteristic = ({
   item,
@@ -84,7 +84,7 @@ const CategoryItemCharacteristic = ({
         <View>
           <Text style={[styles.choiceCategoryTitle]}>Size:</Text>
           <View style={[styles.choiceCategoryList]}>
-            {dimensions.map((size: string) => {
+            {dimensions?.map((size: string) => {
               return (
                 <TouchableOpacity
                   style={[
@@ -120,7 +120,7 @@ const CategoryItemCharacteristic = ({
         </View>
         <Text style={[styles.choiceCategoryTitle]}>Planter:</Text>
         <View style={[styles.choiceCategoryList]}>
-          {planters.map((planter: string) => {
+          {planters?.map((planter: string) => {
             return (
               <TouchableOpacity
                 style={[
@@ -149,7 +149,7 @@ const CategoryItemCharacteristic = ({
         </View>
         <Text style={[styles.choiceCategoryTitle]}>Color:</Text>
         <View style={[styles.colorCategoryContainer]}>
-          {planterColors.map((planterColor: any) => {
+          {planterColors?.map((planterColor: any) => {
             return (
               <TouchableOpacity
                 style={[styles.colorsCategoryList]}
@@ -194,7 +194,9 @@ const CategoryItemCharacteristic = ({
             );
           }}
         >
-          <Text style={[styles.addToCardButtonWrapperText]}>Add To Card - ${lowPrice}</Text>
+          <Text style={[styles.addToCardButtonWrapperText]}>
+            Add To Card - ${activeImageObject.price}
+          </Text>
         </TouchableOpacity>
       </View>
     </Fragment>

@@ -11,7 +11,7 @@ import GrayLine from '../components/GrayLine';
 // UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
-import CategoryItemCharacteristic from '../components/CategoryItemCharacteristic';
+import CategoryItemCharacteristic from '../components/home/CategoryItemCharacteristic';
 
 const PlantsCategoryItemScreen = ({ navigation, route }) => {
   const { item } = route.params;

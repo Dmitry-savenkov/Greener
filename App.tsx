@@ -3,6 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store, { persist } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { LogBox } from 'react-native';
 
 //Components
@@ -16,7 +17,9 @@ export default function App() {
     <Provider store={store}>
       <PersistGate persistor={persist}>
         <ThemesContextProvider>
-          <NavigationMainContainer />
+          <BottomSheetModalProvider>
+            <NavigationMainContainer />
+          </BottomSheetModalProvider>
         </ThemesContextProvider>
       </PersistGate>
     </Provider>
