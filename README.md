@@ -10,9 +10,9 @@ Welcome Page            |  SignIn Page           |  SignUp Page |  Password Reco
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](assets/img1.png)  |  ![](assets/img2.png)   |   ![](assets/img3.png) |   ![](assets/img4.png)
 
-Home          |  Favorites         |  Explore    |  Cart       |  Profile
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------: |:-------------------------:
-![](assets/img5.png)  |  ![](assets/img7.png)   |   ![](assets/img8.png) |   ![](assets/img6.png) |   ![](assets/img9.png)
+Home          |     Plants Category Item      |  Favorites         |  Explore    |  Cart       |  Profile
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------: |:-------------------------:|:-------------------------:
+![](assets/img5.png)  | ![](assets/img10.png)  |  ![](assets/img7.png)   |   ![](assets/img8.png) |   ![](assets/img6.png) |   ![](assets/img9.png)
 
 ## Availables pages
 
@@ -22,11 +22,12 @@ Home          |  Favorites         |  Explore    |  Cart       |  Profile
 * [SignIn Page](./src/screens/LoginScreen.tsx)
 * [SignUp Page](./src/screens/SignUpScreen.tsx)
 * [Password Recovery](./src/screens/ForgotPasswordScreen.tsx)
-* [Side Menu](./src/navigation/CustomDrawer.tsx)
-* [Browser](./src/screens/HomeScreen.tsx)
-* [Explore](./src/screens/FavoritesScreen.tsx)
-* [Best Plants](./src/screens/BestPlantsScreen.tsx)
-* [Settings](./src/screens/ProfileScreen.tsx)
+* [Home](./src/screens/HomeScreen.tsx)
+* [Plants Category Item](./src/screens/PlantsCategoryItemScreen.tsx)
+* [Favorites](./src/screens/FavoritesScreen.tsx)
+* [Explore](./src/screens/ExploreScreen.tsx)
+* [Cart](./src/screens/CartScreen.tsx)
+* [Profile](./src/screens/ProfileScreen.tsx)
 
 
 ## Installation
