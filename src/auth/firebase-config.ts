@@ -1,20 +1,21 @@
 import * as firebase from 'firebase';
-import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from '../../env';
+import Firebase from '../../env';
 
 const firebaseConfig = {
-    apiKey: API_KEY,
-    authDomain: AUTH_DOMAIN,
-    projectId: PROJECT_ID,
-    storageBucket: STORAGE_BUCKET,
-    messagingSenderId: MESSAGING_SENDER_ID,
-    appId: APP_ID
+  apiKey: Firebase.API_KEY,
+  authDomain: Firebase.AUTH_DOMAIN,
+  projectId: Firebase.PROJECT_ID,
+  storageBucket: Firebase.STORAGE_BUCKET,
+  messagingSenderId: Firebase.MESSAGING_SENDER_ID,
+  appId: Firebase.APP_ID,
 };
 
 let app;
+
 if (firebase.apps.length === 0) {
-    app = firebase.initializeApp(firebaseConfig);
+  app = firebase.initializeApp(firebaseConfig);
 } else {
-    app = firebase.app();
+  app = firebase.app();
 }
 const auth = firebase.auth();
 
