@@ -12,7 +12,7 @@ Welcome Page            |  SignIn Page           |  SignUp Page |  Password Reco
 
 Home          |  Favorites         |  Explore    |  Cart       |  Profile
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------: |:-------------------------:
-![](assets/img6.png)  |  ![](assets/img5.png)   |   ![](assets/img7.png) |   ![](assets/img8.png) |   ![](assets/img9.png)
+![](assets/img5.png)  |  ![](assets/img7.png)   |   ![](assets/img8.png) |   ![](assets/img6.png) |   ![](assets/img9.png)
 
 ## Availables pages
 
