@@ -10,7 +10,7 @@ Welcome Page            |  SignIn Page           |  SignUp Page |  Password Reco
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](assets/img1.png)  |  ![](assets/img2.png)   |   ![](assets/img3.png) |   ![](assets/img4.png)
 
-Side Menu          |  Browser         |  Explore    |  Best Plants       |  Settings
+Home          |  Favorites         |  Explore    |  Cart       |  Profile
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------: |:-------------------------:
 ![](assets/img6.png)  |  ![](assets/img5.png)   |   ![](assets/img7.png) |   ![](assets/img8.png) |   ![](assets/img9.png)
 
