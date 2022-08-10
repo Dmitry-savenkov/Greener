@@ -5,6 +5,7 @@ import store, { persist } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { LogBox } from 'react-native';
+import Toast from 'react-native-toast-notifications';
 
 //Components
 import ThemesContextProvider from './src/context/ThemeContext';
@@ -19,6 +20,7 @@ export default function App() {
         <ThemesContextProvider>
           <BottomSheetModalProvider>
             <NavigationMainContainer />
+            <Toast ref={(ref) => (global['toast'] = ref)} />
           </BottomSheetModalProvider>
         </ThemesContextProvider>
       </PersistGate>
