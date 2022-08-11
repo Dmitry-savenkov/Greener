@@ -7,9 +7,15 @@ import {
   DeleteItemFromCard,
   IncreasingNumberItemsCart,
   DecreasingNumberItemsCart,
+  UpdateShippingAddress,
 } from '../actions/cart';
 
 const initialState = {
+  shippingAddress: {
+    name: null,
+    address: null,
+    defaultAddress: false,
+  },
   items: [],
 };
 
@@ -24,6 +30,7 @@ export default handleActions(
       );
       return index !== -1
         ? {
+            ...state,
             items: [
               ...state.items.map((item, i) => {
                 return i === index ? { ...item, count: item.count + 1 } : item;
@@ -31,6 +38,7 @@ export default handleActions(
             ],
           }
         : {
+            ...state,
             items: [
               ...state.items,
               {
@@ -42,12 +50,14 @@ export default handleActions(
           };
     },
     [DeleteItemFromCard]: (state, { payload }) => ({
+      ...state,
       items: state.items.filter((item) => item.plant.id !== payload.id),
     }),
     [IncreasingNumberItemsCart]: (state, { payload }) => {
       const index = state.items.findIndex((item) => item.plant.id === payload.id);
       return index !== -1
         ? {
+            ...state,
             items: [
               ...state.items.map((item, i) => {
                 return i === index ? { ...item, count: item.count + 1 } : item;
@@ -55,6 +65,7 @@ export default handleActions(
             ],
           }
         : {
+            ...state,
             items: [
               ...state.items,
               {
@@ -69,6 +80,7 @@ export default handleActions(
       const index = state.items.findIndex((item) => item.plant.id === payload.id);
       return index !== -1
         ? {
+            ...state,
             items: [
               ...state.items.map((item, i) => {
                 return i === index ? { ...item, count: item.count - 1 } : item;
@@ -76,6 +88,7 @@ export default handleActions(
             ],
           }
         : {
+            ...state,
             items: [
               ...state.items,
               {
@@ -86,6 +99,14 @@ export default handleActions(
             ],
           };
     },
+    [UpdateShippingAddress]: (state: any, { payload }: any) => ({
+      ...state,
+      shippingAddress: {
+        name: payload.name,
+        address: payload.address,
+        defaultAddress: payload.defaultAddress,
+      },
+    }),
   },
   initialState,
 );

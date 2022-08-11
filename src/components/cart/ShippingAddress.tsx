@@ -1,16 +1,40 @@
 // Lib
 import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Components
 import FeatherIcon from '../icons/FeatherIcon';
 import FontAwesome5Icon from '../icons/FontAwesome5Icon';
 import GrayLine from '../GrayLine';
 
+// Actions
+import { UpdateShippingAddress } from '../../redux/actions/cart';
+
 const ShippingAddress = () => {
+  const { shippingAddress } = useSelector((state: any) => ({
+    shippingAddress: state?.Cart?.shippingAddress,
+  }));
+
+  const [addressName, setAddressName] = useState('');
+  const [addressDetails, setAddressDetails] = useState('');
   const [isChecked, setChecked] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const updateShippingAddress = useCallback(() => {
+    dispatch(
+      UpdateShippingAddress({
+        name: addressName,
+        address: addressDetails,
+        defaultAddress: isChecked,
+      }),
+    );
+    bottomSheetModalRef.current?.close();
+  }, [addressDetails, addressName, dispatch, isChecked]);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -62,8 +86,10 @@ const ShippingAddress = () => {
           </View>
         </View>
         <View>
-          <Text style={{ fontSize: 16, fontWeight: '500', marginBottom: 4 }}>Home</Text>
-          <Text style={{ fontSize: 12, fontWeight: '400' }}>61480 Sunbrook Park, PC 5679</Text>
+          <Text style={{ fontSize: 16, fontWeight: '500', marginBottom: 4 }}>
+            {shippingAddress.name}
+          </Text>
+          <Text style={{ fontSize: 12, fontWeight: '400' }}>{shippingAddress.address}</Text>
         </View>
         <TouchableOpacity onPress={handlePresentModalPress}>
           <View style={{ paddingRight: 20, paddingTop: 2 }}>
@@ -81,6 +107,8 @@ const ShippingAddress = () => {
                 Name Address
               </Text>
               <TextInput
+                onChangeText={(value) => setAddressName(value)}
+                value={addressName}
                 style={{
                   borderRadius: 8,
                   backgroundColor: 'rgb(247,247,247)',
@@ -94,6 +122,8 @@ const ShippingAddress = () => {
                 Address Details
               </Text>
               <TextInput
+                onChangeText={(value) => setAddressDetails(value)}
+                value={addressDetails}
                 style={{
                   borderRadius: 8,
                   backgroundColor: 'rgb(247,247,247)',
@@ -109,6 +139,7 @@ const ShippingAddress = () => {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
                 marginTop: 20,
+                marginBottom: 40,
               }}
             >
               <Checkbox
@@ -117,12 +148,13 @@ const ShippingAddress = () => {
                 onValueChange={setChecked}
                 color={isChecked ? 'rgb(87, 189,122)' : undefined}
               />
-              <Text>Make this as the default address</Text>
+              <Text style={{ fontSize: 14, fontWeight: '500' }}>
+                Make this as the default address
+              </Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => updateShippingAddress()}>
               <View
                 style={{
-                  marginTop: 40,
                   width: '100%',
                   height: 50,
                   backgroundColor: 'rgb(87, 189,122)',

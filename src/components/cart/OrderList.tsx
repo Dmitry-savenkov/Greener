@@ -17,9 +17,12 @@ const OrderList = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  const onDismiss = useCallback((item) => {
-    dispatch(DeleteItemFromCard(item));
-  }, []);
+  const onDismiss = useCallback(
+    (item) => {
+      dispatch(DeleteItemFromCard(item));
+    },
+    [dispatch],
+  );
 
   return useMemo(
     () => (
@@ -37,7 +40,7 @@ const OrderList = ({ navigation }) => {
         ))}
       </View>
     ),
-    [items],
+    [items, navigation, onDismiss],
   );
 };
 
