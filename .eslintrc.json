@@ -5,10 +5,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb",
-        "airbnb/hooks",
-        "prettier",
-        "prettier/react"
+        "plugin:react-hooks/recommended",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -20,11 +18,14 @@
     },
     "plugins": [
         "react",
+        "react-hooks",
         "react-native",
         "@typescript-eslint",
         "prettier"
     ],
     "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
         "prettier/prettier" : "error",
         "react/display-name": "warn"
     }
