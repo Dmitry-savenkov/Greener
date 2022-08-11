@@ -1,7 +1,7 @@
 // Lib
 import React, { useCallback, useMemo, useRef } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { View, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcon from '../icons/MaterialCommunityIcon';
 
 // UI
@@ -22,7 +22,7 @@ const ChoouseShipping = () => {
   return (
     <View>
       <View>
-        <Text style={{ fontSize: 16, fontWeight: '600' }}>Shipping Address</Text>
+        <Text style={{ fontSize: 16, fontWeight: '600' }}>Shipping Type</Text>
       </View>
       <TouchableOpacity
         onPress={handlePresentModalPress}

@@ -1,12 +1,25 @@
 // Lib
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import Checkbox from 'expo-checkbox';
 
 // Components
 import FeatherIcon from '../icons/FeatherIcon';
 import FontAwesome5Icon from '../icons/FontAwesome5Icon';
+import GrayLine from '../GrayLine';
 
 const ShippingAddress = () => {
+  const [isChecked, setChecked] = useState(false);
+
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+
   return (
     <View>
       <View>
@@ -52,11 +65,77 @@ const ShippingAddress = () => {
           <Text style={{ fontSize: 16, fontWeight: '500', marginBottom: 4 }}>Home</Text>
           <Text style={{ fontSize: 12, fontWeight: '400' }}>61480 Sunbrook Park, PC 5679</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePresentModalPress}>
           <View style={{ paddingRight: 20, paddingTop: 2 }}>
             <FeatherIcon name="edit-3" size={22} color="rgb(94,202,133)" />
           </View>
         </TouchableOpacity>
+        <BottomSheetModal ref={bottomSheetModalRef} index={1} snapPoints={snapPoints}>
+          <View style={{ paddingHorizontal: 30 }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
+              <Text style={{ fontSize: 18, fontWeight: '600' }}>Address Details</Text>
+            </View>
+            <GrayLine />
+            <View style={{ marginTop: 15 }}>
+              <Text style={{ fontSize: 15, fontWeight: '600', marginBottom: 15 }}>
+                Name Address
+              </Text>
+              <TextInput
+                style={{
+                  borderRadius: 8,
+                  backgroundColor: 'rgb(247,247,247)',
+                  paddingHorizontal: 10,
+                  paddingVertical: 10,
+                }}
+              />
+            </View>
+            <View>
+              <Text style={{ fontSize: 15, fontWeight: '600', marginTop: 15 }}>
+                Address Details
+              </Text>
+              <TextInput
+                style={{
+                  borderRadius: 8,
+                  backgroundColor: 'rgb(247,247,247)',
+                  paddingHorizontal: 10,
+                  paddingVertical: 10,
+                  marginTop: 10,
+                }}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                marginTop: 20,
+              }}
+            >
+              <Checkbox
+                style={{ marginRight: 10, borderColor: 'rgb(87, 189,122)', borderRadius: 6 }}
+                value={isChecked}
+                onValueChange={setChecked}
+                color={isChecked ? 'rgb(87, 189,122)' : undefined}
+              />
+              <Text>Make this as the default address</Text>
+            </View>
+            <TouchableOpacity>
+              <View
+                style={{
+                  marginTop: 40,
+                  width: '100%',
+                  height: 50,
+                  backgroundColor: 'rgb(87, 189,122)',
+                  borderRadius: 100,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ fontSize: 15, fontWeight: '600', color: 'white' }}>Add</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </BottomSheetModal>
       </View>
     </View>
   );
