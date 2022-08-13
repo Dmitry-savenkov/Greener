@@ -11,6 +11,9 @@ import FeatherIcon from '../icons/FeatherIcon';
 import FontAwesome5Icon from '../icons/FontAwesome5Icon';
 import GrayLine from '../GrayLine';
 
+// UI
+import { colors } from '../../constants/theme';
+
 // Actions
 import { UpdateShippingAddress } from '../../redux/actions/cart';
 
@@ -103,7 +106,12 @@ const ShippingAddress = () => {
               <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
                 <Text style={{ fontSize: 18, fontWeight: '600' }}>Address Details</Text>
               </View>
-              <GrayLine />
+              <GrayLine
+                width={'100%'}
+                height={0.8}
+                backgroundColor={colors.grayDefault}
+                marginTop={15}
+              />
               <View style={{ marginTop: 15 }}>
                 <Text style={{ fontSize: 15, fontWeight: '600', marginBottom: 15 }}>
                   Name Address

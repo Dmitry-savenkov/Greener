@@ -53,15 +53,45 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
             sliderPhotos={sliderPhotos}
           />
           <View style={[styles.dropDownContainer]}>
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={description} title={'Description'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={careGuide} title={'Care Guide'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={sadPlantSigns} title={'Sad Plant Signs'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={guarantee} title={'30-Day Guarantee'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
           </View>
         </View>
       </View>

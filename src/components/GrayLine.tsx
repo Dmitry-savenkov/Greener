@@ -2,18 +2,15 @@
 import React from 'react';
 import { View } from 'react-native';
 
-//UI
-import { colors } from '../constants/theme';
-
-const GrayLine = () => {
+const GrayLine = ({ width, height, backgroundColor, marginTop = 0, marginBottom = 0 }) => {
   return (
     <View
       style={{
-        width: '100%',
-        height: 1,
-        backgroundColor: colors.grayDefault,
-        marginTop: 15,
-        marginBottom: 15,
+        width,
+        height,
+        backgroundColor,
+        marginTop,
+        marginBottom,
       }}
     ></View>
   );
