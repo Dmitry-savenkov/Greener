@@ -1,5 +1,5 @@
 // Libs
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
@@ -15,64 +15,67 @@ const CartListItem = ({ navigation, plant, activeImageObject, count }) => {
 
   const dispatch = useDispatch();
 
-  return (
-    <Fragment>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('PlantsCategoryItem', { item: plant });
-        }}
-      >
-        <Image source={image} style={[styles.previewImage]} />
-      </TouchableOpacity>
-      <View style={[styles.payloadContainer]}>
-        <Text style={[styles.title]}>{plant.title}</Text>
-        <View style={[styles.informationWrapper]}>
-          <Text style={[styles.informationItem]}>{size} / </Text>
-          <Text style={[styles.informationItem]}>{color} / </Text>
-          <Text style={[styles.informationItem]}>{planter} </Text>
-        </View>
-        <View style={[styles.priceWrapper]}>
-          <Text style={[styles.informationItem]}>{price}$</Text>
-        </View>
-        <View style={[styles.countWrapper]}>
-          <TouchableOpacity
-            disabled={count === 1}
-            onPress={() => {
-              dispatch(
-                DecreasingNumberItemsCart({
-                  id: plant.id,
-                }),
-              );
-            }}
-          >
-            <View
-              style={[
-                styles.countButton,
-                {
-                  borderColor: count === 1 ? '#848484' : '#2C2C2C',
-                },
-              ]}
+  return useMemo(
+    () => (
+      <Fragment>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('PlantsCategoryItem', { item: plant });
+          }}
+        >
+          <Image source={image} style={[styles.previewImage]} />
+        </TouchableOpacity>
+        <View style={[styles.payloadContainer]}>
+          <Text style={[styles.title]}>{plant.title}</Text>
+          <View style={[styles.informationWrapper]}>
+            <Text style={[styles.informationItem]}>{size} / </Text>
+            <Text style={[styles.informationItem]}>{color} / </Text>
+            <Text style={[styles.informationItem]}>{planter} </Text>
+          </View>
+          <View style={[styles.priceWrapper]}>
+            <Text style={[styles.informationItem]}>{price}$</Text>
+          </View>
+          <View style={[styles.countWrapper]}>
+            <TouchableOpacity
+              disabled={count === 1}
+              onPress={() => {
+                dispatch(
+                  DecreasingNumberItemsCart({
+                    id: plant.id,
+                  }),
+                );
+              }}
             >
-              <EntypoIcon name="minus" size={14} color={count === 1 ? '#848484' : '#2C2C2C'} />
-            </View>
-          </TouchableOpacity>
-          <Text style={[styles.count]}>{count}</Text>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(
-                IncreasingNumberItemsCart({
-                  id: plant.id,
-                }),
-              );
-            }}
-          >
-            <View style={[styles.countButton]}>
-              <EntypoIcon name="plus" size={14} color="#2C2C2C" />
-            </View>
-          </TouchableOpacity>
+              <View
+                style={[
+                  styles.countButton,
+                  {
+                    borderColor: count === 1 ? '#848484' : '#2C2C2C',
+                  },
+                ]}
+              >
+                <EntypoIcon name="minus" size={14} color={count === 1 ? '#848484' : '#2C2C2C'} />
+              </View>
+            </TouchableOpacity>
+            <Text style={[styles.count]}>{count}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(
+                  IncreasingNumberItemsCart({
+                    id: plant.id,
+                  }),
+                );
+              }}
+            >
+              <View style={[styles.countButton]}>
+                <EntypoIcon name="plus" size={14} color="#2C2C2C" />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </Fragment>
+      </Fragment>
+    ),
+    [color, count, dispatch, image, navigation, plant, planter, price, size],
   );
 };
 

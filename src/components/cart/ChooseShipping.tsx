@@ -19,43 +19,50 @@ const ChoouseShipping = () => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  return (
-    <View>
+  return useMemo(
+    () => (
       <View>
-        <Text style={{ fontSize: 16, fontWeight: '600' }}>Shipping Type</Text>
-      </View>
-      <TouchableOpacity
-        onPress={handlePresentModalPress}
-        style={{
-          marginTop: 20,
-          borderRadius: 15,
-          paddingHorizontal: 15,
-          width: '100%',
-          height: 60,
-          backgroundColor: 'white',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ marginRight: 15 }}>
-            <MaterialCommunityIcon name="truck-cargo-container" size={26} color="rgb(94,202,133)" />
-          </View>
-          <View>
-            <Text style={{ fontSize: 16, fontWeight: '500' }}>Choose Shipping Type</Text>
-          </View>
+        <View>
+          <Text style={{ fontSize: 16, fontWeight: '600' }}>Shipping Type</Text>
         </View>
-        <TouchableOpacity>
-          <View style={{ paddingRight: 8 }}>
-            <AntDesignIcon name="right" size={24} color={colors.black} />
+        <TouchableOpacity
+          onPress={handlePresentModalPress}
+          style={{
+            marginTop: 20,
+            borderRadius: 15,
+            paddingHorizontal: 15,
+            width: '100%',
+            height: 60,
+            backgroundColor: 'white',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ marginRight: 15 }}>
+              <MaterialCommunityIcon
+                name="truck-cargo-container"
+                size={26}
+                color="rgb(94,202,133)"
+              />
+            </View>
+            <View>
+              <Text style={{ fontSize: 16, fontWeight: '500' }}>Choose Shipping Type</Text>
+            </View>
           </View>
+          <TouchableOpacity>
+            <View style={{ paddingRight: 8 }}>
+              <AntDesignIcon name="right" size={24} color={colors.black} />
+            </View>
+          </TouchableOpacity>
         </TouchableOpacity>
-      </TouchableOpacity>
-      <BottomSheetModal ref={bottomSheetModalRef} index={1} snapPoints={snapPoints}>
-        <Text></Text>
-      </BottomSheetModal>
-    </View>
+        <BottomSheetModal ref={bottomSheetModalRef} index={1} snapPoints={snapPoints}>
+          <Text></Text>
+        </BottomSheetModal>
+      </View>
+    ),
+    [handlePresentModalPress, snapPoints],
   );
 };
 

@@ -1,5 +1,5 @@
 // Libs
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, {
@@ -67,22 +67,34 @@ const CartList = ({ navigation, plant, onDismiss, activeImageObject, count }) =>
     };
   });
 
-  return (
-    <Animated.View style={[styles.taskContainer, rTaskContainerStyle]}>
-      <Animated.View style={[styles.iconContainer, rIconContainerStyle]}>
-        <FontAwesome5 name={'trash-alt'} size={LIST_ITEM_HEIGHT * 0.3} color={'red'} />
-      </Animated.View>
-      <PanGestureHandler onGestureEvent={panGesture}>
-        <Animated.View style={[styles.task, rStyle]}>
-          <CartListItem
-            navigation={navigation}
-            plant={plant}
-            count={count}
-            activeImageObject={activeImageObject}
-          />
+  return useMemo(
+    () => (
+      <Animated.View style={[styles.taskContainer, rTaskContainerStyle]}>
+        <Animated.View style={[styles.iconContainer, rIconContainerStyle]}>
+          <FontAwesome5 name={'trash-alt'} size={LIST_ITEM_HEIGHT * 0.3} color={'red'} />
         </Animated.View>
-      </PanGestureHandler>
-    </Animated.View>
+        <PanGestureHandler onGestureEvent={panGesture}>
+          <Animated.View style={[styles.task, rStyle]}>
+            <CartListItem
+              navigation={navigation}
+              plant={plant}
+              count={count}
+              activeImageObject={activeImageObject}
+            />
+          </Animated.View>
+        </PanGestureHandler>
+      </Animated.View>
+    ),
+    [
+      activeImageObject,
+      count,
+      navigation,
+      panGesture,
+      plant,
+      rIconContainerStyle,
+      rStyle,
+      rTaskContainerStyle,
+    ],
   );
 };
 

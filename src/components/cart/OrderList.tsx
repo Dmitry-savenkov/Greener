@@ -10,10 +10,11 @@ import CartList from './CartList';
 // Actions
 import { DeleteItemFromCard } from '../../redux/actions/cart';
 
+// Selectors
+import { getOrderListItems } from '../../redux/selectors';
+
 const OrderList = ({ navigation }) => {
-  const { items } = useSelector((state: any) => ({
-    items: state?.Cart?.items,
-  }));
+  const items = useSelector(getOrderListItems);
 
   const dispatch = useDispatch();
 
