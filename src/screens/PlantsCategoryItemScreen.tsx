@@ -7,11 +7,11 @@ import AppLoading from 'expo-app-loading';
 import NavigationGoBack from '../components/NavigationGoBack';
 import DropDown from '../components/DropDown';
 import GrayLine from '../components/GrayLine';
+import CategoryItemCharacteristic from '../components/home/CategoryItemCharacteristic';
 
 // UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
-import CategoryItemCharacteristic from '../components/home/CategoryItemCharacteristic';
 
 const PlantsCategoryItemScreen = ({ navigation, route }) => {
   const { item } = route.params;
