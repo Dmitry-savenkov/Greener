@@ -1,6 +1,6 @@
 // Lib
 import React, { useState, useRef, useMemo, useCallback } from 'react';
-import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { BottomSheetModal, BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useSelector } from 'react-redux';
@@ -81,13 +81,13 @@ const ShippingAddress = () => {
                 marginTop={15}
               />
               <Text style={[styles.fieldTitle]}>Name Address</Text>
-              <TextInput
+              <BottomSheetTextInput
                 onChangeText={(value) => setAddressName(value)}
                 value={addressName}
                 style={[styles.textInput]}
               />
               <Text style={[styles.fieldTitle]}>Address Details</Text>
-              <TextInput
+              <BottomSheetTextInput
                 onChangeText={(value) => setAddressDetails(value)}
                 value={addressDetails}
                 style={[styles.textInput]}
