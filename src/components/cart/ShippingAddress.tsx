@@ -1,7 +1,7 @@
 // Lib
 import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { BottomSheetModal, BottomSheetTextInput } from '@gorhom/bottom-sheet';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -45,6 +45,7 @@ const ShippingAddress = () => {
   const snapPoints = useMemo(() => ['25%', '50%'], []);
 
   const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.close();
     bottomSheetModalRef.current?.present();
   }, []);
 
@@ -61,8 +62,12 @@ const ShippingAddress = () => {
             </View>
           </View>
           <View>
-            <Text style={[styles.shippingAddressName]}>{shippingAddress.name}</Text>
-            <Text style={[styles.shippingAddress]}>{shippingAddress.address}</Text>
+            <Text style={[styles.shippingAddressName]}>
+              {shippingAddress.name ? shippingAddress.name : 'Home'}
+            </Text>
+            <Text style={[styles.shippingAddress]}>
+              {shippingAddress.address ? shippingAddress.address : '61480 Sunbrook Park, PC 5674'}
+            </Text>
           </View>
           <TouchableOpacity onPress={handlePresentModalPress}>
             <View style={[styles.editWrapper]}>
@@ -220,7 +225,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 10,
   },
-  fieldTitle: { fontSize: 15, fontWeight: '600', marginTop: 15 },
+  fieldTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    marginTop: 15,
+  },
 });
 
 export default ShippingAddress;
