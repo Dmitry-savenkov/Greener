@@ -10,16 +10,20 @@ import CartList from './CartList';
 // Actions
 import { DeleteItemFromCard } from '../../redux/actions/cart';
 
+// Selectors
+import { getOrderListItems } from '../../redux/selectors';
+
 const OrderList = ({ navigation }) => {
-  const { items } = useSelector((state: any) => ({
-    items: state?.Cart?.items,
-  }));
+  const items = useSelector(getOrderListItems);
 
   const dispatch = useDispatch();
 
-  const onDismiss = useCallback((item) => {
-    dispatch(DeleteItemFromCard(item));
-  }, []);
+  const onDismiss = useCallback(
+    (item) => {
+      dispatch(DeleteItemFromCard(item));
+    },
+    [dispatch],
+  );
 
   return useMemo(
     () => (
@@ -37,7 +41,7 @@ const OrderList = ({ navigation }) => {
         ))}
       </View>
     ),
-    [items],
+    [items, navigation, onDismiss],
   );
 };
 

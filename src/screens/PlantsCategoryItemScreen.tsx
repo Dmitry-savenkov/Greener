@@ -7,11 +7,11 @@ import AppLoading from 'expo-app-loading';
 import NavigationGoBack from '../components/NavigationGoBack';
 import DropDown from '../components/DropDown';
 import GrayLine from '../components/GrayLine';
+import CategoryItemCharacteristic from '../components/home/CategoryItemCharacteristic';
 
 // UI
 import { width, height, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
-import CategoryItemCharacteristic from '../components/home/CategoryItemCharacteristic';
 
 const PlantsCategoryItemScreen = ({ navigation, route }) => {
   const { item } = route.params;
@@ -53,15 +53,45 @@ const PlantsCategoryItemScreen = ({ navigation, route }) => {
             sliderPhotos={sliderPhotos}
           />
           <View style={[styles.dropDownContainer]}>
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={description} title={'Description'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={careGuide} title={'Care Guide'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={sadPlantSigns} title={'Sad Plant Signs'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
             <DropDown information={guarantee} title={'30-Day Guarantee'} />
-            <GrayLine />
+            <GrayLine
+              width={'100%'}
+              height={1}
+              backgroundColor={colors.grayDefault}
+              marginTop={15}
+              marginBottom={15}
+            />
           </View>
         </View>
       </View>

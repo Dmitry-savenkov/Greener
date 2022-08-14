@@ -6,11 +6,11 @@ import AppLoading from 'expo-app-loading';
 // Components
 import ShippingAddress from '../components/cart/ShippingAddress';
 import OrderList from '../components/cart/OrderList';
+import ChoouseShipping from '../components/cart/ChooseShipping';
 
 // UI
 import { width, colors } from '../constants/theme';
 import { ThemesContext } from '../context/ThemeContext';
-import ChoouseShipping from '../components/cart/ChooseShipping';
 
 const CartScreen = ({ navigation }) => {
   const { fontsLoaded } = useContext(ThemesContext);
