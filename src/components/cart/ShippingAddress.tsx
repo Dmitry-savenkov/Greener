@@ -1,44 +1,22 @@
 // Lib
-import React, { useState, useRef, useMemo, useCallback } from 'react';
-import { BottomSheetModal, BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import React, { useRef, useMemo, useCallback } from 'react';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import Checkbox from 'expo-checkbox';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 
 // Components
 import FeatherIcon from '../icons/FeatherIcon';
 import FontAwesome5Icon from '../icons/FontAwesome5Icon';
-import GrayLine from '../GrayLine';
+import AddressDetails from './AddressDetails';
 
 // UI
 import { colors } from '../../constants/theme';
-
-// Actions
-import { UpdateShippingAddress } from '../../redux/actions/cart';
 
 // Selectors
 import { getShippingAddress } from '../../redux/selectors';
 
 const ShippingAddress = () => {
   const shippingAddress = useSelector(getShippingAddress);
-
-  const [addressName, setAddressName] = useState('');
-  const [addressDetails, setAddressDetails] = useState('');
-  const [isChecked, setChecked] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const updateShippingAddress = useCallback(() => {
-    dispatch(
-      UpdateShippingAddress({
-        name: addressName,
-        address: addressDetails,
-        defaultAddress: isChecked,
-      }),
-    );
-    bottomSheetModalRef.current?.close();
-  }, [addressDetails, addressName, dispatch, isChecked]);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -75,57 +53,12 @@ const ShippingAddress = () => {
             </View>
           </TouchableOpacity>
           <BottomSheetModal ref={bottomSheetModalRef} index={1} snapPoints={snapPoints}>
-            <View style={[styles.bottomSheetContainer]}>
-              <View style={[styles.bottomSheetTitleWrapper]}>
-                <Text style={[styles.bottomSheetTitle]}>Address Details</Text>
-              </View>
-              <GrayLine
-                width={'100%'}
-                height={0.8}
-                backgroundColor={colors.grayDefault}
-                marginTop={15}
-              />
-              <Text style={[styles.fieldTitle]}>Name Address</Text>
-              <BottomSheetTextInput
-                onChangeText={(value) => setAddressName(value)}
-                value={addressName}
-                style={[styles.textInput]}
-              />
-              <Text style={[styles.fieldTitle]}>Address Details</Text>
-              <BottomSheetTextInput
-                onChangeText={(value) => setAddressDetails(value)}
-                value={addressDetails}
-                style={[styles.textInput]}
-              />
-              <View style={[styles.checkboxWrapper]}>
-                <Checkbox
-                  style={[styles.checkbox]}
-                  value={isChecked}
-                  onValueChange={setChecked}
-                  color={isChecked ? 'rgb(87, 189,122)' : undefined}
-                />
-                <Text style={[styles.checkboxText]}>Make this as the default address</Text>
-              </View>
-              <TouchableOpacity onPress={() => updateShippingAddress()}>
-                <View style={[styles.buttonWrapper]}>
-                  <Text style={[styles.buttonText]}>Add</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+            <AddressDetails handlePresentModalPress={handlePresentModalPress} />
           </BottomSheetModal>
         </View>
       </View>
     ),
-    [
-      addressDetails,
-      addressName,
-      handlePresentModalPress,
-      isChecked,
-      shippingAddress.address,
-      shippingAddress.name,
-      snapPoints,
-      updateShippingAddress,
-    ],
+    [handlePresentModalPress, shippingAddress.address, shippingAddress.name, snapPoints],
   );
 };
 
